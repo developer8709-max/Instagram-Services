@@ -314,9 +314,9 @@
           <label>🎯 Service</label>
           <select id="service" name="Service" required>
             <option value="" disabled selected>Choose your boost...</option>
-            <option value="Likes">❤️ Likes (₹20 per 1K)</option>
-            <option value="Views">👁️ Views (₹10 per 1K)</option>
-            <option value="Shares">🔄 Shares (₹15 per 1K)</option>
+            <option value="Likes">❤️ Likes (₹15 per 1K)</option>
+            <option value="Views">👁️ Views (₹5 per 1K)</option>
+            <option value="Shares">🔄 Shares (₹5 per 1K)</option>
           </select>
         </div>
 
@@ -356,7 +356,7 @@
         return;
       }
 
-      const rates = { "Views": 10, "Shares": 15, "Likes": 20 };
+      const rates = { "Views": 5, "Shares": 5, "Likes": 15 };
       const amount = (qty / 1000) * rates[service];
       
       const amountEl = document.getElementById("amount");
