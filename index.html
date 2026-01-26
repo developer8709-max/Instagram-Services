@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>InstaGlow Services ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #667eea 100%);
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Floating orbs background */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      animation: floatOrb linear infinite;
+      pointer-events: none;
+    }
+
+    .orb:nth-child(1) { width: 120px; height: 120px; top: 20%; left: 10%; animation-duration: 20s; }
+    .orb:nth-child(2) { width: 80px; height: 80px; top: 60%; right: 20%; animation-duration: 25s; }
+    .orb:nth-child(3) { width: 60px; height: 60px; bottom: 20%; left: 20%; animation-duration: 18s; }
+    .orb:nth-child(4) { width: 100px; height: 100px; top: 10%; right: 10%; animation-duration: 22s; }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-30px) rotate(120deg); }
+      66% { transform: translateY(20px) rotate(240deg); }
+    }
+
+    .container {
+      max-width: 450px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 40px 30px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+      animation: cardSlide 1s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+      background-size: 300% 100%;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes cardSlide {
+      from { opacity: 0; transform: translateY(50px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0%; }
+      100% { background-position: 300%; }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff, #f0f0f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.9);
+      font-size: clamp(14px, 3vw, 16px);
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.95);
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(15px);
+      font-size: 16px;
+      color: #333;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      font-family: inherit;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      transform: translateY(-3px);
+      box-shadow: 
+        0 15px 35px rgba(0,0,0,0.15),
+        inset 0 2px 10px rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 16px center;
+      background-repeat: no-repeat;
+      background-size: 18px;
+      padding-right: 50px;
+      appearance: none;
+    }
+
+    .calc-btn, .submit-btn {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 15px 0;
+      font-family: inherit;
+    }
+
+    .calc-btn {
+      background: linear-gradient(135deg, #ff9a9e, #fecfef);
+      color: #333;
+      box-shadow: 0 10px 30px rgba(255, 154, 158, 0.4);
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+      font-size: 18px;
+    }
+
+    .calc-btn:hover, .submit-btn:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    .amount-display {
+      text-align: center;
+      font-size: clamp(22px, 6vw, 28px);
+      font-weight: 800;
+      margin: 25px 0;
+      padding: 25px 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      border: 2px solid rgba(255,255,255,0.3);
+      color: #333;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.6s ease;
+    }
+
+    .amount-display.show {
+      opacity: 1;
+      transform: scale(1);
+      animation: amountPulse 2s infinite;
+    }
+
+    @keyframes amountPulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+      50% { box-shadow: 0 0 50px rgba(255,255,255,0.7); }
+    }
+
+    #qr-image {
+      width: 100%;
+      max-width: 300px;
+      max-height: 300px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      display: none;
+      margin: 25px auto;
+      animation: qrPop 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    @keyframes qrPop {
+      0% { opacity: 0; transform: scale(0) rotate(-10deg); }
+      60% { transform: scale(1.1) rotate(5deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    .file-upload-wrapper {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .file-upload-wrapper input[type=file] {
+      display: none;
+    }
+
+    .file-upload-btn {
+      background: linear-gradient(135deg, #4ecdc4, #44a08d);
+      color: white;
+      padding: 16px 20px;
+      border-radius: 25px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .file-upload-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(78, 205, 196, 0.4);
+    }
+
+    .loading {
+      pointer-events: none;
+      position: relative;
+      color: transparent;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 22px;
+      height: 22px;
+      margin: -11px 0 0 -11px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Mobile + Laptop Perfect */
+    @media (max-width: 768px) {
+      body { padding: 15px; }
+      .glass-card { padding: 30px 25px; margin: 20px 10px; }
+      input, select { font-size: 16px; /* Prevents zoom */ }
+    }
+
+    @media (max-width: 480px) {
+      .glass-card { padding: 25px 20px; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Orbs -->
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+
+  <div class="container">
+    <div class="glass-card">
+      <h1>✨ InstaGlow</h1>
+      <p class="subtitle">Premium Instagram Growth Services</p>
+
+      <form id="orderForm" action="https://formsubmit.co/murarikumarstm933@gmail.com" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="🌟 New InstaGlow Order">
+        <input type="hidden" name="_captcha" value="false">
+
+        <div class="form-group">
+          <label>🎯 Service</label>
+          <select id="service" name="Service" required>
+            <option value="" disabled selected>Choose your boost...</option>
+            <option value="Likes">❤️ Likes (₹20 per 1K)</option>
+            <option value="Views">👁️ Views (₹10 per 1K)</option>
+            <option value="Shares">🔄 Shares (₹15 per 1K)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>🔗 Post Link</label>
+          <input type="url" name="Post Link" placeholder="https://instagram.com/p/ABC123/" required>
+        </div>
+
+        <div class="form-group">
+          <label>📈 Quantity</label>
+          <input type="number" id="qty" name="Quantity" placeholder="Enter quantity (1000, 2000...)" min="1000" step="1000" required>
+        </div>
+
+        <button type="button" class="calc-btn" onclick="calculate()">💎 Calculate Price</button>
+
+        <div id="amount" class="amount-display">₹0.00</div>
+
+        <img id="qr-image" src="qr.png" alt="Payment QR Code">
+
+        <div class="file-upload-wrapper">
+          <label class="file-upload-btn" for="paymentProof">📱 Upload Payment Proof</label>
+          <input type="file" id="paymentProof" name="Payment Proof" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">🚀 Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function calculate() {
+      const service = document.getElementById("service").value;
+      const qty = parseFloat(document.getElementById("qty").value) || 0;
+      
+      if (!service || qty < 1000) {
+        alert('Please select service & enter minimum 1000 quantity');
+        return;
+      }
+
+      const rates = { "Views": 10, "Shares": 15, "Likes": 20 };
+      const amount = (qty / 1000) * rates[service];
+      
+      const amountEl = document.getElementById("amount");
+      amountEl.textContent = `💎 Total: ₹${amount.toFixed(2)}`;
+      amountEl.classList.add('show');
+      
+      // Show QR with pop animation
+      document.getElementById("qr-image").style.display = 'block';
+    }
+
+    // Form submit animation
+    document.getElementById('orderForm').addEventListener('submit', function() {
+      const btn = document.getElementById('submitBtn');
+      btn.classList.add('loading');
+      btn.textContent = 'Processing...';
+    });
+
+    // Input interactions
+    document.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('focus', function() {
+        this.style.transform = 'translateY(-3px) scale(1.02)';
+      });
+      el.addEventListener('blur', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Service selector animation
+    document.getElementById('service').addEventListener('change', function() {
+      this.style.background = 'rgba(255, 255, 255, 1)';
+      setTimeout(() => {
+        this.style.background = 'rgba(255, 255, 255, 0.9)';
+      }, 300);
+    });
+  </script>
+</body>
+</html>
