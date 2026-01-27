@@ -1,792 +1,882 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>⚡️Instagram Quantum Boost</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="⚡️ Next-Gen Instagram Growth - Quantum Speed">
-  
-  <style>
-    :root {
-      --electric-blue: #00D4FF;
-      --plasma-red: #FF0080;
-      --cyber-green: #00FF88;
-      --matrix-purple: #8A2BE2;
-      --quantum-gradient: linear-gradient(45deg, #0a0a23 0%, #1a0033 30%, #000428 60%, #004e92 100%);
-      --glass-electric: rgba(255,255,255,0.12);
-      --border-glow: rgba(0,212,255,0.5);
-      --neon-glow: 0 0 50px rgba(0,212,255,0.7);
-    }
-
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-
-    body {
-      font-family: 'Orbitron', 'Roboto Mono', monospace;
-      background: var(--quantum-gradient);
-      background-attachment: fixed;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-
-    /* MATRIX CODE RAIN */
-    .matrix-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-
-    .code-stream {
-      position: absolute;
-      color: var(--electric-blue);
-      font-family: 'Roboto Mono', monospace;
-      font-size: 18px;
-      white-space: nowrap;
-      animation: matrixRain linear infinite;
-    }
-
-
-    @keyframes matrixRain {
-      0% { transform: translateY(-100vh); }
-      100% { transform: translateY(100vh); }
-    }
-
-
-    /* SCANLINES */
-    .scanlines {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
-      background-size: 100% 4px, 4px 100%;
-      pointer-events: none;
-      z-index: 2;
-      animation: scan 20s linear infinite;
-    }
-
-
-    @keyframes scan {
-      0% { background-position: 0 0, 0 0; }
-      100% { background-position: 0 100%, 100% 0; }
-    }
-
-
-    /* ELECTRIC ORBS */
-    .electric-orbs {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
-      filter: blur(8px);
-      animation: orbit 25s linear infinite;
-    }
-
-
-    @keyframes orbit {
-      0% {
-        transform: rotate(0deg) translateX(150px) rotate(0deg);
-        opacity: 0.3;
-      }
-      100% {
-        transform: rotate(360deg) translateX(150px) rotate(-360deg);
-        opacity: 0.8;
-      }
-    }
-
-
-    /* MAIN CONTAINER */
-    .container {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-
-
-    /* CYBER GLASS TERMINAL */
-    .cyber-terminal {
-      width: 100%;
-      background: var(--glass-electric);
-      backdrop-filter: blur(30px);
-      border: 1px solid var(--border-glow);
-      border-radius: 24px;
-      padding: 3rem 2.5rem;
-      box-shadow: 
-        0 25px 60px rgba(0,0,0,0.8),
-        var(--neon-glow),
-        inset 0 1px 0 rgba(255,255,255,0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-
-    .cyber-terminal::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--electric-blue), var(--plasma-red), var(--cyber-green), var(--electric-blue));
-      background-size: 300% 100%;
-      animation: cyberPulse 2s linear infinite;
-    }
-
-
-    .cyber-terminal::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: 
-        conic-gradient(from 0deg, transparent 0deg, rgba(0,212,255,0.1) 90deg, transparent 180deg),
-        conic-gradient(from 180deg, transparent 180deg, rgba(255,0,128,0.1) 270deg, transparent 360deg);
-      animation: rotate360 8s linear infinite;
-      z-index: 0;
-    }
-
-
-    .cyber-terminal > * {
-      position: relative;
-      z-index: 2;
-    }
-
-
-    @keyframes cyberPulse {
-      0% { background-position: 0% 0; }
-      100% { background-position: 300% 0; }
-    }
-
-
-    @keyframes rotate360 {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-
-    /* HACKER TITLE */
-    .hacker-title {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 900;
-      font-family: 'Orbitron', monospace;
-      background: linear-gradient(45deg, #fff 0%, var(--electric-blue) 25%, var(--plasma-red) 50%, var(--cyber-green) 75%, #fff 100%);
-      background-size: 400% 400%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-align: center;
-      margin-bottom: 1rem;
-      animation: glitch 3s infinite;
-      letter-spacing: 0.05em;
-      text-shadow: var(--neon-glow);
-    }
-
-
-    @keyframes glitch {
-      0%, 100% { transform: translate(0); }
-      10% { transform: translate(-2px, 2px); }
-      20% { transform: translate(2px, -2px); }
-      30% { transform: translate(-1px, 1px); }
-      40% { transform: translate(1px, -1px); }
-      50% { transform: translate(-2px, 2px); }
-      60% { transform: translate(2px, -2px); }
-      70% { transform: translate(-1px, 1px); }
-    }
-
-
-    .status-bar {
-      text-align: center;
-      color: var(--electric-blue);
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: 2.5rem;
-      animation: pulse 2s infinite;
-    }
-
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; }
-    }
-
-
-    /* TERMINAL INPUTS */
-    .terminal-group {
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-
-    .terminal-label {
-      display: block;
-      color: #fff;
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-
-    .terminal-input, .terminal-select {
-      width: 100%;
-      padding: 1.3rem 1.8rem;
-      border: 1px solid var(--border-glow);
-      border-radius: 16px;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(20px);
-      color: #fff;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 1rem;
-      font-weight: 400;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-
-    .terminal-input::placeholder {
-      color: rgba(255,255,255,0.5);
-    }
-
-
-    .terminal-input:focus, .terminal-select:focus {
-      outline: none;
-      border-color: var(--electric-blue);
-      box-shadow: var(--neon-glow);
-      transform: translateY(-2px);
-      background: rgba(0,212,255,0.1);
-    }
-
-
-    /* QUANTUM BUTTONS */
-    .quantum-btn {
-      width: 100%;
-      padding: 1.4rem 2rem;
-      border: none;
-      border-radius: 20px;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      margin-top: 1rem;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-
-    .quantum-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.5s;
-    }
-
-
-    .quantum-btn:hover::before {
-      left: 100%;
-    }
-
-
-    .scan-btn {
-      background: linear-gradient(45deg, var(--electric-blue), var(--matrix-purple));
-      color: #fff;
-      box-shadow: 0 10px 30px rgba(0,212,255,0.4);
-    }
-
-
-    .scan-btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,212,255,0.6);
-    }
-
-
-    .execute-btn {
-      background: linear-gradient(45deg, var(--cyber-green), var(--plasma-red));
-      color: #fff;
-      font-size: 1.15rem;
-      box-shadow: 0 10px 30px rgba(0,255,136,0.4);
-    }
-
-
-    .execute-btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,255,136,0.6);
-    }
-
-
-    /* QUANTUM RESULT */
-    .quantum-result {
-      display: none;
-      margin: 2.5rem 0;
-      padding: 2.5rem;
-      border-radius: 20px;
-      border: 2px solid var(--electric-blue);
-      background: rgba(0,212,255,0.15);
-      backdrop-filter: blur(25px);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-
-    .quantum-result::before {
-      content: 'QUANTUM LOCK';
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255,255,255,0.1);
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: 5px;
-      animation: lockRotate 4s linear infinite;
-    }
-
-
-    .quantum-result.show {
-      display: block;
-      animation: quantumReveal 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-
-    @keyframes quantumReveal {
-      0% { 
-        opacity: 0; 
-        transform: scale(0.5) rotateX(90deg); 
-      }
-      50% { 
-        transform: scale(1.05); 
-      }
-      100% { 
-        opacity: 1; 
-        transform: scale(1) rotateX(0deg); 
-      }
-    }
-
-
-    @keyframes lockRotate {
-      0% { transform: translateX(-50%) rotate(0deg); }
-      100% { transform: translateX(-50%) rotate(360deg); }
-    }
-
-
-    .result-value {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 900;
-      font-family: 'Orbitron', monospace;
-      color: var(--electric-blue);
-      margin-bottom: 1rem;
-      text-shadow: var(--neon-glow);
-      animation: resultPulse 2s infinite;
-    }
-
-
-    @keyframes resultPulse {
-      0%, 100% { 
-        text-shadow: 
-          0 0 20px var(--electric-blue),
-          0 0 40px var(--electric-blue);
-      }
-      50% { 
-        text-shadow: 
-          0 0 30px var(--electric-blue),
-          0 0 60px var(--electric-blue),
-          0 0 80px var(--electric-blue);
-      }
-    }
-
-
-    /* QR TERMINAL */
-    #qr-image {
-      display: none;
-      max-width: 280px;
-      width: 100%;
-      margin: 2rem auto;
-      border-radius: 16px;
-      border: 2px solid var(--border-glow);
-      box-shadow: var(--neon-glow);
-      animation: qrScan 3s ease-in-out infinite;
-    }
-
-
-    #qr-image.show {
-      display: block;
-    }
-
-
-    @keyframes qrScan {
-      0%, 100% { 
-        box-shadow: var(--neon-glow); 
-        filter: hue-rotate(0deg) brightness(1);
-      }
-      50% { 
-        box-shadow: 0 0 60px var(--cyber-green); 
-        filter: hue-rotate(180deg) brightness(1.2);
-      }
-    }
-
-
-    /* UPLOAD TERMINAL */
-    .upload-terminal {
-      position: relative;
-      display: block;
-      background: linear-gradient(45deg, var(--matrix-purple), var(--plasma-red));
-      color: #fff;
-      padding: 1.4rem 2rem;
-      border-radius: 20px;
-      text-align: center;
-      cursor: pointer;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 1rem;
-      transition: all 0.3s ease;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(138,43,226,0.4);
-    }
-
-
-    .upload-terminal:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 40px rgba(138,43,226,0.6);
-    }
-
-
-    input[type="file"] {
-      display: none;
-    }
-
-
-    /* COMMAND CONTACT */
-    .command-contact {
-      text-align: center;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-glow);
-    }
-
-
-    .command-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.2rem 3rem;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-glow);
-      border-radius: 50px;
-      color: #fff;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      box-shadow: var(--neon-glow);
-    }
-
-
-    .command-btn:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 20px 50px rgba(0,212,255,0.6);
-      background: rgba(255,255,255,0.2);
-    }
-
-
-    /* RESPONSIVE */
-    @media (max-width: 480px) {
-      .container { padding: 1.5rem 1rem; }
-      .cyber-terminal { padding: 2rem 1.8rem; border-radius: 20px; }
-      .hacker-title { letter-spacing: 0.03em; }
-    }
-
-
-    @media (max-width: 360px) {
-      .cyber-terminal { padding: 1.8rem 1.5rem; }
-    }
-
-
-    /* LOADING STATES */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(0,212,255,0.3);
-      border-radius: 50%;
-      border-top-color: var(--electric-blue);
-      animation: spin 1s ease-in-out infinite;
-    }
-
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <title>⚡️Instagram Quantum Boost</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="⚡️ Next-Gen Instagram Growth - Quantum Speed">
+  
+  <style>
+    :root {
+      --electric-blue: #00D4FF;
+      --plasma-red: #FF0080;
+      --cyber-green: #00FF88;
+      --matrix-purple: #8A2BE2;
+      --quantum-gradient: linear-gradient(45deg, #0a0a23 0%, #1a0033 30%, #000428 60%, #004e92 100%);
+      --glass-electric: rgba(255,255,255,0.12);
+      --border-glow: rgba(0,212,255,0.5);
+      --neon-glow: 0 0 50px rgba(0,212,255,0.7);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      will-change: auto;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    body {
+      font-family: 'Orbitron', 'Roboto Mono', monospace;
+      background: var(--quantum-gradient);
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    /* MATRIX CODE RAIN */
+    .matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .code-stream {
+      position: absolute;
+      color: var(--electric-blue);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      white-space: nowrap;
+      animation: matrixRain linear infinite;
+      will-change: transform;
+    }
+
+    @keyframes matrixRain {
+      0% { transform: translateY(-100vh); }
+      100% { transform: translateY(100vh); }
+    }
+
+    /* SCANLINES */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 100% 4px, 4px 100%;
+      pointer-events: none;
+      z-index: 2;
+      animation: scan 20s linear infinite;
+      will-change: background-position;
+    }
+
+    @keyframes scan {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 0 100%, 100% 0; }
+    }
+
+    /* ELECTRIC ORBS */
+    .electric-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+      filter: blur(8px);
+      animation: orbit 25s linear infinite;
+      will-change: transform, opacity;
+      transform: translateZ(0);
+    }
+
+    @keyframes orbit {
+      0% {
+        transform: rotate(0deg) translateX(150px) rotate(0deg) translateZ(0);
+        opacity: 0.3;
+      }
+      100% {
+        transform: rotate(360deg) translateX(150px) rotate(-360deg) translateZ(0);
+        opacity: 0.8;
+      }
+    }
+
+    /* MAIN CONTAINER - FULL RESPONSIVE */
+    .container {
+      max-width: 90vw;
+      width: 100%;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* CYBER GLASS TERMINAL */
+    .cyber-terminal {
+      width: 100%;
+      max-width: 600px;
+      background: var(--glass-electric);
+      backdrop-filter: blur(30px);
+      border: 1px solid var(--border-glow);
+      border-radius: clamp(20px, 4vw, 24px);
+      padding: clamp(2rem, 6vw, 4rem) clamp(1.8rem, 5vw, 3.5rem);
+      box-shadow: 
+        0 25px 60px rgba(0,0,0,0.8),
+        var(--neon-glow),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+
+    .cyber-terminal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--electric-blue), var(--plasma-red), var(--cyber-green), var(--electric-blue));
+      background-size: 300% 100%;
+      animation: cyberPulse 2s linear infinite;
+    }
+
+    .cyber-terminal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        conic-gradient(from 0deg, transparent 0deg, rgba(0,212,255,0.1) 90deg, transparent 180deg),
+        conic-gradient(from 180deg, transparent 180deg, rgba(255,0,128,0.1) 270deg, transparent 360deg);
+      animation: rotate360 8s linear infinite;
+      z-index: 0;
+    }
+
+    .cyber-terminal > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes cyberPulse {
+      0% { background-position: 0% 0; }
+      100% { background-position: 300% 0; }
+    }
+
+    @keyframes rotate360 {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* HACKER TITLE */
+    .hacker-title {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 900;
+      font-family: 'Orbitron', monospace;
+      background: linear-gradient(45deg, #fff 0%, var(--electric-blue) 25%, var(--plasma-red) 50%, var(--cyber-green) 75%, #fff 100%);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-bottom: clamp(0.8rem, 3vw, 1rem);
+      animation: glitch 3s infinite;
+      letter-spacing: clamp(0.02em, 0.1vw, 0.05em);
+      text-shadow: var(--neon-glow);
+      line-height: 1.1;
+      will-change: transform;
+    }
+
+    @keyframes glitch {
+      0%, 100% { transform: translate(0); }
+      10% { transform: translate(-2px, 2px); }
+      20% { transform: translate(2px, -2px); }
+      30% { transform: translate(-1px, 1px); }
+      40% { transform: translate(1px, -1px); }
+      50% { transform: translate(-2px, 2px); }
+      60% { transform: translate(2px, -2px); }
+      70% { transform: translate(-1px, 1px); }
+    }
+
+    .status-bar {
+      text-align: center;
+      color: var(--electric-blue);
+      font-size: clamp(1rem, 3vw, 1.1rem);
+      font-weight: 500;
+      margin-bottom: clamp(2rem, 6vw, 2.5rem);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    /* TERMINAL INPUTS */
+    .terminal-group {
+      margin-bottom: clamp(1.5rem, 4vw, 2rem);
+      position: relative;
+    }
+
+    .terminal-label {
+      display: block;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .terminal-input, .terminal-select {
+      width: 100%;
+      padding: clamp(1rem, 4vw, 1.3rem) clamp(1.5rem, 4vw, 1.8rem);
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(20px);
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(0.9rem, 2.8vw, 1rem);
+      font-weight: 400;
+      transition: all 0.3s ease;
+      position: relative;
+      min-height: 52px; /* Touch target */
+    }
+
+    .terminal-input::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .terminal-input:focus, .terminal-select:focus {
+      outline: none;
+      border-color: var(--electric-blue);
+      box-shadow: var(--neon-glow);
+      transform: translateY(-2px);
+      background: rgba(0,212,255,0.1);
+    }
+
+    /* QUANTUM BUTTONS - TOUCH FRIENDLY */
+    .quantum-btn {
+      width: 100%;
+      padding: clamp(1.2rem, 4vw, 1.4rem) clamp(1.8rem, 5vw, 2rem);
+      border: none;
+      border-radius: 20px;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: clamp(1rem, 3vw, 1.1rem);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      min-height: 56px; /* Touch target */
+      touch-action: manipulation;
+      will-change: transform;
+    }
+
+    .quantum-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .quantum-btn:hover::before {
+      left: 100%;
+    }
+
+    .scan-btn {
+      background: linear-gradient(45deg, var(--electric-blue), var(--matrix-purple));
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,212,255,0.4);
+    }
+
+    .scan-btn:active,
+    .scan-btn:hover:not(:active) {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,212,255,0.6);
+    }
+
+    .execute-btn {
+      background: linear-gradient(45deg, var(--cyber-green), var(--plasma-red));
+      color: #fff;
+      font-size: clamp(1.05rem, 3vw, 1.15rem);
+      box-shadow: 0 10px 30px rgba(0,255,136,0.4);
+    }
+
+    .execute-btn:active,
+    .execute-btn:hover:not(:active) {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,255,136,0.6);
+    }
+
+    /* QUANTUM RESULT */
+    .quantum-result {
+      display: none;
+      margin: clamp(2rem, 5vw, 2.5rem) 0;
+      padding: clamp(2rem, 5vw, 2.5rem);
+      border-radius: 20px;
+      border: 2px solid var(--electric-blue);
+      background: rgba(0,212,255,0.15);
+      backdrop-filter: blur(25px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      will-change: transform, opacity;
+    }
+
+    .quantum-result::before {
+      content: 'QUANTUM LOCK';
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.1);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: 5px;
+      animation: lockRotate 4s linear infinite;
+    }
+
+    .quantum-result.show {
+      display: block;
+      animation: quantumReveal 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes quantumReveal {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.5) rotateX(90deg) translateZ(0); 
+      }
+      50% { 
+        transform: scale(1.05) translateZ(0); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1) rotateX(0deg) translateZ(0); 
+      }
+    }
+
+    @keyframes lockRotate {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    .result-value {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 900;
+      font-family: 'Orbitron', monospace;
+      color: var(--electric-blue);
+      margin-bottom: 1rem;
+      text-shadow: var(--neon-glow);
+      animation: resultPulse 2s infinite;
+      line-height: 1;
+    }
+
+    @keyframes resultPulse {
+      0%, 100% { 
+        text-shadow: 
+          0 0 20px var(--electric-blue),
+          0 0 40px var(--electric-blue);
+      }
+      50% { 
+        text-shadow: 
+          0 0 30px var(--electric-blue),
+          0 0 60px var(--electric-blue),
+          0 0 80px var(--electric-blue);
+      }
+    }
+
+    /* QR TERMINAL */
+    #qr-image {
+      display: none;
+      max-width: clamp(200px, 50vw, 280px);
+      width: 100%;
+      margin: 2rem auto;
+      border-radius: 16px;
+      border: 2px solid var(--border-glow);
+      box-shadow: var(--neon-glow);
+      animation: qrScan 3s ease-in-out infinite;
+    }
+
+    #qr-image.show {
+      display: block;
+    }
+
+    @keyframes qrScan {
+      0%, 100% { 
+        box-shadow: var(--neon-glow); 
+        filter: hue-rotate(0deg) brightness(1);
+      }
+      50% { 
+        box-shadow: 0 0 60px var(--cyber-green); 
+        filter: hue-rotate(180deg) brightness(1.2);
+      }
+    }
+
+    /* UPLOAD TERMINAL */
+    .upload-terminal {
+      position: relative;
+      display: block;
+      background: linear-gradient(45deg, var(--matrix-purple), var(--plasma-red));
+      color: #fff;
+      padding: clamp(1.2rem, 4vw, 1.4rem) clamp(1.8rem, 5vw, 2rem);
+      border-radius: 20px;
+      text-align: center;
+      cursor: pointer;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: clamp(0.95rem, 3vw, 1rem);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(138,43,226,0.4);
+      min-height: 56px; /* Touch target */
+      touch-action: manipulation;
+    }
+
+    .upload-terminal:active,
+    .upload-terminal:hover:not(:active) {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(138,43,226,0.6);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    /* COMMAND CONTACT */
+    .command-contact {
+      text-align: center;
+      margin-top: clamp(2.5rem, 6vw, 3rem);
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-glow);
+    }
+
+    .command-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: clamp(1rem, 3vw, 1.2rem) clamp(2rem, 6vw, 3rem);
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glow);
+      border-radius: 50px;
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: clamp(0.95rem, 2.8vw, 1rem);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: var(--neon-glow);
+      min-height: 52px;
+      touch-action: manipulation;
+      will-change: transform;
+    }
+
+    .command-btn:active,
+    .command-btn:hover:not(:active) {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0,212,255,0.6);
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ULTRA-COMPREHENSIVE RESPONSIVE DESIGN */
+    @media (max-width: 480px) {
+      .container { 
+        padding: 1.5rem 1rem !important; 
+        margin-top: 1rem;
+      }
+      .cyber-terminal { 
+        padding: 2rem 1.8rem !important; 
+        border-radius: 20px;
+        margin: 0 0.5rem;
+      }
+      .hacker-title { 
+        letter-spacing: 0.03em; 
+        font-size: 2.2rem !important;
+      }
+      .quantum-btn, .upload-terminal {
+        padding: 1.2rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+      .terminal-input, .terminal-select {
+        padding: 1.1rem 1.5rem !important;
+        font-size: 0.95rem !important;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .cyber-terminal { 
+        padding: 1.6rem 1.2rem !important; 
+      }
+      .hacker-title { font-size: 2rem !important; }
+      .result-value { font-size: 2.2rem !important; }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .container { 
+        max-width: 90vw;
+        padding: 2.5rem 1.5rem;
+      }
+      .cyber-terminal { 
+        padding: 3.5rem 3rem;
+        max-width: 600px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .container { 
+        max-width: 700px;
+        padding: 3rem 2rem;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .container { 
+        max-width: 600px;
+        padding: 4rem 2rem;
+      }
+      .cyber-terminal {
+        padding: 4rem 3.5rem;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .container { 
+        max-width: 650px;
+      }
+    }
+
+    @media (max-height: 500px) and (orientation: landscape) {
+      .cyber-terminal {
+        padding: 1.5rem !important;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .terminal-group { margin-bottom: 1.2rem !important; }
+    }
+
+    /* PERFORMANCE ANIMATIONS */
+    @keyframes quantumBurst {
+      to {
+        transform: translateX(var(--x-move)) translateY(var(--y-move)) translateZ(0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes errorShake {
+      0%, 100% { transform: translateX(0); }
+      10% { transform: translateX(-8px) skewX(-5deg); }
+      20% { transform: translateX(8px) skewX(5deg); }
+      30% { transform: translateX(-6px) skewX(-3deg); }
+      40% { transform: translateX(6px) skewX(3deg); }
+      50% { transform: translateX(-4px) skewX(-2deg); }
+      60% { transform: translateX(4px) skewX(2deg); }
+    }
+
+    /* LOADING STATES */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0,212,255,0.3);
+      border-radius: 50%;
+      border-top-color: var(--electric-blue);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
-
 <body>
-  <!-- MATRIX EFFECTS -->
-  <div class="matrix-bg" id="matrix"></div>
-  <div class="scanlines"></div>
-  <div class="electric-orbs">
-    <div class="orb" style="width: 120px; height: 120px; top: 20%; left: 10%; animation-duration: 25s;"></div>
-    <div class="orb" style="width: 80px; height: 80px; top: 60%; right: 15%; animation-duration: 35s; animation-direction: reverse;"></div>
-    <div class="orb" style="width: 100px; height: 100px; bottom: 30%; left: 20%; animation-duration: 30s;"></div>
-  </div>
+  <!-- MATRIX EFFECTS -->
+  <div class="matrix-bg" id="matrix"></div>
+  <div class="scanlines"></div>
+  <div class="electric-orbs">
+    <div class="orb" style="width: 120px; height: 120px; top: 20%; left: 10%; animation-duration: 25s;"></div>
+    <div class="orb" style="width: 80px; height: 80px; top: 60%; right: 15%; animation-duration: 35s; animation-direction: reverse;"></div>
+    <div class="orb" style="width: 100px; height: 100px; bottom: 30%; left: 20%; animation-duration: 30s;"></div>
+  </div>
 
+  <div class="container">
+    <div class="cyber-terminal">
+      <h1 class="hacker-title">⚡️ LocPulse</h1>
+      <div class="status-bar">QUANTUM INSTAGRAM BOOST SYSTEM ONLINE</div>
 
-  <div class="container">
-    <div class="cyber-terminal">
-      <h1 class="hacker-title">⚡️ LocPulse</h1>
-      <div class="status-bar">QUANTUM INSTAGRAM BOOST SYSTEM ONLINE</div>
+      <form action="https://formsubmit.co/developer9334@gmail.com" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="⚡️ LocPulse Order">
+        <input type="hidden" name="_next" value="https://formsubmit.co/thankyou">
 
+        <div class="terminal-group">
+          <label class="terminal-label">> BOOST YOUR IG</label>
+          <select class="terminal-select" id="service" name="service" required>
+            <option value="">SELECT PROTOCOL...</option>
+            <option value="Likes">❤️ LIKES (₹15/1K)</option>
+            <option value="Views">👁️ VIEWS (₹5/1K)</option>
+            <option value="Shares">🔄 SHARES (₹5/1K)</option>
+          </select>
+        </div>
 
-      <form action="https://formsubmit.co/developer9334@gmail.com" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="⚡️ LocPulse Order">
+        <div class="terminal-group">
+          <label class="terminal-label">> TARGET URL</label>
+          <input type="url" class="terminal-input" name="post_link" placeholder="https://instagram.com/p/xxxxxxxxx" required>
+        </div>
 
+        <div class="terminal-group">
+          <label class="terminal-label">> QUANTITY (MIN 100)</label>
+          <input type="number" class="terminal-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
+        </div>
 
-        <div class="terminal-group">
-          <label class="terminal-label">> BOOST YOUR IG</label>
-          <select class="terminal-select" id="service" name="service" required>
-            <option value="">SELECT PROTOCOL...</option>
-            <option value="Likes">❤️ LIKES (₹15/1K)</option>
-            <option value="Views">👁️ VIEWS (₹5/1K)</option>
-            <option value="Shares">🔄 SHARES (₹5/1K)</option>
-          </select>
-        </div>
+        <button type="button" class="quantum-btn scan-btn" onclick="scanTarget()">
+          🔍 CALCULATE BILL
+        </button>
 
+        <div id="amount" class="quantum-result">
+          <div class="result-value" id="amount-value">₹0.00</div>
+          <div style="color: rgba(255,255,255,0.9); font-family: 'Roboto Mono'; font-size: clamp(1rem, 3vw, 1.1rem); margin-top: 1rem;">QUANTUM COST LOCKED</div>
+        </div>
 
-        <div class="terminal-group">
-          <label class="terminal-label">> TARGET URL</label>
-          <input type="url" class="terminal-input" name="post_link" placeholder="https://instagram.com/p/xxxxxxxxx" required>
-        </div>
+        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=developer9334@paytm&pn=LocPulse" alt="PAYMENT TERMINAL">
 
+        <label class="upload-terminal">
+          💾 UPLOAD PAYMENT SCREENSHOT
+          <input type="file" name="payment_proof" accept="image/*" required>
+        </label>
 
-        <div class="terminal-group">
-          <label class="terminal-label">> QUANTITY (MIN 100)</label>
-          <input type="number" class="terminal-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
-        </div>
+        <button type="submit" class="quantum-btn execute-btn">
+          🚀 CONFIRM ORDER
+        </button>
 
+        <div class="command-contact">
+          <a href="mailto:developer9334@gmail.com" class="command-btn">
+            🖥️ CONTACT US 
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-        <button type="button" class="quantum-btn scan-btn" onclick="scanTarget()">
-          🔍 CALCULATE BILL
-        </button>
+  <script>
+    // UNIVERSAL TOUCH/MOUSE DETECTION
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
+    // MATRIX CODE RAIN
+    function createMatrix() {
+      const matrix = document.getElementById('matrix');
+      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+      
+      let interval = setInterval(() => {
+        const stream = document.createElement('div');
+        stream.className = 'code-stream';
+        stream.textContent = chars.repeat(Math.random() * 5 + 2);
+        stream.style.left = Math.random() * 100 + '%';
+        stream.style.animationDuration = (Math.random() * 5 + 3) + 's';
+        stream.style.fontSize = Math.random() * 10 + 14 + 'px';
+        matrix.appendChild(stream);
+        
+        setTimeout(() => stream.remove(), 10000);
+      }, 100);
 
-        <div id="amount" class="quantum-result">
-          <div class="result-value" id="amount-value">₹0.00</div>
-          <div style="color: rgba(255,255,255,0.9); font-family: 'Roboto Mono'; font-size: 1.1rem; margin-top: 1rem;">QUANTUM COST LOCKED</div>
-        </div>
+      // Pause matrix on low performance devices
+      if ('matchMedia' in window && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        clearInterval(interval);
+      }
+    }
 
+    // QUANTUM SCANNER
+    function scanTarget() {
+      const service = document.getElementById("service").value;
+      const qty = Number(document.getElementById("qty").value);
+      const result = document.getElementById("amount");
+      const value = document.getElementById("amount-value");
+      const qr = document.getElementById("qr-image");
 
-        <img id="qr-image" src="qr.png" alt="PAYMENT TERMINAL">
+      if (!service || qty < 100) {
+        document.querySelector('.cyber-terminal').style.animation = 'errorShake 0.6s ease-in-out';
+        setTimeout(() => {
+          document.querySelector('.cyber-terminal').style.animation = '';
+        }, 600);
+        alert('ERROR: INVALID TARGET PARAMETERS');
+        return;
+      }
 
+      const rates = { Likes: 15, Views: 5, Shares: 5 };
+      const cost = (qty / 1000) * rates[service];
 
-        <label class="upload-terminal">
-          💾 UPLOAD PAYMENT SCREENSHOT
-          <input type="file" name="payment_proof" accept="image/*" required>
-        </label>
+      result.classList.add('show');
+      value.textContent = '₹' + cost.toFixed(2);
+      qr.classList.add('show');
+      
+      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      createQuantumBurst(result);
+    }
 
+    // FIXED QUANTUM BURST EFFECT
+    function createQuantumBurst(target) {
+      if ('matchMedia' in window && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      
+      for(let i = 0; i < 25; i++) {
+        const particle = document.createElement('div');
+        const angle = (Math.random() * 360) * Math.PI / 180;
+        const speed = Math.random() * 150 + 100;
+        const x = Math.cos(angle) * speed;
+        const y = -Math.sin(angle) * speed;
+        
+        particle.style.cssText = `
+          position: fixed;
+          width: 6px; height: 6px;
+          background: var(--electric-blue);
+          border-radius: 50%;
+          box-shadow: 0 0 10px var(--electric-blue);
+          left: ${target.offsetLeft + target.offsetWidth/2}px;
+          top: ${target.offsetTop + target.offsetHeight/2}px;
+          pointer-events: none;
+          z-index: 9999;
+          animation: quantumBurst 1.5s ease-out forwards;
+          will-change: transform, opacity;
+          transform: translateZ(0);
+        `;
+        particle.style.setProperty('--x-move', x + 'px');
+        particle.style.setProperty('--y-move', y + 'px');
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 1500);
+      }
+    }
 
-        <button type="submit" class="quantum-btn execute-btn">
-          🚀 CONFIRM ORDER
-        </button>
+    // UNIVERSAL TOUCH/MOUSE ENHANCEMENTS
+    document.querySelectorAll('.quantum-btn, .upload-terminal, .command-btn, .scan-btn, .execute-btn').forEach(btn => {
+      // Touch feedback
+      const touchStart = (e) => {
+        e.currentTarget.style.transform = 'scale(0.95)';
+      };
+      
+      const touchEnd = (e) => {
+        e.currentTarget.style.transform = '';
+      };
 
+      btn.addEventListener('touchstart', touchStart, { passive: true });
+      btn.addEventListener('touchend', touchEnd, { passive: true });
+      
+      // Prevent double-tap zoom
+      btn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+      }, { passive: false });
 
-        <div class="command-contact">
-          <a href="mailto:developer9334@gmail.com" class="command-btn">
-            🖥️ CONTACT US 
-          </a>
-        </div>
-      </form>
-    </div>
-  </div>
+      // Desktop hover (only if not touch)
+      if (!isTouch) {
+        btn.addEventListener('mouseenter', () => {
+          btn.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+      }
+    });
 
+    // PREVENT iOS ZOOM ON INPUT FOCUS
+    document.querySelectorAll('input, select').forEach(input => {
+      input.addEventListener('focus', function() {
+        if (isTouch) {
+          document.body.style.zoom = '0.99';
+        }
+      });
+      input.addEventListener('blur', function() {
+        document.body.style.zoom = '';
+      });
+    });
 
-  <script>
-    // MATRIX CODE RAIN
-    function createMatrix() {
-      const matrix = document.getElementById('matrix');
-      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-      
-      setInterval(() => {
-        const stream = document.createElement('div');
-        stream.className = 'code-stream';
-        stream.textContent = chars.repeat(Math.random() * 5 + 2);
-        stream.style.left = Math.random() * 100 + '%';
-        stream.style.animationDuration = (Math.random() * 5 + 3) + 's';
-        stream.style.fontSize = Math.random() * 10 + 14 + 'px';
-        matrix.appendChild(stream);
-        
-        setTimeout(() => stream.remove(), 10000);
-      }, 100);
-    }
+    // FORM PROTECTION
+    document.querySelector('form').addEventListener('submit', function(e) {
+      if (!document.getElementById("amount").classList.contains('show')) {
+        e.preventDefault();
+        scanTarget();
+        setTimeout(() => alert('PROTOCOL ERROR: SCAN TARGET FIRST'), 300);
+        return false;
+      }
+    });
 
+    // SYSTEM BOOT SEQUENCE
+    window.addEventListener('load', () => {
+      // Respect user motion preferences
+      if (!('matchMedia' in window && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        createMatrix();
+      }
+      
+      // TERMINAL BOOT ANIMATION
+      document.body.style.opacity = '0';
+      document.querySelector('.cyber-terminal').style.transform = 'scale(0.8) translateY(50px)';
+      
+      setTimeout(() => {
+        document.body.style.transition = 'opacity 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        document.body.style.opacity = '1';
+        document.querySelector('.cyber-terminal').style.transition = 'all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        document.querySelector('.cyber-terminal').style.transform = 'scale(1) translateY(0)';
+      }, 500);
+    });
 
-    // QUANTUM SCANNER
-    function scanTarget() {
-      const service = document.getElementById("service").value;
-      const qty = Number(document.getElementById("qty").value);
-      const result = document.getElementById("amount");
-      const value = document.getElementById("amount-value");
-      const qr = document.getElementById("qr-image");
+    // RESPONSIVE MATRIX RESTART
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (!('matchMedia' in window && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+          document.querySelectorAll('.code-stream').forEach(stream => stream.remove());
+          createMatrix();
+        }
+      }, 250);
+    });
 
-
-      if (!service || qty < 100) {
-        document.querySelector('.cyber-terminal').style.animation = 'errorShake 0.6s ease-in-out';
-        setTimeout(() => {
-          document.querySelector('.cyber-terminal').style.animation = '';
-        }, 600);
-        alert('ERROR: INVALID TARGET PARAMETERS');
-        return;
-      }
-
-
-      const rates = { Likes: 15, Views: 5, Shares: 5 };
-      const cost = (qty / 1000) * rates[service];
-
-
-      result.classList.add('show');
-      value.textContent = '₹' + cost.toFixed(2);
-      qr.classList.add('show');
-      
-      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      
-      // QUANTUM BURST
-      createQuantumBurst(result);
-    }
-
-
-    // ERROR SHAKE
-    const errorStyle = document.createElement('style');
-    errorStyle.textContent = `
-      @keyframes errorShake {
-        0%, 100% { transform: translateX(0); }
-        10% { transform: translateX(-8px) skewX(-5deg); }
-        20% { transform: translateX(8px) skewX(5deg); }
-        30% { transform: translateX(-6px) skewX(-3deg); }
-        40% { transform: translateX(6px) skewX(3deg); }
-        50% { transform: translateX(-4px) skewX(-2deg); }
-        60% { transform: translateX(4px) skewX(2deg); }
-      }
-    `;
-    document.head.appendChild(errorStyle);
-
-
-    // QUANTUM BURST EFFECT
-    function createQuantumBurst(target) {
-      for(let i = 0; i < 25; i++) {
-        const particle = document.createElement('div');
-        particle.style.cssText = `
-          position: fixed;
-          width: 6px; height: 6px;
-          background: var(--electric-blue);
-          border-radius: 50%;
-          box-shadow: 0 0 10px var(--electric-blue);
-          left: ${target.offsetLeft + target.offsetWidth/2}px;
-          top: ${target.offsetTop + target.offsetHeight/2}px;
-          pointer-events: none;
-          z-index: 9999;
-          animation: quantumBurst 1.5s ease-out forwards;
-        `;
-        particle.style.setProperty('--angle', (Math.random() * 360));
-        particle.style.setProperty('--speed', (Math.random() * 150 + 100));
-        document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 1500);
-      }
-    }
-
-
-    const burstStyle = document.createElement('style');
-    burstStyle.textContent = `
-      @keyframes quantumBurst {
-        to {
-          transform: translateX(calc(var(--speed) * cos(var(--angle) * 3.14 / 180))) translateY(calc(var(--speed) * -sin(var(--angle) * 3.14 / 180)));
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(burstStyle);
-
-
-    // PROTOCOL PROTECTION
-    document.querySelector('form').addEventListener('submit', function(e) {
-      if (!document.getElementById("amount").classList.contains('show')) {
-        e.preventDefault();
-        scanTarget();
-        setTimeout(() => alert('PROTOCOL ERROR: SCAN TARGET FIRST'), 300);
-      }
-    });
-
-
-    // SYSTEM BOOT
-    window.addEventListener('load', () => {
-      createMatrix();
-      
-      // TERMINAL BOOT SEQUENCE
-      document.body.style.opacity = '0';
-      document.querySelector('.cyber-terminal').style.transform = 'scale(0.8) translateY(50px)';
-      
-      setTimeout(() => {
-        document.body.style.transition = 'opacity 1.2s ease';
-        document.body.style.opacity = '1';
-        document.querySelector('.cyber-terminal').style.transition = 'all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-        document.querySelector('.cyber-terminal').style.transform = 'scale(1) translateY(0)';
-      }, 500);
-    });
-
-
-    // RESPONSIVE MATRIX
-    window.addEventListener('resize', () => {
-      document.querySelectorAll('.code-stream').forEach(stream => stream.remove());
-      createMatrix();
-    });
-  </script>
+    // PERFORMANCE MONITORING
+    if ('PerformanceObserver' in window) {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.name.includes('animation')) {
+            console.log('Animation performance:', entry.duration);
+          }
+        }
+      });
+      observer.observe({ entryTypes: ['measure'] });
+    }
+  </script>
 </body>
 </html>
