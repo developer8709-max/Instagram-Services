@@ -1,695 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>⚡️Instagram Quantum Boost</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="description" content="⚡️ Next-Gen Instagram Growth - Quantum Speed">
+  <title>AstroPulse Instagram Booster</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   
   <style>
     :root {
-      --electric-blue: #00D4FF;
-      --plasma-red: #FF0080;
-      --cyber-green: #00FF88;
-      --matrix-purple: #8A2BE2;
-      --quantum-gradient: linear-gradient(45deg, #0a0a23 0%, #1a0033 30%, #000428 60%, #004e92 100%);
-      --glass-electric: rgba(255,255,255,0.12);
-      --border-glow: rgba(0,212,255,0.5);
-      --neon-glow: 0 0 50px rgba(0,212,255,0.7);
+      --astro-purple: #8B5CF6;
+      --nebula-pink: #EC4899;
+      --cosmic-teal: #06B6D4;
+      --star-white: #F8FAFC;
+      --panel-bg: rgba(139, 92, 246, 0.1);
+      --border-color: rgba(139, 92, 246, 0.3);
+      --glow: 0 0 20px rgba(139, 92, 246, 0.3);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      will-change: auto;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
     }
 
     body {
       font-family: 'Orbitron', 'Roboto Mono', monospace;
-      background: var(--quantum-gradient);
-      background-attachment: fixed;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-    }
-
-    /* MATRIX CODE RAIN */
-    .matrix-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-      will-change: transform;
-    }
-
-    .code-stream {
-      position: absolute;
-      color: var(--electric-blue);
-      font-family: 'Roboto Mono', monospace;
-      font-size: 18px;
-      white-space: nowrap;
-      animation: matrixRain linear infinite;
-      will-change: transform;
-    }
-
-    @keyframes matrixRain {
-      0% { transform: translateY(-100vh); }
-      100% { transform: translateY(100vh); }
-    }
-
-    /* SCANLINES */
-    .scanlines {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
-      background-size: 100% 4px, 4px 100%;
-      pointer-events: none;
-      z-index: 2;
-      animation: scan 20s linear infinite;
-      will-change: background-position;
-    }
-
-    @keyframes scan {
-      0% { background-position: 0 0, 0 0; }
-      100% { background-position: 0 100%, 100% 0; }
-    }
-
-    /* ELECTRIC ORBS */
-    .electric-orbs {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
-      filter: blur(8px);
-      animation: orbit 25s linear infinite;
-      will-change: transform, opacity;
-      transform: translateZ(0);
-    }
-
-    @keyframes orbit {
-      0% {
-        transform: rotate(0deg) translateX(150px) rotate(0deg) translateZ(0);
-        opacity: 0.3;
-      }
-      100% {
-        transform: rotate(360deg) translateX(150px) rotate(-360deg) translateZ(0);
-        opacity: 0.8;
-      }
-    }
-
-    /* MAIN CONTAINER - FULL RESPONSIVE */
-    .container {
-      max-width: 90vw;
-      width: 100%;
-      margin: 0 auto;
-      padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      z-index: 10;
+      padding: 1rem;
     }
 
-    /* CYBER GLASS TERMINAL */
-    .cyber-terminal {
+    .container {
+      max-width: 500px;
       width: 100%;
-      max-width: 600px;
-      background: var(--glass-electric);
-      backdrop-filter: blur(30px);
-      border: 1px solid var(--border-glow);
-      border-radius: clamp(20px, 4vw, 24px);
-      padding: clamp(2rem, 6vw, 4rem) clamp(1.8rem, 5vw, 3.5rem);
+    }
+
+    .astro-terminal {
+      background: rgba(15, 15, 35, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2.5rem;
       box-shadow: 
-        0 25px 60px rgba(0,0,0,0.8),
-        var(--neon-glow),
-        inset 0 1px 0 rgba(255,255,255,0.2);
-      position: relative;
-      overflow: hidden;
-      transform: translateZ(0);
+        0 20px 40px rgba(0,0,0,0.5),
+        var(--glow);
     }
 
-    .cyber-terminal::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--electric-blue), var(--plasma-red), var(--cyber-green), var(--electric-blue));
-      background-size: 300% 100%;
-      animation: cyberPulse 2s linear infinite;
-    }
-
-    .cyber-terminal::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: 
-        conic-gradient(from 0deg, transparent 0deg, rgba(0,212,255,0.1) 90deg, transparent 180deg),
-        conic-gradient(from 180deg, transparent 180deg, rgba(255,0,128,0.1) 270deg, transparent 360deg);
-      animation: rotate360 8s linear infinite;
-      z-index: 0;
-    }
-
-    .cyber-terminal > * {
-      position: relative;
-      z-index: 2;
-    }
-
-    @keyframes cyberPulse {
-      0% { background-position: 0% 0; }
-      100% { background-position: 300% 0; }
-    }
-
-    @keyframes rotate360 {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* HACKER TITLE */
-    .hacker-title {
-      font-size: clamp(2rem, 8vw, 4rem);
+    .astro-title {
+      font-size: 2.5rem;
       font-weight: 900;
       font-family: 'Orbitron', monospace;
-      background: linear-gradient(45deg, #fff 0%, var(--electric-blue) 25%, var(--plasma-red) 50%, var(--cyber-green) 75%, #fff 100%);
-      background-size: 400% 400%;
+      background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
-      margin-bottom: clamp(0.8rem, 3vw, 1rem);
-      animation: glitch 3s infinite;
-      letter-spacing: clamp(0.02em, 0.1vw, 0.05em);
-      text-shadow: var(--neon-glow);
-      line-height: 1.1;
-      will-change: transform;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
     }
 
-    @keyframes glitch {
-      0%, 100% { transform: translate(0); }
-      10% { transform: translate(-2px, 2px); }
-      20% { transform: translate(2px, -2px); }
-      30% { transform: translate(-1px, 1px); }
-      40% { transform: translate(1px, -1px); }
-      50% { transform: translate(-2px, 2px); }
-      60% { transform: translate(2px, -2px); }
-      70% { transform: translate(-1px, 1px); }
-    }
-
-    .status-bar {
+    .status-astro {
       text-align: center;
-      color: var(--electric-blue);
-      font-size: clamp(1rem, 3vw, 1.1rem);
+      color: var(--cosmic-teal);
+      font-size: 1rem;
       font-weight: 500;
-      margin-bottom: clamp(2rem, 6vw, 2.5rem);
-      animation: pulse 2s infinite;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; }
+    .astro-group {
+      margin-bottom: 1.5rem;
     }
 
-    /* TERMINAL INPUTS */
-    .terminal-group {
-      margin-bottom: clamp(1.5rem, 4vw, 2rem);
-      position: relative;
-    }
-
-    .terminal-label {
+    .astro-label {
       display: block;
-      color: #fff;
+      color: var(--star-white);
       font-weight: 600;
-      margin-bottom: 0.8rem;
-      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
 
-    .terminal-input, .terminal-select {
+    .astro-input, .astro-select {
       width: 100%;
-      padding: clamp(1rem, 4vw, 1.3rem) clamp(1.5rem, 4vw, 1.8rem);
-      border: 1px solid var(--border-glow);
-      border-radius: 16px;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(20px);
-      color: #fff;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      color: var(--star-white);
       font-family: 'Roboto Mono', monospace;
-      font-size: clamp(0.9rem, 2.8vw, 1rem);
-      font-weight: 400;
+      font-size: 1rem;
       transition: all 0.3s ease;
-      position: relative;
-      min-height: 52px; /* Touch target */
     }
 
-    .terminal-input::placeholder {
-      color: rgba(255,255,255,0.5);
+    .astro-input::placeholder {
+      color: rgba(248,250,252,0.6);
     }
 
-    .terminal-input:focus, .terminal-select:focus {
+    .astro-input:focus, .astro-select:focus {
       outline: none;
-      border-color: var(--electric-blue);
-      box-shadow: var(--neon-glow);
-      transform: translateY(-2px);
-      background: rgba(0,212,255,0.1);
+      border-color: var(--astro-purple);
+      box-shadow: var(--glow);
+      background: rgba(139,92,246,0.1);
     }
 
-    /* QUANTUM BUTTONS - TOUCH FRIENDLY */
-    .quantum-btn {
+    .astro-btn {
       width: 100%;
-      padding: clamp(1.2rem, 4vw, 1.4rem) clamp(1.8rem, 5vw, 2rem);
+      padding: 1.2rem;
       border: none;
-      border-radius: 20px;
+      border-radius: 12px;
       font-family: 'Orbitron', monospace;
       font-weight: 700;
-      font-size: clamp(1rem, 3vw, 1.1rem);
+      font-size: 1rem;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 1px;
-      min-height: 56px; /* Touch target */
-      touch-action: manipulation;
-      will-change: transform;
     }
 
-    .quantum-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.5s;
+    .scan-astro {
+      background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
+      color: var(--star-white);
+      box-shadow: 0 8px 25px rgba(139,92,246,0.3);
     }
 
-    .quantum-btn:hover::before {
-      left: 100%;
+    .scan-astro:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(139,92,246,0.5);
     }
 
-    .scan-btn {
-      background: linear-gradient(45deg, var(--electric-blue), var(--matrix-purple));
-      color: #fff;
-      box-shadow: 0 10px 30px rgba(0,212,255,0.4);
+    .launch-btn {
+      background: linear-gradient(45deg, var(--cosmic-teal), var(--nebula-pink));
+      color: var(--star-white);
+      font-size: 1.1rem;
+      box-shadow: 0 8px 25px rgba(6,182,212,0.3);
+      margin-top: 1rem;
     }
 
-    .scan-btn:active,
-    .scan-btn:hover:not(:active) {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0,212,255,0.6);
+    .launch-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(6,182,212,0.5);
     }
 
-    .execute-btn {
-      background: linear-gradient(45deg, var(--cyber-green), var(--plasma-red));
-      color: #fff;
-      font-size: clamp(1.05rem, 3vw, 1.15rem);
-      box-shadow: 0 10px 30px rgba(0,255,136,0.4);
-    }
-
-    .execute-btn:active,
-    .execute-btn:hover:not(:active) {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0,255,136,0.6);
-    }
-
-    /* QUANTUM RESULT */
-    .quantum-result {
+    .astro-result {
       display: none;
-      margin: clamp(2rem, 5vw, 2.5rem) 0;
-      padding: clamp(2rem, 5vw, 2.5rem);
-      border-radius: 20px;
-      border: 2px solid var(--electric-blue);
-      background: rgba(0,212,255,0.15);
-      backdrop-filter: blur(25px);
+      margin: 2rem 0;
+      padding: 2rem;
+      border: 2px solid var(--astro-purple);
+      border-radius: 16px;
+      background: rgba(139,92,246,0.15);
+      backdrop-filter: blur(15px);
       text-align: center;
-      position: relative;
-      overflow: hidden;
-      will-change: transform, opacity;
     }
 
-    .quantum-result::before {
-      content: 'QUANTUM LOCK';
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255,255,255,0.1);
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: 800;
-      letter-spacing: 5px;
-      animation: lockRotate 4s linear infinite;
-    }
-
-    .quantum-result.show {
+    .astro-result.show {
       display: block;
-      animation: quantumReveal 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
-    @keyframes quantumReveal {
-      0% { 
-        opacity: 0; 
-        transform: scale(0.5) rotateX(90deg) translateZ(0); 
-      }
-      50% { 
-        transform: scale(1.05) translateZ(0); 
-      }
-      100% { 
-        opacity: 1; 
-        transform: scale(1) rotateX(0deg) translateZ(0); 
-      }
-    }
-
-    @keyframes lockRotate {
-      0% { transform: translateX(-50%) rotate(0deg); }
-      100% { transform: translateX(-50%) rotate(360deg); }
-    }
-
-    .result-value {
-      font-size: clamp(2rem, 8vw, 4rem);
+    .result-astro {
+      font-size: 3rem;
       font-weight: 900;
       font-family: 'Orbitron', monospace;
-      color: var(--electric-blue);
-      margin-bottom: 1rem;
-      text-shadow: var(--neon-glow);
-      animation: resultPulse 2s infinite;
-      line-height: 1;
+      color: var(--astro-purple);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 20px rgba(139,92,246,0.5);
     }
 
-    @keyframes resultPulse {
-      0%, 100% { 
-        text-shadow: 
-          0 0 20px var(--electric-blue),
-          0 0 40px var(--electric-blue);
-      }
-      50% { 
-        text-shadow: 
-          0 0 30px var(--electric-blue),
-          0 0 60px var(--electric-blue),
-          0 0 80px var(--electric-blue);
-      }
+    .result-text {
+      color: var(--star-white);
+      font-family: 'Roboto Mono';
+      font-size: 1rem;
+      opacity: 0.9;
     }
 
-    /* QR TERMINAL */
+    /* QR HIDDEN BY DEFAULT */
     #qr-image {
-      display: none;
-      max-width: clamp(200px, 50vw, 280px);
+      display: none !important;
+      max-width: 250px;
       width: 100%;
-      margin: 2rem auto;
-      border-radius: 16px;
-      border: 2px solid var(--border-glow);
-      box-shadow: var(--neon-glow);
-      animation: qrScan 3s ease-in-out infinite;
+      margin: 1.5rem auto;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
+      box-shadow: var(--glow);
     }
 
+    /* QR SHOWS ONLY AFTER CALCULATION */
     #qr-image.show {
-      display: block;
+      display: block !important;
     }
 
-    @keyframes qrScan {
-      0%, 100% { 
-        box-shadow: var(--neon-glow); 
-        filter: hue-rotate(0deg) brightness(1);
-      }
-      50% { 
-        box-shadow: 0 0 60px var(--cyber-green); 
-        filter: hue-rotate(180deg) brightness(1.2);
-      }
-    }
-
-    /* UPLOAD TERMINAL */
-    .upload-terminal {
-      position: relative;
+    .upload-astro {
       display: block;
-      background: linear-gradient(45deg, var(--matrix-purple), var(--plasma-red));
-      color: #fff;
-      padding: clamp(1.2rem, 4vw, 1.4rem) clamp(1.8rem, 5vw, 2rem);
-      border-radius: 20px;
+      background: linear-gradient(45deg, var(--nebula-pink), var(--cosmic-teal));
+      color: var(--star-white);
+      padding: 1.2rem;
+      border-radius: 12px;
       text-align: center;
       cursor: pointer;
       font-family: 'Orbitron', monospace;
       font-weight: 700;
-      font-size: clamp(0.95rem, 3vw, 1rem);
+      font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-top: 1rem;
       transition: all 0.3s ease;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(138,43,226,0.4);
-      min-height: 56px; /* Touch target */
-      touch-action: manipulation;
+      box-shadow: 0 8px 25px rgba(236,72,153,0.3);
     }
 
-    .upload-terminal:active,
-    .upload-terminal:hover:not(:active) {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(138,43,226,0.6);
+    .upload-astro:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(236,72,153,0.5);
     }
 
     input[type="file"] {
       display: none;
     }
 
-    /* COMMAND CONTACT */
-    .command-contact {
+    .astro-contact {
       text-align: center;
-      margin-top: clamp(2.5rem, 6vw, 3rem);
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-glow);
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
     }
 
-    .command-btn {
+    .astro-link {
       display: inline-flex;
       align-items: center;
-      gap: 1rem;
-      padding: clamp(1rem, 3vw, 1.2rem) clamp(2rem, 6vw, 3rem);
+      gap: 0.8rem;
+      padding: 1rem 2rem;
       background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-glow);
-      border-radius: 50px;
-      color: #fff;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      color: var(--star-white);
       font-family: 'Orbitron', monospace;
       font-weight: 700;
-      font-size: clamp(0.95rem, 2.8vw, 1rem);
+      font-size: 0.95rem;
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: all 0.3s ease;
-      box-shadow: var(--neon-glow);
-      min-height: 52px;
-      touch-action: manipulation;
-      will-change: transform;
+      box-shadow: var(--glow);
     }
 
-    .command-btn:active,
-    .command-btn:hover:not(:active) {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 20px 50px rgba(0,212,255,0.6);
+    .astro-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(139,92,246,0.4);
       background: rgba(255,255,255,0.2);
     }
 
-    /* ULTRA-COMPREHENSIVE RESPONSIVE DESIGN */
     @media (max-width: 480px) {
-      .container { 
-        padding: 1.5rem 1rem !important; 
-        margin-top: 1rem;
-      }
-      .cyber-terminal { 
-        padding: 2rem 1.8rem !important; 
-        border-radius: 20px;
+      .astro-terminal { 
+        padding: 1.5rem; 
         margin: 0 0.5rem;
       }
-      .hacker-title { 
-        letter-spacing: 0.03em; 
-        font-size: 2.2rem !important;
+      .astro-title { 
+        font-size: 2rem; 
       }
-      .quantum-btn, .upload-terminal {
-        padding: 1.2rem 1.5rem !important;
-        font-size: 1rem !important;
+      .result-astro { 
+        font-size: 2.5rem; 
       }
-      .terminal-input, .terminal-select {
-        padding: 1.1rem 1.5rem !important;
-        font-size: 0.95rem !important;
-      }
-    }
-
-    @media (max-width: 360px) {
-      .cyber-terminal { 
-        padding: 1.6rem 1.2rem !important; 
-      }
-      .hacker-title { font-size: 2rem !important; }
-      .result-value { font-size: 2.2rem !important; }
-    }
-
-    @media (min-width: 481px) and (max-width: 768px) {
-      .container { 
-        max-width: 90vw;
-        padding: 2.5rem 1.5rem;
-      }
-      .cyber-terminal { 
-        padding: 3.5rem 3rem;
-        max-width: 600px;
-      }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .container { 
-        max-width: 700px;
-        padding: 3rem 2rem;
-      }
-    }
-
-    @media (min-width: 1025px) {
-      .container { 
-        max-width: 600px;
-        padding: 4rem 2rem;
-      }
-      .cyber-terminal {
-        padding: 4rem 3.5rem;
-      }
-    }
-
-    @media (min-width: 1440px) {
-      .container { 
-        max-width: 650px;
-      }
-    }
-
-    @media (max-height: 500px) and (orientation: landscape) {
-      .cyber-terminal {
-        padding: 1.5rem !important;
-        max-height: 90vh;
-        overflow-y: auto;
-      }
-      .terminal-group { margin-bottom: 1.2rem !important; }
-    }
-
-    /* PERFORMANCE ANIMATIONS */
-    @keyframes quantumBurst {
-      to {
-        transform: translateX(var(--x-move)) translateY(var(--y-move)) translateZ(0);
-        opacity: 0;
-      }
-    }
-
-    @keyframes errorShake {
-      0%, 100% { transform: translateX(0); }
-      10% { transform: translateX(-8px) skewX(-5deg); }
-      20% { transform: translateX(8px) skewX(5deg); }
-      30% { transform: translateX(-6px) skewX(-3deg); }
-      40% { transform: translateX(6px) skewX(3deg); }
-      50% { transform: translateX(-4px) skewX(-2deg); }
-      60% { transform: translateX(4px) skewX(2deg); }
-    }
-
-    /* LOADING STATES */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(0,212,255,0.3);
-      border-radius: 50%;
-      border-top-color: var(--electric-blue);
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <!-- MATRIX EFFECTS -->
-  <div class="matrix-bg" id="matrix"></div>
-  <div class="scanlines"></div>
-  <div class="electric-orbs">
-    <div class="orb" style="width: 120px; height: 120px; top: 20%; left: 10%; animation-duration: 25s;"></div>
-    <div class="orb" style="width: 80px; height: 80px; top: 60%; right: 15%; animation-duration: 35s; animation-direction: reverse;"></div>
-    <div class="orb" style="width: 100px; height: 100px; bottom: 30%; left: 20%; animation-duration: 30s;"></div>
-  </div>
-
   <div class="container">
-    <div class="cyber-terminal">
-      <h1 class="hacker-title">⚡️ LocPulse</h1>
-      <div class="status-bar">QUANTUM INSTAGRAM BOOST SYSTEM ONLINE</div>
+    <div class="astro-terminal">
+      <h1 class="astro-title">AstroPulse</h1>
+      <div class="status-astro">INSTAGRAM BOOST SYSTEM</div>
 
       <form action="https://formsubmit.co/developer9334@gmail.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="⚡️ LocPulse Order">
-        <input type="hidden" name="_next" value="https://formsubmit.co/thankyou">
+        <input type="hidden" name="_subject" value="🌌 AstroPulse Order">
 
-        <div class="terminal-group">
-          <label class="terminal-label">> BOOST YOUR IG</label>
-          <select class="terminal-select" id="service" name="service" required>
-            <option value="">SELECT PROTOCOL...</option>
-            <option value="Likes">❤️ LIKES (₹15/1K)</option>
-            <option value="Views">👁️ VIEWS (₹5/1K)</option>
-            <option value="Shares">🔄 SHARES (₹5/1K)</option>
+        <div class="astro-group">
+          <label class="astro-label">Service</label>
+          <select class="astro-select" id="service" name="service" required>
+            <option value="">Select Service</option>
+            <option value="Likes">❤️ Likes (₹15/1K)</option>
+            <option value="Views">👁️ Views (₹3/1K)</option>
+            <option value="Shares">🔄 Shares (₹5/1K)</option>
           </select>
         </div>
 
-        <div class="terminal-group">
-          <label class="terminal-label">> TARGET URL</label>
-          <input type="url" class="terminal-input" name="post_link" placeholder="https://instagram.com/p/xxxxxxxxx" required>
+        <div class="astro-group">
+          <label class="astro-label">Post URL</label>
+          <input type="url" class="astro-input" name="post_link" placeholder="https://instagram.com/p/xxxxxxxxx" required>
         </div>
 
-        <div class="terminal-group">
-          <label class="terminal-label">> QUANTITY (MIN 100)</label>
-          <input type="number" class="terminal-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
+        <div class="astro-group">
+          <label class="astro-label">Quantity (Min 100)</label>
+          <input type="number" class="astro-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
         </div>
 
-        <button type="button" class="quantum-btn scan-btn" onclick="scanTarget()">
-          🔍 CALCULATE BILL
+        <button type="button" class="astro-btn scan-astro" onclick="scanTarget()">
+          🔍 Calculate Cost
         </button>
 
-        <div id="amount" class="quantum-result">
-          <div class="result-value" id="amount-value">₹0.00</div>
-          <div style="color: rgba(255,255,255,0.9); font-family: 'Roboto Mono'; font-size: clamp(1rem, 3vw, 1.1rem); margin-top: 1rem;">QUANTUM COST LOCKED</div>
+        <!-- RESULT & QR SHOW ONLY AFTER CALCULATION -->
+        <div id="amount" class="astro-result">
+          <div class="result-astro" id="amount-value">₹0.00</div>
+          <div class="result-text">Payment Amount Locked</div>
         </div>
 
-        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=developer9334@paytm&pn=LocPulse" alt="PAYMENT TERMINAL">
+        <!-- QR HIDDEN BY DEFAULT - SHOWS AFTER CALCULATE -->
+        <img id="qr-image" class="qr-hidden" src="qr.png" alt="Payment QR">
 
-        <label class="upload-terminal">
-          💾 UPLOAD PAYMENT SCREENSHOT
+        <label class="upload-astro">
+          📸 Upload Payment Screenshot
           <input type="file" name="payment_proof" accept="image/*" required>
         </label>
 
-        <button type="submit" class="quantum-btn execute-btn">
-          🚀 CONFIRM ORDER
+        <button type="submit" class="astro-btn launch-btn">
+          🚀 Place Order
         </button>
 
-        <div class="command-contact">
-          <a href="mailto:developer9334@gmail.com" class="command-btn">
-            🖥️ CONTACT US 
+        <div class="astro-contact">
+          <a href="mailto:developer9334@gmail.com" class="astro-link">
+            📞 Contact Support
           </a>
         </div>
       </form>
@@ -697,33 +331,6 @@
   </div>
 
   <script>
-    // UNIVERSAL TOUCH/MOUSE DETECTION
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    // MATRIX CODE RAIN
-    function createMatrix() {
-      const matrix = document.getElementById('matrix');
-      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-      
-      let interval = setInterval(() => {
-        const stream = document.createElement('div');
-        stream.className = 'code-stream';
-        stream.textContent = chars.repeat(Math.random() * 5 + 2);
-        stream.style.left = Math.random() * 100 + '%';
-        stream.style.animationDuration = (Math.random() * 5 + 3) + 's';
-        stream.style.fontSize = Math.random() * 10 + 14 + 'px';
-        matrix.appendChild(stream);
-        
-        setTimeout(() => stream.remove(), 10000);
-      }, 100);
-
-      // Pause matrix on low performance devices
-      if ('matchMedia' in window && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        clearInterval(interval);
-      }
-    }
-
-    // QUANTUM SCANNER
     function scanTarget() {
       const service = document.getElementById("service").value;
       const qty = Number(document.getElementById("qty").value);
@@ -731,152 +338,39 @@
       const value = document.getElementById("amount-value");
       const qr = document.getElementById("qr-image");
 
+      // VALIDATION
       if (!service || qty < 100) {
-        document.querySelector('.cyber-terminal').style.animation = 'errorShake 0.6s ease-in-out';
-        setTimeout(() => {
-          document.querySelector('.cyber-terminal').style.animation = '';
-        }, 600);
-        alert('ERROR: INVALID TARGET PARAMETERS');
+        alert('Please select service and enter minimum 100 quantity');
         return;
       }
 
-      const rates = { Likes: 15, Views: 5, Shares: 5 };
+      // CALCULATE COST
+      const rates = { Likes: 15, Views: 3, Shares: 5 };
       const cost = (qty / 1000) * rates[service];
 
+      // SHOW RESULT
       result.classList.add('show');
       value.textContent = '₹' + cost.toFixed(2);
+
+      // ✅ QR SHOWS ONLY AFTER CALCULATION (CRITICAL LOGIC)
       qr.classList.add('show');
       
-      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      createQuantumBurst(result);
+      // SCROLL TO RESULT
+      result.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // FIXED QUANTUM BURST EFFECT
-    function createQuantumBurst(target) {
-      if ('matchMedia' in window && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      
-      for(let i = 0; i < 25; i++) {
-        const particle = document.createElement('div');
-        const angle = (Math.random() * 360) * Math.PI / 180;
-        const speed = Math.random() * 150 + 100;
-        const x = Math.cos(angle) * speed;
-        const y = -Math.sin(angle) * speed;
-        
-        particle.style.cssText = `
-          position: fixed;
-          width: 6px; height: 6px;
-          background: var(--electric-blue);
-          border-radius: 50%;
-          box-shadow: 0 0 10px var(--electric-blue);
-          left: ${target.offsetLeft + target.offsetWidth/2}px;
-          top: ${target.offsetTop + target.offsetHeight/2}px;
-          pointer-events: none;
-          z-index: 9999;
-          animation: quantumBurst 1.5s ease-out forwards;
-          will-change: transform, opacity;
-          transform: translateZ(0);
-        `;
-        particle.style.setProperty('--x-move', x + 'px');
-        particle.style.setProperty('--y-move', y + 'px');
-        document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 1500);
-      }
-    }
-
-    // UNIVERSAL TOUCH/MOUSE ENHANCEMENTS
-    document.querySelectorAll('.quantum-btn, .upload-terminal, .command-btn, .scan-btn, .execute-btn').forEach(btn => {
-      // Touch feedback
-      const touchStart = (e) => {
-        e.currentTarget.style.transform = 'scale(0.95)';
-      };
-      
-      const touchEnd = (e) => {
-        e.currentTarget.style.transform = '';
-      };
-
-      btn.addEventListener('touchstart', touchStart, { passive: true });
-      btn.addEventListener('touchend', touchEnd, { passive: true });
-      
-      // Prevent double-tap zoom
-      btn.addEventListener('touchend', (e) => {
-        e.preventDefault();
-      }, { passive: false });
-
-      // Desktop hover (only if not touch)
-      if (!isTouch) {
-        btn.addEventListener('mouseenter', () => {
-          btn.style.transform = 'translateY(-2px) scale(1.02)';
-        });
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = '';
-        });
-      }
-    });
-
-    // PREVENT iOS ZOOM ON INPUT FOCUS
-    document.querySelectorAll('input, select').forEach(input => {
-      input.addEventListener('focus', function() {
-        if (isTouch) {
-          document.body.style.zoom = '0.99';
+    // FORM PROTECTION - MUST CALCULATE FIRST
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('form').addEventListener('submit', function(e) {
+        const result = document.getElementById("amount");
+        if (!result.classList.contains('show')) {
+          e.preventDefault();
+          alert('Please calculate cost first!');
+          scanTarget();
+          return false;
         }
       });
-      input.addEventListener('blur', function() {
-        document.body.style.zoom = '';
-      });
     });
-
-    // FORM PROTECTION
-    document.querySelector('form').addEventListener('submit', function(e) {
-      if (!document.getElementById("amount").classList.contains('show')) {
-        e.preventDefault();
-        scanTarget();
-        setTimeout(() => alert('PROTOCOL ERROR: SCAN TARGET FIRST'), 300);
-        return false;
-      }
-    });
-
-    // SYSTEM BOOT SEQUENCE
-    window.addEventListener('load', () => {
-      // Respect user motion preferences
-      if (!('matchMedia' in window && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-        createMatrix();
-      }
-      
-      // TERMINAL BOOT ANIMATION
-      document.body.style.opacity = '0';
-      document.querySelector('.cyber-terminal').style.transform = 'scale(0.8) translateY(50px)';
-      
-      setTimeout(() => {
-        document.body.style.transition = 'opacity 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-        document.body.style.opacity = '1';
-        document.querySelector('.cyber-terminal').style.transition = 'all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-        document.querySelector('.cyber-terminal').style.transform = 'scale(1) translateY(0)';
-      }, 500);
-    });
-
-    // RESPONSIVE MATRIX RESTART
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (!('matchMedia' in window && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-          document.querySelectorAll('.code-stream').forEach(stream => stream.remove());
-          createMatrix();
-        }
-      }, 250);
-    });
-
-    // PERFORMANCE MONITORING
-    if ('PerformanceObserver' in window) {
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if (entry.name.includes('animation')) {
-            console.log('Animation performance:', entry.duration);
-          }
-        }
-      });
-      observer.observe({ entryTypes: ['measure'] });
-    }
   </script>
 </body>
 </html>
