@@ -3,7 +3,8 @@
 <head>
   <title>AstroPulse Instagram Booster</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+  
+  <!-- STYLES REMAIN SAME until contact-btn -->
   <style>
     :root {
       --astro-purple: #8B5CF6;
@@ -75,9 +76,16 @@
       background: rgba(0,0,0,0.4);
       color: var(--star-white);
       font-family: 'Roboto Mono', monospace;
+      transition: all 0.3s ease;
     }
 
-    textarea { resize: none; }
+    .astro-input:focus, .astro-select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--astro-purple);
+      box-shadow: var(--glow);
+    }
+
+    textarea { resize: none; min-height: 120px; }
 
     .astro-btn {
       width: 100%;
@@ -87,19 +95,49 @@
       font-family: 'Orbitron', monospace;
       font-weight: 700;
       cursor: pointer;
-      margin-top: 0.5rem;
       text-transform: uppercase;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .scan-astro {
       background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
       color: white;
+      box-shadow: 0 10px 25px rgba(139,92,246,0.3);
+      margin-bottom: 2rem;
     }
+
+    .scan-astro:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(139,92,246,0.5); }
 
     .launch-btn {
       background: linear-gradient(45deg, var(--cosmic-teal), var(--nebula-pink));
       color: white;
-      margin-top: 1rem;
+      font-size: 1.1rem;
+      box-shadow: 0 10px 25px rgba(6,182,212,0.3);
+      margin-bottom: 1rem;
+    }
+
+    .launch-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(6,182,212,0.5); }
+
+    /* 🆕 SMALL CONTACT BUTTON */
+    .contact-btn {
+      background: linear-gradient(45deg, var(--nebula-pink), var(--astro-purple));
+      color: white;
+      font-size: 0.8rem;        /* Smaller text */
+      padding: 0.8rem 1rem;     /* Smaller padding */
+      width: auto;              /* Not full width */
+      margin: 0 auto;           /* Center it */
+      display: inline-block;    /* Inline sizing */
+      border-radius: 25px;      /* More pill-shaped */
+      opacity: 0.9;
+      font-weight: 600;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(236,72,153,0.5);
+      opacity: 1;
     }
 
     .astro-result {
@@ -109,6 +147,8 @@
       border-radius: 16px;
       border: 2px solid var(--astro-purple);
       text-align: center;
+      background: rgba(139,92,246,0.1);
+      margin-bottom: 1.5rem;
     }
 
     .astro-result.show { display: block; }
@@ -117,30 +157,53 @@
       font-size: 3rem;
       color: var(--astro-purple);
       font-weight: 900;
+      text-shadow: 0 0 20px rgba(139,92,246,0.5);
+      margin-bottom: 0.5rem;
     }
 
     #qr-image {
       display: none;
       max-width: 250px;
       margin: 1.5rem auto;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
+      box-shadow: var(--glow);
+      margin-bottom: 1.5rem;
     }
 
     #qr-image.show { display: block; }
 
     .upload-astro {
       background: linear-gradient(45deg, var(--nebula-pink), var(--cosmic-teal));
-      padding: 1rem;
+      padding: 1.2rem;
       text-align: center;
       border-radius: 12px;
       cursor: pointer;
       color: white;
       font-weight: bold;
+      font-family: 'Orbitron', monospace;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      display: block;
+      margin-bottom: 1.5rem;
     }
+
+    .upload-astro:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(236,72,153,0.5); }
 
     input[type="file"] { display: none; }
 
+    .contact-section {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
     @media(max-width:480px){
       .astro-terminal { padding: 1.5rem; }
+      .astro-title { font-size: 2rem; }
+      .result-astro { font-size: 2.5rem; }
+      .contact-btn { padding: 0.7rem 0.9rem; font-size: 0.75rem; }
     }
   </style>
 
@@ -156,6 +219,7 @@
 
 <form action="https://formsubmit.co/developer9334@gmail.com" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_subject" value="🌌 AstroPulse Order">
 
 <div class="astro-group">
 <label class="astro-label">Service</label>
@@ -165,21 +229,20 @@
   <option value="Views">👁️ Views (₹3/1K)</option>
   <option value="Shares">🔄 Shares (₹5/1K)</option>
   <option value="Followers">👤 Followers (₹20/1K)</option>
-  <option value="Comments">💬 Comments (₹30/1K)</option>
+  <option value="Comments">💬 Comments (₹5/1K)</option>
 </select>
 </div>
 
 <div class="astro-group">
 <label class="astro-label">Post URL</label>
-<input type="url" class="astro-input" name="post_link" required>
+<input type="url" class="astro-input" name="post_link" placeholder="https://instagram.com/p/xxxxxxxxx" required>
 </div>
 
 <div class="astro-group">
 <label class="astro-label">Quantity (Min 100)</label>
-<input type="number" class="astro-input" id="qty" name="quantity" min="100" step="100" required>
+<input type="number" class="astro-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
 </div>
 
-<!-- COMMENTS INPUT -->
 <div class="astro-group" id="comment-box" style="display:none;">
 <label class="astro-label">Enter 5 Comments (One per line)</label>
 <textarea class="astro-input" name="comments_text" rows="5"
@@ -187,7 +250,7 @@ placeholder="Nice post!
 Amazing 🔥
 Great content
 Love this ❤️
-Keep it up"></textarea>
+Keep it up 💪"></textarea>
 </div>
 
 <button type="button" class="astro-btn scan-astro" onclick="scanTarget()">🔍 Calculate Cost</button>
@@ -197,23 +260,34 @@ Keep it up"></textarea>
 <div>Payment Amount Locked</div>
 </div>
 
-<img id="qr-image" src="qr.png" alt="QR Code">
+<img id="qr-image" src="https://via.placeholder.com/250x250/8B5CF6/FFFFFF?text=UPI+QR" alt="QR Code">
 
 <label class="upload-astro">
 📸 Upload Payment Screenshot
-<input type="file" name="payment_proof" required>
+<input type="file" name="payment_proof" accept="image/*">
 </label>
 
 <button type="submit" class="astro-btn launch-btn">🚀 Place Order</button>
 
 </form>
+
+<!-- 🆕 SMALL CONTACT BUTTON -->
+<div class="contact-section">
+<a href="mailto:developer9334@gmail.com" style="text-decoration: none;">
+<button class="contact-btn">📞 Contact Support</button>
+</a>
+</div>
+
 </div>
 </div>
 
 <script>
+let isCalculated = false;
+
 function toggleComments(){
+  const service = document.getElementById("service");
   document.getElementById("comment-box").style.display =
-  service.value === "Comments" ? "block" : "none";
+    service.value === "Comments" ? "block" : "none";
 }
 
 function scanTarget(){
@@ -224,33 +298,42 @@ function scanTarget(){
   const value = document.getElementById("amount-value");
   const qr = document.getElementById("qr-image");
 
-  if(!service || qty < 100){
-    alert("Select service and minimum 100 quantity");
+  if(!service){
+    alert("Please select a service");
+    return;
+  }
+  
+  if(qty < 100){
+    alert("Minimum quantity is 100");
     return;
   }
 
   if(service === "Comments"){
     const lines = comments.split("\n").filter(l => l.trim() !== "");
-    if(lines.length !== 5){
-      alert("You must enter exactly 5 comments");
+    if(lines.length < 5){
+      alert("Please enter at least 5 comments (one per line)");
       return;
     }
   }
 
-  const rates = {
-    Likes: 15,
-    Views: 3,
-    Shares: 5,
-    Followers: 20,
-    Comments: 30
-  };
-
+  const rates = { Likes: 15, Views: 3, Shares: 5, Followers: 20, Comments: 5 };
   const cost = (qty / 1000) * rates[service];
 
   result.classList.add("show");
   value.textContent = "₹" + cost.toFixed(2);
   qr.classList.add("show");
+  isCalculated = true;
+  
+  result.scrollIntoView({ behavior: 'smooth' });
 }
+
+document.addEventListener('submit', function(e){
+  if(!isCalculated){
+    e.preventDefault();
+    alert('Please calculate cost first! 🔍');
+    document.querySelector('.scan-astro').scrollIntoView();
+  }
+});
 </script>
 
 </body>
