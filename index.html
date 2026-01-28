@@ -83,7 +83,7 @@
       text-transform: uppercase;
     }
 
-    .astro-input, .astro-select {
+    .astro-input, .astro-select, .astro-textarea {
       width: 100%;
       padding: 1rem 1.2rem;
       border: 1px solid var(--border-color);
@@ -94,13 +94,21 @@
       font-family: 'Roboto Mono', monospace;
       font-size: 1rem;
       transition: all 0.3s ease;
+      resize: vertical;
     }
 
-    .astro-input::placeholder {
+    .astro-textarea {
+      min-height: 120px;
+      max-height: 200px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .astro-input::placeholder, .astro-textarea::placeholder {
       color: rgba(248,250,252,0.6);
     }
 
-    .astro-input:focus, .astro-select:focus {
+    .astro-input:focus, .astro-select:focus, .astro-textarea:focus {
       outline: none;
       border-color: var(--astro-purple);
       box-shadow: var(--glow);
@@ -177,7 +185,6 @@
       opacity: 0.9;
     }
 
-    /* QR HIDDEN BY DEFAULT */
     #qr-image {
       display: none !important;
       max-width: 250px;
@@ -188,7 +195,6 @@
       box-shadow: var(--glow);
     }
 
-    /* QR SHOWS ONLY AFTER CALCULATION */
     #qr-image.show {
       display: block !important;
     }
@@ -218,6 +224,22 @@
 
     input[type="file"] {
       display: none;
+    }
+
+    /* COMMENTS TEXTAREA - HIDDEN BY DEFAULT */
+    .comments-group {
+      display: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .comments-group.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .astro-contact {
@@ -281,11 +303,13 @@
 
         <div class="astro-group">
           <label class="astro-label">Service</label>
-          <select class="astro-select" id="service" name="service" required>
+          <select class="astro-select" id="service" name="service" required onchange="toggleComments()">
             <option value="">Select Service</option>
             <option value="Likes">❤️ Likes (₹15/1K)</option>
             <option value="Views">👁️ Views (₹3/1K)</option>
+            <option value="Followers">👤 Followers (₹25/1K)</option>
             <option value="Shares">🔄 Shares (₹5/1K)</option>
+            <option value="Comments">💬 Comments (₹5/1K)</option>
           </select>
         </div>
 
@@ -299,17 +323,30 @@
           <input type="number" class="astro-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
         </div>
 
+        <!-- COMMENTS INPUT - HIDDEN BY DEFAULT -->
+        <div class="comments-group" id="comments-group">
+          <label class="astro-label">5 Sample Comments</label>
+          <textarea class="astro-textarea" name="sample_comments" placeholder="Enter 5 different comments (one per line):
+Example:
+Great post! 🔥
+Love this content!
+Amazing work ✨
+Super cool!
+Keep it up! 💪" required></textarea>
+          <small style="color: var(--cosmic-teal); font-size: 0.8rem; display: block; margin-top: 0.5rem;">
+            Enter exactly 5 comments (one per line) for realistic commenting
+          </small>
+        </div>
+
         <button type="button" class="astro-btn scan-astro" onclick="scanTarget()">
           🔍 Calculate Cost
         </button>
 
-        <!-- RESULT & QR SHOW ONLY AFTER CALCULATION -->
         <div id="amount" class="astro-result">
           <div class="result-astro" id="amount-value">₹0.00</div>
           <div class="result-text">Payment Amount Locked</div>
         </div>
 
-        <!-- QR HIDDEN BY DEFAULT - SHOWS AFTER CALCULATE -->
         <img id="qr-image" class="qr-hidden" src="qr.png" alt="Payment QR">
 
         <label class="upload-astro">
@@ -331,9 +368,22 @@
   </div>
 
   <script>
+    function toggleComments() {
+      const service = document.getElementById("service").value;
+      const commentsGroup = document.getElementById("comments-group");
+      
+      if (service === "Comments") {
+        commentsGroup.classList.add('show');
+      } else {
+        commentsGroup.classList.remove('show');
+        document.querySelector('textarea[name="sample_comments"]').value = '';
+      }
+    }
+
     function scanTarget() {
       const service = document.getElementById("service").value;
       const qty = Number(document.getElementById("qty").value);
+      const commentsTextarea = document.querySelector('textarea[name="sample_comments"]');
       const result = document.getElementById("amount");
       const value = document.getElementById("amount-value");
       const qr = document.getElementById("qr-image");
@@ -344,15 +394,35 @@
         return;
       }
 
+      // COMMENTS VALIDATION
+      if (service === "Comments") {
+        const comments = commentsTextarea.value.trim();
+        if (!comments) {
+          alert('Please enter 5 sample comments for Comments service');
+          return;
+        }
+        const commentLines = comments.split('\n').filter(line => line.trim());
+        if (commentLines.length < 5) {
+          alert('Please enter at least 5 different comments (one per line)');
+          return;
+        }
+      }
+
       // CALCULATE COST
-      const rates = { Likes: 15, Views: 3, Shares: 5 };
+      const rates = { 
+        Likes: 15, 
+        Views: 3, 
+        Followers: 25, 
+        Shares: 5, 
+        Comments: 5 
+      };
       const cost = (qty / 1000) * rates[service];
 
       // SHOW RESULT
       result.classList.add('show');
       value.textContent = '₹' + cost.toFixed(2);
 
-      // ✅ QR SHOWS ONLY AFTER CALCULATION (CRITICAL LOGIC)
+      // QR SHOWS ONLY AFTER CALCULATION
       qr.classList.add('show');
       
       // SCROLL TO RESULT
