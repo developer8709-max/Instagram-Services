@@ -165,6 +165,7 @@
       margin-bottom: 0.5rem;
     }
 
+    /* ✅ QR HIDDEN BY DEFAULT - SHOWS AFTER CALCULATION */
     #qr-image {
       display: none !important;
       max-width: 250px;
@@ -269,8 +270,8 @@ Keep it up 💪"></textarea>
 <div>Payment Amount Locked</div>
 </div>
 
-<!-- ✅ FIXED QR - Replace src with your QR -->
-<img id="qr-image" src="https://via.placeholder.com/250x250/8B5CF6/FFFFFF?text=UPI+QR" alt="QR Code">
+<!-- ✅ YOUR GITHUB QR.PNG - WILL SHOW AFTER CALCULATION -->
+<img id="qr-image" src="./qr.png" alt="Payment QR Code">
 
 <label class="upload-astro">
 📸 Upload Payment Screenshot
@@ -290,25 +291,29 @@ Keep it up 💪"></textarea>
 </div>
 </div>
 
-<!-- ✅ 100% ERROR-FREE JAVASCRIPT -->
+<!-- ✅ BULLETPROOF JAVASCRIPT -->
 <script>
 let isCalculated = false;
 
 function toggleComments(){
-  // ✅ FIXED: Properly get service element
   const serviceSelect = document.getElementById("service");
   const commentBox = document.getElementById("comment-box");
-  commentBox.style.display = serviceSelect.value === "Comments" ? "block" : "none";
+  if(serviceSelect && commentBox){
+    commentBox.style.display = serviceSelect.value === "Comments" ? "block" : "none";
+  }
 }
 
 function scanTarget(){
-  // ✅ ALL VARIABLES PROPERLY DEFINED
   const serviceSelect = document.getElementById("service");
-  const service = serviceSelect.value;
   const qtyInput = document.getElementById("qty");
-  const qty = Number(qtyInput.value);
   const commentsTextarea = document.querySelector('[name="comments_text"]');
+  
+  if(!serviceSelect || !qtyInput) return;
+
+  const service = serviceSelect.value;
+  const qty = Number(qtyInput.value);
   const comments = commentsTextarea ? commentsTextarea.value.trim() : '';
+  
   const result = document.getElementById("amount");
   const value = document.getElementById("amount-value");
   const qr = document.getElementById("qr-image");
@@ -324,7 +329,7 @@ function scanTarget(){
     return;
   }
 
-  if(service === "Comments" && commentsTextarea){
+  if(service === "Comments" && commentsTextarea && comments){
     const lines = comments.split("\n").filter(l => l.trim() !== "");
     if(lines.length < 5){
       alert("Please enter at least 5 comments (one per line)");
@@ -336,15 +341,17 @@ function scanTarget(){
   const rates = { Likes: 15, Views: 3, Shares: 5, Followers: 20, Comments: 30 };
   const cost = (qty / 1000) * rates[service];
 
-  // ✅ SHOW EVERYTHING - QR WILL APPEAR
-  result.classList.add("show");
-  value.textContent = "₹" + cost.toFixed(2);
-  qr.classList.add("show");
-  qr.style.display = "block"; // FORCE SHOW
-  isCalculated = true;
+  // ✅ SHOW RESULT + QR (GUARANTEED)
+  if(result && value && qr){
+    result.classList.add("show");
+    value.textContent = "₹" + cost.toFixed(2);
+    qr.classList.add("show");
+    qr.style.display = "block";  // FORCE DISPLAY
+    isCalculated = true;
+  }
   
   // SCROLL TO RESULT
-  result.scrollIntoView({ behavior: 'smooth' });
+  if(result) result.scrollIntoView({ behavior: 'smooth' });
 }
 
 // FORM PROTECTION
@@ -352,7 +359,8 @@ document.addEventListener('submit', function(e){
   if(!isCalculated){
     e.preventDefault();
     alert('Please calculate cost first! 🔍');
-    document.querySelector('.scan-astro').scrollIntoView();
+    const calcBtn = document.querySelector('.scan-astro');
+    if(calcBtn) calcBtn.scrollIntoView({ behavior: 'smooth' });
   }
 });
 </script>
