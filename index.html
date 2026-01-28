@@ -3,7 +3,7 @@
 <head>
   <title>AstroPulse Instagram Booster</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
+
   <style>
     :root {
       --astro-purple: #8B5CF6;
@@ -15,11 +15,7 @@
       --glow: 0 0 20px rgba(139, 92, 246, 0.3);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Orbitron', 'Roboto Mono', monospace;
@@ -31,10 +27,7 @@
       padding: 1rem;
     }
 
-    .container {
-      max-width: 500px;
-      width: 100%;
-    }
+    .container { max-width: 500px; width: 100%; }
 
     .astro-terminal {
       background: rgba(15, 15, 35, 0.95);
@@ -42,18 +35,14 @@
       border: 1px solid var(--border-color);
       border-radius: 20px;
       padding: 2.5rem;
-      box-shadow: 
-        0 20px 40px rgba(0,0,0,0.5),
-        var(--glow);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), var(--glow);
     }
 
     .astro-title {
       font-size: 2.5rem;
       font-weight: 900;
-      font-family: 'Orbitron', monospace;
       background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
       -webkit-background-clip: text;
-      background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
       margin-bottom: 1rem;
@@ -63,403 +52,206 @@
     .status-astro {
       text-align: center;
       color: var(--cosmic-teal);
-      font-size: 1rem;
-      font-weight: 500;
       margin-bottom: 2rem;
       letter-spacing: 1px;
     }
 
-    .astro-group {
-      margin-bottom: 1.5rem;
-    }
+    .astro-group { margin-bottom: 1.5rem; }
 
     .astro-label {
-      display: block;
       color: var(--star-white);
       font-weight: 600;
       margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
+      display: block;
       text-transform: uppercase;
+      font-size: 0.85rem;
     }
 
-    .astro-input, .astro-select, .astro-textarea {
+    .astro-input, .astro-select, textarea {
       width: 100%;
-      padding: 1rem 1.2rem;
-      border: 1px solid var(--border-color);
+      padding: 1rem;
       border-radius: 12px;
+      border: 1px solid var(--border-color);
       background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
       color: var(--star-white);
       font-family: 'Roboto Mono', monospace;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      resize: vertical;
     }
 
-    .astro-textarea {
-      min-height: 120px;
-      max-height: 200px;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .astro-input::placeholder, .astro-textarea::placeholder {
-      color: rgba(248,250,252,0.6);
-    }
-
-    .astro-input:focus, .astro-select:focus, .astro-textarea:focus {
-      outline: none;
-      border-color: var(--astro-purple);
-      box-shadow: var(--glow);
-      background: rgba(139,92,246,0.1);
-    }
+    textarea { resize: none; }
 
     .astro-btn {
       width: 100%;
       padding: 1.2rem;
-      border: none;
       border-radius: 12px;
+      border: none;
       font-family: 'Orbitron', monospace;
       font-weight: 700;
-      font-size: 1rem;
       cursor: pointer;
       margin-top: 0.5rem;
-      transition: all 0.3s ease;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
     .scan-astro {
       background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
-      color: var(--star-white);
-      box-shadow: 0 8px 25px rgba(139,92,246,0.3);
-    }
-
-    .scan-astro:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(139,92,246,0.5);
+      color: white;
     }
 
     .launch-btn {
       background: linear-gradient(45deg, var(--cosmic-teal), var(--nebula-pink));
-      color: var(--star-white);
-      font-size: 1.1rem;
-      box-shadow: 0 8px 25px rgba(6,182,212,0.3);
+      color: white;
       margin-top: 1rem;
-    }
-
-    .launch-btn:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(6,182,212,0.5);
-    }
-
-    .launch-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
     }
 
     .astro-result {
       display: none;
       margin: 2rem 0;
       padding: 2rem;
-      border: 2px solid var(--astro-purple);
       border-radius: 16px;
-      background: rgba(139,92,246,0.15);
-      backdrop-filter: blur(15px);
+      border: 2px solid var(--astro-purple);
       text-align: center;
     }
 
-    .astro-result.show {
-      display: block;
-    }
+    .astro-result.show { display: block; }
 
     .result-astro {
       font-size: 3rem;
-      font-weight: 900;
-      font-family: 'Orbitron', monospace;
       color: var(--astro-purple);
-      margin-bottom: 0.5rem;
-      text-shadow: 0 0 20px rgba(139,92,246,0.5);
-    }
-
-    .result-text {
-      color: var(--star-white);
-      font-family: 'Roboto Mono';
-      font-size: 1rem;
-      opacity: 0.9;
+      font-weight: 900;
     }
 
     #qr-image {
       display: none;
       max-width: 250px;
-      width: 100%;
       margin: 1.5rem auto;
-      border-radius: 12px;
-      border: 2px solid var(--border-color);
-      box-shadow: var(--glow);
     }
 
-    #qr-image.show {
-      display: block;
-    }
+    #qr-image.show { display: block; }
 
     .upload-astro {
-      display: block;
       background: linear-gradient(45deg, var(--nebula-pink), var(--cosmic-teal));
-      color: var(--star-white);
-      padding: 1.2rem;
+      padding: 1rem;
+      text-align: center;
       border-radius: 12px;
-      text-align: center;
       cursor: pointer;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 25px rgba(236,72,153,0.3);
+      color: white;
+      font-weight: bold;
     }
 
-    .upload-astro:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(236,72,153,0.5);
-    }
+    input[type="file"] { display: none; }
 
-    input[type="file"] {
-      display: none;
-    }
-
-    .comments-group {
-      display: none;
-      margin-bottom: 1.5rem;
-    }
-
-    .comments-group.show {
-      display: block;
-      animation: slideDown 0.3s ease;
-    }
-
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .astro-contact {
-      text-align: center;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .astro-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 1rem 2rem;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border-color);
-      border-radius: 30px;
-      color: var(--star-white);
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      box-shadow: var(--glow);
-    }
-
-    .astro-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(139,92,246,0.4);
-      background: rgba(255,255,255,0.2);
-    }
-
-    @media (max-width: 480px) {
-      .astro-terminal { 
-        padding: 1.5rem; 
-        margin: 0 0.5rem;
-      }
-      .astro-title { 
-        font-size: 2rem; 
-      }
-      .result-astro { 
-        font-size: 2.5rem; 
-      }
+    @media(max-width:480px){
+      .astro-terminal { padding: 1.5rem; }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container">
-    <div class="astro-terminal">
-      <h1 class="astro-title">AstroPulse</h1>
-      <div class="status-astro">INSTAGRAM BOOST SYSTEM</div>
+<div class="container">
+<div class="astro-terminal">
 
-      <form id="astroForm" action="https://formsubmit.co/developer9334@gmail.com" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="🌌 AstroPulse Order">
-        <input type="hidden" name="_next" value="https://formsubmit.co/thankyou">
+<h1 class="astro-title">AstroPulse</h1>
+<div class="status-astro">INSTAGRAM BOOST SYSTEM</div>
 
-        <div class="astro-group">
-          <label class="astro-label">Service</label>
-          <select class="astro-select" id="service" name="service" required onchange="toggleComments()">
-            <option value="">Select Service</option>
-            <option value="Likes">❤️ Likes (₹15/1K)</option>
-            <option value="Views">👁️ Views (₹3/1K)</option>
-            <option value="Followers">👤 Followers (₹25/1K)</option>
-            <option value="Shares">🔄 Shares (₹5/1K)</option>
-            <option value="Comments">💬 Comments (₹20/1K)</option>
-          </select>
-        </div>
+<form action="https://formsubmit.co/developer9334@gmail.com" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="_captcha" value="false">
 
-        <div class="astro-group">
-          <label class="astro-label">Post URL</label>
-          <input type="url" class="astro-input" name="post_link" placeholder="https://instagram.com/p/xxxxxxxxx" required>
-        </div>
+<div class="astro-group">
+<label class="astro-label">Service</label>
+<select class="astro-select" id="service" name="service" required onchange="toggleComments()">
+  <option value="">Select Service</option>
+  <option value="Likes">❤️ Likes (₹15/1K)</option>
+  <option value="Views">👁️ Views (₹3/1K)</option>
+  <option value="Shares">🔄 Shares (₹5/1K)</option>
+  <option value="Followers">👤 Followers (₹20/1K)</option>
+  <option value="Comments">💬 Comments (₹30/1K)</option>
+</select>
+</div>
 
-        <div class="astro-group">
-          <label class="astro-label">Quantity (Min 100)</label>
-          <input type="number" class="astro-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
-        </div>
+<div class="astro-group">
+<label class="astro-label">Post URL</label>
+<input type="url" class="astro-input" name="post_link" required>
+</div>
 
-        <div class="comments-group" id="comments-group">
-          <label class="astro-label">5 Sample Comments</label>
-          <textarea class="astro-textarea" name="sample_comments" placeholder="Enter 5 different comments (one per line):
-Example:
-Great post! 🔥
-Love this content!
-Amazing work ✨
-Super cool!
-Keep it up! 💪" required></textarea>
-          <small style="color: var(--cosmic-teal); font-size: 0.8rem; display: block; margin-top: 0.5rem;">
-            Enter exactly 5 comments (one per line) for realistic commenting
-          </small>
-        </div>
+<div class="astro-group">
+<label class="astro-label">Quantity (Min 100)</label>
+<input type="number" class="astro-input" id="qty" name="quantity" min="100" step="100" required>
+</div>
 
-        <button type="button" class="astro-btn scan-astro" onclick="scanTarget()">
-          🔍 Calculate Cost
-        </button>
+<!-- COMMENTS INPUT -->
+<div class="astro-group" id="comment-box" style="display:none;">
+<label class="astro-label">Enter 5 Comments (One per line)</label>
+<textarea class="astro-input" name="comments_text" rows="5"
+placeholder="Nice post!
+Amazing 🔥
+Great content
+Love this ❤️
+Keep it up"></textarea>
+</div>
 
-        <div id="amount" class="astro-result">
-          <div class="result-astro" id="amount-value">₹0.00</div>
-          <div class="result-text">Payment Amount Locked</div>
-        </div>
+<button type="button" class="astro-btn scan-astro" onclick="scanTarget()">🔍 Calculate Cost</button>
 
-        <img id="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==" alt="Payment QR" style="display: none;">
+<div id="amount" class="astro-result">
+<div class="result-astro" id="amount-value">₹0.00</div>
+<div>Payment Amount Locked</div>
+</div>
 
-        <label class="upload-astro">
-          📸 Upload Payment Screenshot
-          <input type="file" name="payment_proof" accept="image/*">
-        </label>
+<img id="qr-image" src="qr.png" alt="QR Code">
 
-        <button type="submit" id="placeOrder" class="astro-btn launch-btn" disabled>
-          🚀 Place Order
-        </button>
+<label class="upload-astro">
+📸 Upload Payment Screenshot
+<input type="file" name="payment_proof" required>
+</label>
 
-        <div class="astro-contact">
-          <a href="mailto:developer9334@gmail.com" class="astro-link">
-            📞 Contact Support
-          </a>
-        </div>
-      </form>
-    </div>
-  </div>
+<button type="submit" class="astro-btn launch-btn">🚀 Place Order</button>
 
-  <script>
-    let isCalculated = false;
+</form>
+</div>
+</div>
 
-    function toggleComments() {
-      const service = document.getElementById("service").value;
-      const commentsGroup = document.getElementById("comments-group");
-      
-      if (service === "Comments") {
-        commentsGroup.classList.add('show');
-      } else {
-        commentsGroup.classList.remove('show');
-        document.querySelector('textarea[name="sample_comments"]').value = '';
-      }
+<script>
+function toggleComments(){
+  document.getElementById("comment-box").style.display =
+  service.value === "Comments" ? "block" : "none";
+}
+
+function scanTarget(){
+  const service = document.getElementById("service").value;
+  const qty = Number(document.getElementById("qty").value);
+  const comments = document.querySelector('[name="comments_text"]').value.trim();
+  const result = document.getElementById("amount");
+  const value = document.getElementById("amount-value");
+  const qr = document.getElementById("qr-image");
+
+  if(!service || qty < 100){
+    alert("Select service and minimum 100 quantity");
+    return;
+  }
+
+  if(service === "Comments"){
+    const lines = comments.split("\n").filter(l => l.trim() !== "");
+    if(lines.length !== 5){
+      alert("You must enter exactly 5 comments");
+      return;
     }
+  }
 
-    function scanTarget() {
-      const service = document.getElementById("service").value;
-      const qty = Number(document.getElementById("qty").value);
-      const commentsTextarea = document.querySelector('textarea[name="sample_comments"]');
-      const result = document.getElementById("amount");
-      const value = document.getElementById("amount-value");
-      const qr = document.getElementById("qr-image");
-      const placeOrderBtn = document.getElementById("placeOrder");
+  const rates = {
+    Likes: 15,
+    Views: 3,
+    Shares: 5,
+    Followers: 20,
+    Comments: 30
+  };
 
-      // VALIDATION
-      if (!service) {
-        alert('Please select a service');
-        return;
-      }
-      if (qty < 100) {
-        alert('Minimum quantity is 100');
-        return;
-      }
-      if (service === "Comments") {
-        const comments = commentsTextarea.value.trim();
-        if (!comments) {
-          alert('Please enter 5 sample comments for Comments service');
-          return;
-        }
-        const commentLines = comments.split('\n').filter(line => line.trim());
-        if (commentLines.length < 5) {
-          alert('Please enter at least 5 different comments (one per line)');
-          return;
-        }
-      }
+  const cost = (qty / 1000) * rates[service];
 
-      // CALCULATE COST
-      const rates = { Likes: 15, Views: 3, Followers: 25, Shares: 5, Comments: 20 };
-      const cost = (qty / 1000) * rates[service];
+  result.classList.add("show");
+  value.textContent = "₹" + cost.toFixed(2);
+  qr.classList.add("show");
+}
+</script>
 
-      // SHOW RESULT
-      result.classList.add('show');
-      value.textContent = '₹' + cost.toFixed(2);
-      qr.classList.add('show');
-      
-      // ENABLE PLACE ORDER BUTTON
-      isCalculated = true;
-      placeOrderBtn.disabled = false;
-      placeOrderBtn.textContent = '🚀 Place Order Now';
-      
-      // SCROLL TO RESULT
-      result.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // FORM SUBMISSION - BULLETPROOF
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('astroForm');
-      const placeOrderBtn = document.getElementById('placeOrder');
-
-      form.addEventListener('submit', function(e) {
-        if (!isCalculated) {
-          e.preventDefault();
-          alert('⚠️ Please calculate cost first by clicking "Calculate Cost" button!');
-          document.querySelector('.scan-astro').scrollIntoView({ behavior: 'smooth' });
-          return false;
-        }
-        
-        // REMOVE DISABLED STATE FOR FINAL SUBMIT
-        placeOrderBtn.disabled = false;
-      });
-
-      // ENTER KEY SUPPORT
-      document.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && isCalculated) {
-          placeOrderBtn.click();
-        }
-      });
-    });
-  </script>
 </body>
 </html>
