@@ -149,9 +149,15 @@
       margin-top: 1rem;
     }
 
-    .launch-btn:hover {
+    .launch-btn:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 15px 35px rgba(6,182,212,0.5);
+    }
+
+    .launch-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .astro-result {
@@ -186,7 +192,7 @@
     }
 
     #qr-image {
-      display: none !important;
+      display: none;
       max-width: 250px;
       width: 100%;
       margin: 1.5rem auto;
@@ -196,7 +202,7 @@
     }
 
     #qr-image.show {
-      display: block !important;
+      display: block;
     }
 
     .upload-astro {
@@ -226,7 +232,6 @@
       display: none;
     }
 
-    /* COMMENTS TEXTAREA - HIDDEN BY DEFAULT */
     .comments-group {
       display: none;
       margin-bottom: 1.5rem;
@@ -297,9 +302,10 @@
       <h1 class="astro-title">AstroPulse</h1>
       <div class="status-astro">INSTAGRAM BOOST SYSTEM</div>
 
-      <form action="https://formsubmit.co/developer9334@gmail.com" method="POST" enctype="multipart/form-data">
+      <form id="astroForm" action="https://formsubmit.co/developer9334@gmail.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="🌌 AstroPulse Order">
+        <input type="hidden" name="_next" value="https://formsubmit.co/thankyou">
 
         <div class="astro-group">
           <label class="astro-label">Service</label>
@@ -309,7 +315,7 @@
             <option value="Views">👁️ Views (₹3/1K)</option>
             <option value="Followers">👤 Followers (₹25/1K)</option>
             <option value="Shares">🔄 Shares (₹5/1K)</option>
-            <option value="Comments">💬 Comments (₹5/1K)</option>
+            <option value="Comments">💬 Comments (₹20/1K)</option>
           </select>
         </div>
 
@@ -323,7 +329,6 @@
           <input type="number" class="astro-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
         </div>
 
-        <!-- COMMENTS INPUT - HIDDEN BY DEFAULT -->
         <div class="comments-group" id="comments-group">
           <label class="astro-label">5 Sample Comments</label>
           <textarea class="astro-textarea" name="sample_comments" placeholder="Enter 5 different comments (one per line):
@@ -347,14 +352,14 @@ Keep it up! 💪" required></textarea>
           <div class="result-text">Payment Amount Locked</div>
         </div>
 
-        <img id="qr-image" class="qr-hidden" src="qr.png" alt="Payment QR">
+        <img id="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==" alt="Payment QR" style="display: none;">
 
         <label class="upload-astro">
           📸 Upload Payment Screenshot
-          <input type="file" name="payment_proof" accept="image/*" required>
+          <input type="file" name="payment_proof" accept="image/*">
         </label>
 
-        <button type="submit" class="astro-btn launch-btn">
+        <button type="submit" id="placeOrder" class="astro-btn launch-btn" disabled>
           🚀 Place Order
         </button>
 
@@ -368,6 +373,8 @@ Keep it up! 💪" required></textarea>
   </div>
 
   <script>
+    let isCalculated = false;
+
     function toggleComments() {
       const service = document.getElementById("service").value;
       const commentsGroup = document.getElementById("comments-group");
@@ -387,14 +394,17 @@ Keep it up! 💪" required></textarea>
       const result = document.getElementById("amount");
       const value = document.getElementById("amount-value");
       const qr = document.getElementById("qr-image");
+      const placeOrderBtn = document.getElementById("placeOrder");
 
       // VALIDATION
-      if (!service || qty < 100) {
-        alert('Please select service and enter minimum 100 quantity');
+      if (!service) {
+        alert('Please select a service');
         return;
       }
-
-      // COMMENTS VALIDATION
+      if (qty < 100) {
+        alert('Minimum quantity is 100');
+        return;
+      }
       if (service === "Comments") {
         const comments = commentsTextarea.value.trim();
         if (!comments) {
@@ -409,35 +419,44 @@ Keep it up! 💪" required></textarea>
       }
 
       // CALCULATE COST
-      const rates = { 
-        Likes: 15, 
-        Views: 3, 
-        Followers: 25, 
-        Shares: 5, 
-        Comments: 5 
-      };
+      const rates = { Likes: 15, Views: 3, Followers: 25, Shares: 5, Comments: 20 };
       const cost = (qty / 1000) * rates[service];
 
       // SHOW RESULT
       result.classList.add('show');
       value.textContent = '₹' + cost.toFixed(2);
-
-      // QR SHOWS ONLY AFTER CALCULATION
       qr.classList.add('show');
+      
+      // ENABLE PLACE ORDER BUTTON
+      isCalculated = true;
+      placeOrderBtn.disabled = false;
+      placeOrderBtn.textContent = '🚀 Place Order Now';
       
       // SCROLL TO RESULT
       result.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // FORM PROTECTION - MUST CALCULATE FIRST
+    // FORM SUBMISSION - BULLETPROOF
     document.addEventListener('DOMContentLoaded', function() {
-      document.querySelector('form').addEventListener('submit', function(e) {
-        const result = document.getElementById("amount");
-        if (!result.classList.contains('show')) {
+      const form = document.getElementById('astroForm');
+      const placeOrderBtn = document.getElementById('placeOrder');
+
+      form.addEventListener('submit', function(e) {
+        if (!isCalculated) {
           e.preventDefault();
-          alert('Please calculate cost first!');
-          scanTarget();
+          alert('⚠️ Please calculate cost first by clicking "Calculate Cost" button!');
+          document.querySelector('.scan-astro').scrollIntoView({ behavior: 'smooth' });
           return false;
+        }
+        
+        // REMOVE DISABLED STATE FOR FINAL SUBMIT
+        placeOrderBtn.disabled = false;
+      });
+
+      // ENTER KEY SUPPORT
+      document.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && isCalculated) {
+          placeOrderBtn.click();
         }
       });
     });
