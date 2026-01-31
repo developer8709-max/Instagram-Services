@@ -236,6 +236,121 @@
       border: 1px solid var(--success-green);
     }
 
+    /* ZOOMABLE QR MODAL */
+    .qr-zoom-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(15px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .qr-zoom-modal.show {
+      display: flex;
+    }
+
+    .qr-zoom-container {
+      background: rgba(15, 15, 35, 0.98);
+      border: 3px solid var(--astro-purple);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 90vw;
+      max-height: 90vh;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(139,92,246,0.5);
+      position: relative;
+    }
+
+    .qr-zoom-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--star-white);
+      font-size: 2.5rem;
+      cursor: pointer;
+      font-weight: 700;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .qr-zoom-close:hover {
+      background: rgba(255,255,255,0.1);
+      transform: rotate(90deg);
+    }
+
+    .qr-zoom-title {
+      color: var(--cosmic-teal);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .qr-zoom-image {
+      max-width: 350px;
+      max-height: 350px;
+      width: auto;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+      cursor: grab;
+    }
+
+    .qr-zoom-image:active {
+      cursor: grabbing;
+    }
+
+    .zoom-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .zoom-btn {
+      background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
+      color: white;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 25px;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      min-width: 80px;
+    }
+
+    .zoom-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(139,92,246,0.4);
+    }
+
+    .zoom-info {
+      color: var(--star-white);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      opacity: 0.8;
+      font-family: 'Roboto Mono', monospace;
+    }
+
     .login-modal {
       background: rgba(15, 15, 35, 0.98);
       backdrop-filter: blur(25px);
@@ -392,37 +507,7 @@
       opacity: 1;
     }
 
-    .astro-result {
-      display: none;
-      margin: 2rem 0;
-      padding: 2rem;
-      border-radius: 16px;
-      border: 2px solid var(--astro-purple);
-      text-align: center;
-      background: rgba(139,92,246,0.1);
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-
-    .astro-result.show { display: block; }
-
-    .result-astro {
-      font-size: 3rem;
-      color: var(--astro-purple);
-      font-weight: 900;
-      text-shadow: 0 0 20px rgba(139,92,246,0.5);
-      margin-bottom: 0.5rem;
-    }
-
-    .result-currency {
-      position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--cosmic-teal);
-    }
-
+    /* UPDATED QR CONTAINER WITH ZOOM BUTTON */
     .qr-container {
       display: none;
       max-width: 250px;
@@ -431,15 +516,54 @@
       border: 2px solid var(--border-color);
       box-shadow: var(--glow);
       margin-bottom: 1.5rem;
+      position: relative;
+      padding: 1rem;
+      background: rgba(0,0,0,0.3);
     }
 
     .qr-container.show { display: block; }
 
-    #qr-india, #qr-binance, #qr-funds { display: none; }
+    #qr-india, #qr-binance, #qr-funds, #qr-funds-bep20 { 
+      display: none; 
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
     .qr-container.show #qr-india.active,
     .qr-container.show #qr-binance.active,
-    .qr-container.show #qr-funds.active { display: block; }
+    .qr-container.show #qr-funds.active,
+    .qr-container.show #qr-funds-bep20.active { 
+      display: block; 
+    }
+
+    .qr-zoom-btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--astro-purple);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(139,92,246,0.5);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .qr-zoom-btn:hover {
+      transform: scale(1.1);
+      background: var(--cosmic-teal);
+      box-shadow: 0 8px 20px rgba(6,182,212,0.6);
+    }
 
     .upload-astro {
       background: linear-gradient(45deg, var(--nebula-pink), var(--cosmic-teal));
@@ -482,14 +606,48 @@
       font-weight: 700;
     }
 
+    .astro-result {
+      display: none;
+      margin: 2rem 0;
+      padding: 2rem;
+      border-radius: 16px;
+      border: 2px solid var(--astro-purple);
+      text-align: center;
+      background: rgba(139,92,246,0.1);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .astro-result.show { display: block; }
+
+    .result-astro {
+      font-size: 3rem;
+      color: var(--astro-purple);
+      font-weight: 900;
+      text-shadow: 0 0 20px rgba(139,92,246,0.5);
+      margin-bottom: 0.5rem;
+    }
+
+    .result-currency {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cosmic-teal);
+    }
+
     @media(max-width:480px){
-      .astro-terminal, .login-modal, .fund-box { padding: 1.5rem; }
+      .astro-terminal, .login-modal, .fund-box, .qr-zoom-container { padding: 1.5rem; }
       .astro-title, .login-title { font-size: 2rem; }
       .result-astro { font-size: 2.5rem; }
       .result-currency { font-size: 1rem; top: 1rem; right: 1.5rem; }
       .wallet-balance { font-size: 1.5rem; }
       .contact-btn { padding: 0.7rem 0.9rem; font-size: 0.75rem; }
       .payment-tab { padding: 0.8rem; font-size: 0.9rem; }
+      .qr-zoom-image { max-width: 280px; max-height: 280px; }
+      .zoom-controls { gap: 0.5rem; }
+      .zoom-btn { padding: 0.6rem 0.8rem; font-size: 0.8rem; min-width: 70px; }
     }
   </style>
 
@@ -592,10 +750,13 @@ Keep it up 💪"></textarea>
         </div>
       </div>
 
+      <!-- UPDATED QR CONTAINER WITH ZOOM BUTTONS -->
       <div id="qr-container" class="qr-container">
+        <button class="qr-zoom-btn" onclick="openQRZoom('india')">🔍</button>
         <img id="qr-india" src="./qr.png" alt="India Payment QR">
+        
+        <button class="qr-zoom-btn" onclick="openQRZoom('binance')" style="display: none;">🔍</button>
         <img id="qr-binance" src="./binance.png" alt="International Payment QR">
-        <img id="qr-funds" src="./binance.png" alt="Add Funds QR">
       </div>
 
       <label class="upload-astro">
@@ -643,7 +804,8 @@ Keep it up 💪"></textarea>
         <!-- BEP20 QR CONTENT -->
         <div id="bep20-content" class="payment-content">
           <div id="fund-qr-bep20" class="qr-container show">
-            <img id="qr-funds-bep20" src="./binance.png" alt="BEP20 Add Funds QR" class="active" style="display: block;">
+            <button class="qr-zoom-btn" onclick="openQRZoom('funds')">🔍</button>
+            <img id="qr-funds-bep20" src="./binance.png" alt="BEP20 Add Funds QR" class="active">
           </div>
           <div style="color: var(--star-white); font-size: 0.85rem; opacity: 0.8;">
             Scan QR or copy address from image
@@ -660,6 +822,26 @@ Keep it up 💪"></textarea>
       
       <div style="color: var(--cosmic-teal); font-size: 0.85rem; margin-top: 1rem;">
         Screenshot will be sent for verification
+      </div>
+    </div>
+  </div>
+
+  <!-- QR ZOOM MODAL -->
+  <div id="qrZoomModal" class="qr-zoom-modal">
+    <div class="qr-zoom-container">
+      <button class="qr-zoom-close" onclick="closeQRZoom()">×</button>
+      <div class="qr-zoom-title" id="qrZoomTitle">Payment QR Code</div>
+      <img id="qrZoomImage" class="qr-zoom-image" src="" alt="Zoomed QR Code" draggable="false">
+      
+      <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomQR(0.8)">🔍⁻</button>
+        <button class="zoom-btn" onclick="zoomQR(1)">🔄 Reset</button>
+        <button class="zoom-btn" onclick="zoomQR(1.25)">🔍⁺</button>
+        <button class="zoom-btn" onclick="zoomQR(1.5)">🔍⁺⁺</button>
+      </div>
+      
+      <div class="zoom-info">
+        💡 Drag to pan • Use buttons to zoom • Perfect for scanning
       </div>
     </div>
   </div>
@@ -681,34 +863,51 @@ let orderCompleted = false;
 let selectedPaymentMethod = 'binance-id';
 const INR_TO_USDT = 0.012;
 let telegramBtn = null;
+let currentZoomLevel = 1;
+let qrZoomImage = null;
+let isDragging = false;
+let startX, startY, translateX = 0, translateY = 0;
 
-// Initialize Telegram button
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
   telegramBtn = document.getElementById('telegramFloat');
+  qrZoomImage = document.getElementById('qrZoomImage');
   
   // Payment method tab functionality
   document.querySelectorAll('.payment-tab').forEach(tab => {
     tab.addEventListener('click', function() {
       const method = this.dataset.method;
       
-      // Update active tab
       document.querySelectorAll('.payment-tab').forEach(t => t.classList.remove('active'));
       this.classList.add('active');
       
-      // Update active content
       document.querySelectorAll('.payment-content').forEach(content => content.classList.remove('active'));
       document.getElementById(method === 'binance-id' ? 'binance-id-content' : 'bep20-content').classList.add('active');
       
       selectedPaymentMethod = method;
     });
   });
+
+  // QR Zoom drag functionality
+  setupQRDrag();
 });
+
+function setupQRDrag() {
+  qrZoomImage.addEventListener('mousedown', startDrag);
+  document.getElementById('qrZoomModal').addEventListener('mousemove', drag);
+  document.getElementById('qrZoomModal').addEventListener('mouseup', stopDrag);
+  document.getElementById('qrZoomModal').addEventListener('mouseleave', stopDrag);
+
+  // Touch support for mobile
+  qrZoomImage.addEventListener('touchstart', startDragMobile);
+  document.getElementById('qrZoomModal').addEventListener('touchmove', dragMobile);
+  document.getElementById('qrZoomModal').addEventListener('touchend', stopDrag);
+}
 
 function verifyLogin() {
   const emailInput = document.getElementById("userEmail");
   const countrySelect = document.getElementById("userCountry");
   
-  // Strict email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailInput.value || !emailRegex.test(emailInput.value)) {
     alert("Please enter a valid email address only!");
@@ -739,11 +938,9 @@ function verifyLogin() {
     statusText.innerHTML = "🌍 INSTAGRAM BOOST SYSTEM (USDT)";
   }
   
-  // Hide login and show main terminal
   document.getElementById("loginModal").style.display = "none";
   document.getElementById("mainTerminal").classList.add("show");
   
-  // Show Telegram button after login (FIXED bottom right position)
   setTimeout(() => {
     telegramBtn.classList.add('show');
     telegramBtn.classList.add('pulse');
@@ -757,8 +954,6 @@ function updateWalletDisplay() {
 
 function showFundModal() {
   document.getElementById("fundModal").classList.add("show");
-  
-  // Show payment method selection only for non-India users
   if (userCountry !== "India") {
     document.getElementById("paymentMethodSection").style.display = "block";
   } else {
@@ -769,6 +964,88 @@ function showFundModal() {
 function closeFundModal() {
   document.getElementById("fundModal").classList.remove("show");
   document.getElementById("fundAmount").value = "";
+}
+
+// NEW QR ZOOM FUNCTIONS
+function openQRZoom(type) {
+  const modal = document.getElementById('qrZoomModal');
+  const title = document.getElementById('qrZoomTitle');
+  const image = document.getElementById('qrZoomImage');
+  
+  resetZoom();
+  
+  if (type === 'india') {
+    title.textContent = '🇮🇳 India Payment QR';
+    image.src = './qr.png';
+  } else if (type === 'binance') {
+    title.textContent = '🌍 International Payment QR (Binance)';
+    image.src = './binance.png';
+  } else if (type === 'funds') {
+    title.textContent = '💰 Add Funds QR (BEP20)';
+    image.src = './binance.png';
+  }
+  
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeQRZoom() {
+  const modal = document.getElementById('qrZoomModal');
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
+  resetZoom();
+}
+
+function zoomQR(scale) {
+  currentZoomLevel = Math.max(0.5, Math.min(3, scale));
+  qrZoomImage.style.transform = `scale(${currentZoomLevel}) translate(${translateX}px, ${translateY}px)`;
+}
+
+function resetZoom() {
+  currentZoomLevel = 1;
+  translateX = 0;
+  translateY = 0;
+  qrZoomImage.style.transform = 'scale(1) translate(0px, 0px)';
+}
+
+// Drag functionality for desktop
+function startDrag(e) {
+  if (currentZoomLevel <= 1) return;
+  isDragging = true;
+  startX = e.clientX - translateX;
+  startY = e.clientY - translateY;
+  qrZoomImage.style.cursor = 'grabbing';
+}
+
+function drag(e) {
+  if (!isDragging || currentZoomLevel <= 1) return;
+  translateX = e.clientX - startX;
+  translateY = e.clientY - startY;
+  qrZoomImage.style.transform = `scale(${currentZoomLevel}) translate(${translateX}px, ${translateY}px)`;
+}
+
+function stopDrag() {
+  isDragging = false;
+  qrZoomImage.style.cursor = 'grab';
+}
+
+// Mobile touch support
+function startDragMobile(e) {
+  if (currentZoomLevel <= 1) return;
+  isDragging = true;
+  const touch = e.touches[0];
+  const rect = qrZoomImage.getBoundingClientRect();
+  startX = touch.clientX - translateX;
+  startY = touch.clientY - translateY;
+}
+
+function dragMobile(e) {
+  if (!isDragging || currentZoomLevel <= 1) return;
+  e.preventDefault();
+  const touch = e.touches[0];
+  translateX = touch.clientX - startX;
+  translateY = touch.clientY - startY;
+  qrZoomImage.style.transform = `scale(${currentZoomLevel}) translate(${translateX}px, ${translateY}px)`;
 }
 
 function confirmAddFunds() {
@@ -855,15 +1132,20 @@ function scanTarget() {
   const qrContainer = document.getElementById("qr-container");
   qrContainer.classList.add("show");
   
+  // Show appropriate QR and zoom button
   if (userCountry === "India") {
     document.getElementById("qr-india").classList.add("active");
-    document.querySelectorAll('#qr-container img').forEach(img => img.style.display = "none");
     document.getElementById("qr-india").style.display = "block";
+    document.querySelector('#qr-container .qr-zoom-btn[onclick="openQRZoom(\'india\')"]').style.display = "flex";
+    document.querySelector('#qr-container .qr-zoom-btn[onclick="openQRZoom(\'binance\')"]').style.display = "none";
   } else {
     document.getElementById("qr-binance").classList.add("active");
-    document.querySelectorAll('#qr-container img').forEach(img => img.style.display = "none");
     document.getElementById("qr-binance").style.display = "block";
+    document.querySelector('#qr-container .qr-zoom-btn[onclick="openQRZoom(\'binance\')"]').style.display = "flex";
+    document.querySelector('#qr-container .qr-zoom-btn[onclick="openQRZoom(\'india\')"]').style.display = "none";
   }
+  
+  document.querySelectorAll('#qr-container img:not(.active)').forEach(img => img.style.display = "none");
   
   document.getElementById("amount").classList.add("show");
   isCalculated = true;
@@ -904,7 +1186,6 @@ document.getElementById("orderForm").addEventListener('submit', function(e) {
   orderCompleted = true;
   alert('🚀 Order placed successfully!');
   
-  // Hide Telegram button after order completion
   telegramBtn.classList.remove('pulse');
   telegramBtn.classList.add('hidden');
 });
@@ -913,9 +1194,16 @@ document.getElementById("fundModal").addEventListener('click', function(e) {
   if (e.target === this) closeFundModal();
 });
 
+document.getElementById("qrZoomModal").addEventListener('click', function(e) {
+  if (e.target === this) closeQRZoom();
+});
+
 document.addEventListener('keypress', function(e) {
   if (e.key === 'Enter' && document.getElementById('loginModal').style.display !== 'none') {
     verifyLogin();
+  }
+  if (e.key === 'Escape' && document.getElementById('qrZoomModal').classList.contains('show')) {
+    closeQRZoom();
   }
 });
 </script>
