@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <title>AstroPulse Instagram Booster</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   
   <style>
     :root {
@@ -11,288 +10,425 @@
       --nebula-pink: #EC4899;
       --cosmic-teal: #06B6D4;
       --star-white: #F8FAFC;
-      --dark-bg: #0f0f23;
+      --panel-bg: rgba(139, 92, 246, 0.1);
       --border-color: rgba(139, 92, 246, 0.3);
-      --glow: 0 0 20px rgba(139, 92, 246, 0.4);
+      --glow: 0 0 20px rgba(139, 92, 246, 0.3);
       --success-green: #10B981;
       --telegram-blue: #0088cc;
-      --error-red: #EF4444;
+      --telegram-glow: rgba(0, 136, 204, 0.4);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Orbitron', 'Roboto Mono', monospace;
-      background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 50%, #1e3a8a 100%);
+      font-family: 'Orbitron', 'Roboto Mono', monospace;
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 100%);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 1rem;
       position: relative;
       overflow-x: hidden;
-      line-height: 1.5;
     }
 
-    .container {
-      max-width: 420px;
-      width: 100%;
-      position: relative;
-      z-index: 10;
-    }
+    .container { max-width: 500px; width: 100%; }
 
-    /* TELEGRAM FLOATING BUTTON */
+    /* FIXED TELEGRAM BUTTON - BOTTOM RIGHT POSITION */
     .telegram-float {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 64px;
-      height: 64px;
+      bottom: 30px;
+      right: 30px;
+      width: 70px;
+      height: 70px;
       background: var(--telegram-blue);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 32px rgba(0, 136, 204, 0.4);
-      z-index: 1001;
+      box-shadow: 0 8px 25px var(--telegram-glow);
+      z-index: 10000;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 2px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(16px);
+      border: 3px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(10px);
       opacity: 0;
-      transform: scale(0) translate(8px, 8px);
+      transform: scale(0);
       text-decoration: none;
     }
 
     .telegram-float.show {
       opacity: 1;
-      transform: scale(1) translate(0, 0);
+      transform: scale(1);
     }
 
     .telegram-float:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 40px rgba(0, 136, 204, 0.5);
+      transform: scale(1.1);
+      box-shadow: 0 15px 35px var(--telegram-glow);
     }
 
+    /* Pulsing animation */
     @keyframes pulse-telegram {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.7); }
-      50% { box-shadow: 0 0 0 16px rgba(0, 136, 204, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.7); }
+      70% { box-shadow: 0 0 0 25px rgba(0, 136, 204, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0); }
     }
 
-    .telegram-float.pulse { animation: pulse-telegram 2s infinite; }
-    .telegram-float.hidden { display: none !important; }
-
-    /* MODALS */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
+    .telegram-float.pulse {
+      animation: pulse-telegram 2s infinite;
     }
 
-    .modal.show { display: flex; }
+    .telegram-float.hidden {
+      display: none !important;
+    }
 
-    .modal-content {
-      background: var(--dark-bg);
-      backdrop-filter: blur(24px);
+    @media(max-width: 480px) {
+      .telegram-float {
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+
+    .astro-terminal {
+      background: rgba(15, 15, 35, 0.95);
+      backdrop-filter: blur(20px);
       border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 2rem;
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 32px 64px rgba(0,0,0,0.6), var(--glow);
-      position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1.5rem;
-      background: none;
-      border: none;
-      color: var(--star-white);
-      font-size: 1.8rem;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-
-    .close-btn:hover { opacity: 1; }
-
-    /* TERMINAL */
-    .terminal {
-      background: var(--dark-bg);
-      backdrop-filter: blur(24px);
-      border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 2rem;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.6), var(--glow);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), var(--glow);
       display: none;
-      width: 100%;
     }
 
-    .terminal.show { display: block; }
+    .astro-terminal.show { display: block; }
 
-    /* WALLET HEADER */
     .wallet-header {
       display: none;
-      background: linear-gradient(135deg, var(--cosmic-teal), var(--success-green));
-      padding: 1.5rem;
+      background: linear-gradient(45deg, var(--cosmic-teal), var(--success-green));
+      padding: 1rem;
       border-radius: 16px;
       margin-bottom: 1.5rem;
       text-align: center;
-      box-shadow: 0 12px 32px rgba(6, 182, 212, 0.3);
+      box-shadow: 0 10px 30px rgba(6,182,212,0.3);
     }
 
     .wallet-header.show { display: block; }
 
     .wallet-balance {
-      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-size: 2rem;
       font-weight: 900;
       color: var(--star-white);
       margin-bottom: 0.5rem;
-      text-shadow: 0 0 12px rgba(255,255,255,0.6);
+      text-shadow: 0 0 15px rgba(255,255,255,0.5);
     }
 
-    /* FORM ELEMENTS */
-    .form-group {
+    .wallet-currency { 
+      font-size: 1rem; 
+      color: var(--star-white);
+      opacity: 0.9;
+    }
+
+    .add-funds-btn {
+      background: linear-gradient(45deg, var(--nebula-pink), var(--astro-purple));
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .add-funds-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(236,72,153,0.5);
+    }
+
+    /* PAYMENT METHOD SELECTION MODAL */
+    .payment-method-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(10px);
+      z-index: 1001;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .payment-method-modal.show { display: flex; }
+
+    .method-selector {
+      background: rgba(15, 15, 35, 0.98);
+      border: 2px solid var(--cosmic-teal);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--glow);
+    }
+
+    .method-title {
+      color: var(--cosmic-teal);
+      font-size: 1.6rem;
       margin-bottom: 1.5rem;
+      font-weight: 700;
     }
 
-    .form-label {
+    .method-option {
+      background: rgba(139, 92, 246, 0.2);
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', monospace;
+      font-weight: 600;
+      color: var(--star-white);
+    }
+
+    .method-option:hover, .method-option.selected {
+      background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
+      border-color: var(--cosmic-teal);
+      transform: translateY(-2px);
+      box-shadow: var(--glow);
+    }
+
+    .fund-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .fund-modal.show { display: flex; }
+
+    .fund-box {
+      background: rgba(15, 15, 35, 0.98);
+      border: 2px solid var(--cosmic-teal);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--glow);
+      position: relative;
+    }
+
+    .fund-title {
+      color: var(--cosmic-teal);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .payment-info {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid var(--success-green);
+      border-radius: 12px;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.95rem;
+      color: var(--success-green);
+    }
+
+    .bep20-qr { display: none; }
+    .binance-id { display: none; }
+
+    .login-modal {
+      background: rgba(15, 15, 35, 0.98);
+      backdrop-filter: blur(25px);
+      border: 2px solid var(--astro-purple);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.7), var(--glow);
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .login-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      letter-spacing: 3px;
+    }
+
+    .login-subtitle {
+      color: var(--cosmic-teal);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .astro-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .status-astro {
+      text-align: center;
+      color: var(--cosmic-teal);
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .astro-group { 
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .astro-label {
       color: var(--star-white);
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       display: block;
       text-transform: uppercase;
       font-size: 0.85rem;
-      letter-spacing: 0.5px;
     }
 
-    .form-input, .form-select, textarea {
+    .astro-input, .astro-select, textarea {
       width: 100%;
-      padding: 1rem 1.25rem;
-      border-radius: 16px;
+      padding: 1rem;
+      border-radius: 12px;
       border: 1px solid var(--border-color);
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0,0,0,0.4);
       color: var(--star-white);
       font-family: 'Roboto Mono', monospace;
-      font-size: 1rem;
       transition: all 0.3s ease;
     }
 
-    .form-input:focus, .form-select:focus, textarea:focus {
+    .astro-input:focus, .astro-select:focus, textarea:focus {
       outline: none;
       border-color: var(--astro-purple);
       box-shadow: var(--glow);
-      background: rgba(0, 0, 0, 0.6);
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-      font-size: 0.95rem;
-    }
+    textarea { resize: none; min-height: 120px; }
 
-    /* BUTTONS */
-    .btn {
+    .astro-btn {
       width: 100%;
-      padding: 1.25rem;
-      border-radius: 16px;
+      padding: 1.2rem;
+      border-radius: 12px;
       border: none;
       font-family: 'Orbitron', monospace;
       font-weight: 700;
       cursor: pointer;
       text-transform: uppercase;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
       font-size: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--astro-purple), var(--cosmic-teal));
-      color: white;
-      box-shadow: 0 12px 32px rgba(139, 92, 246, 0.4);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(139, 92, 246, 0.6);
-    }
-
-    .btn-scan {
-      background: linear-gradient(135deg, var(--astro-purple), var(--cosmic-teal));
       margin-bottom: 1.5rem;
-      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
     }
 
-    .btn-launch {
-      background: linear-gradient(135deg, var(--cosmic-teal), var(--nebula-pink));
+    .login-btn, .add-funds-confirm {
+      background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
+      color: white;
+      box-shadow: 0 15px 35px rgba(139,92,246,0.4);
       font-size: 1.1rem;
-      box-shadow: 0 12px 32px rgba(6, 182, 212, 0.4);
+    }
+
+    .login-btn:hover, .add-funds-confirm:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 20px 45px rgba(139,92,246,0.6); 
+    }
+
+    .scan-astro {
+      background: linear-gradient(45deg, var(--astro-purple), var(--cosmic-teal));
+      color: white;
+      box-shadow: 0 10px 25px rgba(139,92,246,0.3);
+      margin-bottom: 2rem;
+    }
+
+    .scan-astro:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 15px 35px rgba(139,92,246,0.5); 
+    }
+
+    .launch-btn {
+      background: linear-gradient(45deg, var(--cosmic-teal), var(--nebula-pink));
+      color: white;
+      font-size: 1.1rem;
+      box-shadow: 0 10px 25px rgba(6,182,212,0.3);
       margin-bottom: 1rem;
     }
 
-    .btn-launch:disabled {
+    .launch-btn:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 15px 35px rgba(6,182,212,0.5); 
+    }
+
+    .launch-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
-      box-shadow: none;
     }
 
-    .btn-secondary {
-      background: linear-gradient(135deg, var(--nebula-pink), var(--astro-purple));
+    .contact-btn {
+      background: linear-gradient(45deg, var(--nebula-pink), var(--astro-purple));
       color: white;
-      font-size: 0.9rem;
-      padding: 0.875rem 1.5rem;
+      font-size: 0.8rem;
+      padding: 0.8rem 1rem;
       width: auto;
       margin: 0 auto;
       display: inline-block;
-      border-radius: 24px;
+      border-radius: 25px;
       opacity: 0.9;
+      font-weight: 600;
     }
 
-    .btn-secondary:hover {
+    .contact-btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(236,72,153,0.5);
       opacity: 1;
-      box-shadow: 0 12px 32px rgba(236, 72, 153, 0.5);
     }
 
-    /* RESULTS */
-    .result {
+    .astro-result {
       display: none;
-      margin: 1.5rem 0;
+      margin: 2rem 0;
       padding: 2rem;
-      border-radius: 20px;
+      border-radius: 16px;
       border: 2px solid var(--astro-purple);
       text-align: center;
-      background: rgba(139, 92, 246, 0.12);
+      background: rgba(139,92,246,0.1);
+      margin-bottom: 1.5rem;
       position: relative;
     }
 
-    .result.show { display: block; }
+    .astro-result.show { display: block; }
 
-    .result-amount {
-      font-size: clamp(2.5rem, 8vw, 3.5rem);
+    .result-astro {
+      font-size: 3rem;
       color: var(--astro-purple);
       font-weight: 900;
-      text-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+      text-shadow: 0 0 20px rgba(139,92,246,0.5);
       margin-bottom: 0.5rem;
     }
 
@@ -300,87 +436,47 @@
       position: absolute;
       top: 1.5rem;
       right: 2rem;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--cosmic-teal);
     }
 
-    /* QR CONTAINER */
     .qr-container {
       display: none;
-      max-width: 260px;
+      max-width: 250px;
       margin: 1.5rem auto;
-      padding: 1.5rem;
-      border-radius: 20px;
+      border-radius: 12px;
       border: 2px solid var(--border-color);
-      background: rgba(0, 0, 0, 0.3);
       box-shadow: var(--glow);
+      margin-bottom: 1.5rem;
     }
 
     .qr-container.show { display: block; }
 
-    .qr-container img {
-      display: none;
-      width: 100%;
-      height: auto;
+    #qr-india, #qr-binance, #qr-funds { display: none; }
+
+    .qr-container.show #qr-india.active,
+    .qr-container.show #qr-binance.active,
+    .qr-container.show #qr-funds.active { display: block; }
+
+    .upload-astro {
+      background: linear-gradient(45deg, var(--nebula-pink), var(--cosmic-teal));
+      padding: 1.2rem;
+      text-align: center;
       border-radius: 12px;
-      max-width: 220px;
-    }
-
-    .qr-container.show img.active { display: block; }
-
-    /* STATUS MESSAGES */
-    .status {
-      color: var(--cosmic-teal);
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    .status-success {
-      color: var(--success-green);
-      font-size: 1.1rem;
-      margin-top: 1rem;
-    }
-
-    .status-error {
-      color: var(--error-red);
-      font-size: 1.1rem;
-      margin-top: 1rem;
-    }
-
-    /* TITLES */
-    .title {
-      font-size: clamp(2rem, 6vw, 2.75rem);
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--astro-purple), var(--cosmic-teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-align: center;
-      margin-bottom: 1rem;
-      letter-spacing: 1px;
-    }
-
-    .upload-area {
-      background: linear-gradient(135deg, var(--nebula-pink), var(--cosmic-teal));
-      padding: 1.25rem;
-      text-align: center;
-      border-radius: 16px;
       cursor: pointer;
       color: white;
-      font-weight: 700;
+      font-weight: bold;
       font-family: 'Orbitron', monospace;
       text-transform: uppercase;
       transition: all 0.3s ease;
+      display: block;
       margin-bottom: 1.5rem;
     }
 
-    .upload-area:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(236, 72, 153, 0.5);
+    .upload-astro:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 15px 35px rgba(236,72,153,0.5); 
     }
 
     input[type="file"] { display: none; }
@@ -392,500 +488,477 @@
       border-top: 1px solid var(--border-color);
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 480px) {
-      body { padding: 0.75rem; }
-      .container { max-width: 100%; }
-      .modal-content, .terminal { padding: 1.5rem; }
-      .telegram-float { width: 56px; height: 56px; bottom: 20px; right: 20px; }
-      .qr-container { max-width: 240px; padding: 1.25rem; }
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--star-white);
+      font-size: 2rem;
+      cursor: pointer;
+      font-weight: 700;
     }
 
-    @media (min-width: 768px) {
-      .container { max-width: 480px; }
-      .modal-content, .terminal { padding: 2.5rem; }
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .terminal.show, .result.show, .qr-container.show {
-      animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    @media(max-width:480px){
+      .astro-terminal, .login-modal, .fund-box, .method-selector { padding: 1.5rem; }
+      .astro-title, .login-title { font-size: 2rem; }
+      .result-astro { font-size: 2.5rem; }
+      .result-currency { font-size: 1rem; top: 1rem; right: 1.5rem; }
+      .wallet-balance { font-size: 1.5rem; }
+      .contact-btn { padding: 0.7rem 0.9rem; font-size: 0.75rem; }
     }
   </style>
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container">
-    <!-- LOGIN MODAL -->
-    <div id="loginModal" class="modal show">
-      <div class="modal-content login-modal">
-        <h1 class="title">🔐 ACCESS TERMINAL</h1>
-        <p style="color: var(--cosmic-teal); margin-bottom: 2rem; font-size: 1.1rem;">VERIFY YOUR IDENTITY</p>
-        
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" id="userEmail" placeholder="your@email.com" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Country</label>
-          <select class="form-select" id="userCountry" required>
-            <option value="">Select Country</option>
-            <option value="India">🇮🇳 India</option>
-            <option value="USA">🇺🇸 USA</option>
-            <option value="UK">🇬🇧 UK</option>
-            <option value="Canada">🇨🇦 Canada</option>
-            <option value="Australia">🇦🇺 Australia</option>
-            <option value="Other">🌍 Other</option>
-          </select>
-        </div>
-
-        <button class="btn btn-primary" onclick="verifyLogin()">🚀 Enter Terminal</button>
-      </div>
+<div class="container">
+  
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="login-modal">
+    <h1 class="login-title">🔐 ACCESS TERMINAL</h1>
+    <div class="login-subtitle">VERIFY YOUR IDENTITY</div>
+    
+    <div class="astro-group">
+      <label class="astro-label">Email Address</label>
+      <input type="email" class="astro-input" id="userEmail" placeholder="your@email.com" required>
     </div>
 
-    <!-- MAIN TERMINAL -->
-    <div id="mainTerminal" class="terminal">
-      <!-- WALLET HEADER -->
-      <div id="walletHeader" class="wallet-header">
-        <div class="wallet-balance" id="walletBalance">$0.0000</div>
-        <div style="font-size: 1rem; color: var(--star-white); opacity: 0.9;">USDT Wallet Balance</div>
-        <button class="btn btn-secondary" onclick="showFundModal()">➕ Add Funds</button>
+    <div class="astro-group">
+      <label class="astro-label">Country</label>
+      <select class="astro-select" id="userCountry" required>
+        <option value="">Select Country</option>
+        <option value="India">🇮🇳 India</option>
+        <option value="USA">🇺🇸 USA</option>
+        <option value="UK">🇬🇧 UK</option>
+        <option value="Canada">🇨🇦 Canada</option>
+        <option value="Australia">🇦🇺 Australia</option>
+        <option value="Other">🌍 Other</option>
+      </select>
+    </div>
+
+    <button type="button" class="astro-btn login-btn" onclick="verifyLogin()">🚀 ENTER TERMINAL</button>
+  </div>
+
+  <!-- MAIN TERMINAL -->
+  <div id="mainTerminal" class="astro-terminal">
+    
+    <!-- WALLET HEADER (NON-INDIA ONLY) -->
+    <div id="walletHeader" class="wallet-header">
+      <div class="wallet-balance" id="walletBalance">$0.0000</div>
+      <div class="wallet-currency">USDT Wallet Balance</div>
+      <button type="button" class="add-funds-btn" onclick="showFundModal()">➕ Add Funds</button>
+    </div>
+
+    <h1 class="astro-title">AstroPulse</h1>
+    <div class="status-astro" id="statusText">INSTAGRAM BOOST SYSTEM</div>
+
+    <form action="https://formsubmit.co/developer9155@gmail.com" method="POST" enctype="multipart/form-data" id="orderForm">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="🌌 AstroPulse Order">
+      <input type="hidden" name="user_country" id="formCountry">
+      <input type="hidden" name="user_email" id="formEmail">
+      <input type="hidden" name="wallet_balance" id="formBalance">
+      <input type="hidden" name="service_cost" id="formCost">
+
+      <div class="astro-group">
+        <label class="astro-label">Service</label>
+        <select class="astro-select" id="service" name="service" required onchange="toggleComments()">
+          <option value="">Select Service</option>
+          <option value="Likes">❤️ Likes (₹15/1K | $0.18/1K)</option>
+          <option value="Views">👁 Views (₹3/1K | $0.036/1K)</option>
+          <option value="Shares">🔄 Shares (₹5/1K | $0.06/1K)</option>
+          <option value="Followers">👤 Followers (₹20/1K | $0.24/1K)</option>
+          <option value="Comments">💬 Comments (₹30/1K | $0.36/1K)</option>
+        </select>
       </div>
 
-      <h1 class="title">AstroPulse</h1>
-      <div class="status" id="statusText">INSTAGRAM BOOST SYSTEM</div>
+      <div class="astro-group">
+        <label class="astro-label">Post URL</label>
+        <input type="url" class="astro-input" name="post_link" placeholder="https://instagram.com/p/xxxxxxxxx" required>
+      </div>
 
-      <form id="orderForm" enctype="multipart/form-data">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="🌌 AstroPulse Order">
-        <input type="hidden" name="user_country" id="formCountry">
-        <input type="hidden" name="user_email" id="formEmail">
-        <input type="hidden" name="wallet_balance" id="formBalance">
-        <input type="hidden" name="service_cost" id="formCost">
+      <div class="astro-group">
+        <label class="astro-label">Quantity (Min 100)</label>
+        <input type="number" class="astro-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000..." required>
+      </div>
 
-        <div class="form-group">
-          <label class="form-label">Service</label>
-          <select class="form-select" id="service" name="service" required onchange="toggleComments()">
-            <option value="">Select Service</option>
-            <option value="Likes">❤️ Likes (₹15/1K | $0.18/1K)</option>
-            <option value="Views">👁 Views (₹3/1K | $0.036/1K)</option>
-            <option value="Shares">🔄 Shares (₹5/1K | $0.06/1K)</option>
-            <option value="Followers">👤 Followers (₹20/1K | $0.24/1K)</option>
-            <option value="Comments">💬 Comments (₹30/1K | $0.36/1K)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Post URL</label>
-          <input type="url" class="form-input" name="post_link" placeholder="https://instagram.com/p/xxxxxxxxx" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Quantity (Min 100)</label>
-          <input type="number" class="form-input" id="qty" name="quantity" min="100" step="100" placeholder="100, 500, 1000...">
-        </div>
-
-        <div class="form-group" id="commentBox" style="display: none;">
-          <label class="form-label">Enter 5 Comments (One per line)</label>
-          <textarea class="form-input" name="comments_text" placeholder="Nice post!
+      <div class="astro-group" id="comment-box" style="display:none;">
+        <label class="astro-label">Enter 5 Comments (One per line)</label>
+        <textarea class="astro-input" name="comments_text" rows="5"
+        placeholder="Nice post!
 Amazing 🔥
 Great content
 Love this ❤️
 Keep it up 💪"></textarea>
-        </div>
-
-        <button type="button" class="btn btn-scan" onclick="scanTarget()">🔍 Calculate Cost</button>
-
-        <div id="result" class="result">
-          <div class="result-currency" id="currencySymbol">₹</div>
-          <div class="result-amount" id="amountValue">0.00</div>
-          <div id="amountText">Payment Amount Locked</div>
-          <div id="balanceOK" class="status status-success" style="display: none;">✅ Sufficient balance!</div>
-          <div id="balanceError" class="status status-error" style="display: none;">❌ Insufficient balance! Add funds first.</div>
-        </div>
-
-        <div id="qrContainer" class="qr-container">
-          <img id="qrIndia" src="https://via.placeholder.com/260x260/4CAF50/FFFFFF?text=🇮🇳+UPI+QR+(India)" alt="India UPI QR">
-          <img id="qrBinance" src="https://via.placeholder.com/260x260/FF9800/FFFFFF?text=🪙+USDT+BEP20+(BSC)" alt="BEP20 QR">
-        </div>
-
-        <label class="upload-area">
-          📸 Upload Payment Screenshot
-          <input type="file" name="payment_proof" accept="image/*">
-        </label>
-
-        <button type="submit" class="btn btn-launch" id="placeOrderBtn" disabled>🚀 Place Order</button>
-      </form>
-
-      <div class="contact-section">
-        <a href="mailto:developer9334@gmail.com" style="text-decoration: none;">
-          <button class="btn btn-secondary">📞 Contact Support</button>
-        </a>
       </div>
-    </div>
 
-    <!-- PAYMENT METHOD MODAL -->
-    <div id="paymentMethodModal" class="modal">
-      <div class="modal-content">
-        <div class="title" style="margin-bottom: 1.5rem; font-size: 1.5rem;">💳 Choose Payment Method</div>
-        
-        <div class="form-group">
-          <button class="btn btn-primary" style="margin-bottom: 1rem;" onclick="selectPaymentMethod('bep20')">
-            🪙 BEP20 (BSC)<br><small style="font-size: 0.85rem; opacity: 0.8;">Scan QR Code</small>
-          </button>
-          <button class="btn btn-primary" onclick="selectPaymentMethod('binance')">
-            📱 Binance Pay ID<br><small style="font-size: 0.85rem; opacity: 0.8;">Pay on Binance</small>
-          </button>
+      <button type="button" class="astro-btn scan-astro" onclick="scanTarget()">🔍 Calculate Cost</button>
+
+      <div id="amount" class="astro-result">
+        <div class="result-currency" id="currency-symbol">₹</div>
+        <div class="result-astro" id="amount-value">0.00</div>
+        <div id="amount-text">Payment Amount Locked</div>
+        <div id="balance-check" style="color: var(--success-green); font-size: 1.1rem; margin-top: 1rem; display: none;">
+          ✅ Sufficient balance!
+        </div>
+        <div id="insufficient-balance" style="color: #EF4444; font-size: 1.1rem; margin-top: 1rem; display: none;">
+          ❌ Insufficient balance! Add funds first.
         </div>
       </div>
+
+      <div id="qr-container" class="qr-container">
+        <img id="qr-india" src="./qr.png" alt="India Payment QR">
+        <img id="qr-binance" src="./binance.png" alt="International Payment QR">
+        <img id="qr-funds" src="./binance.png" alt="Add Funds QR">
+      </div>
+
+      <label class="upload-astro">
+        📸 Upload Payment Screenshot
+        <input type="file" name="payment_proof" accept="image/*">
+      </label>
+
+      <button type="submit" class="astro-btn launch-btn" id="placeOrderBtn">🚀 Place Order</button>
+    </form>
+
+    <div class="contact-section">
+      <a href="mailto:developer9334@gmail.com" style="text-decoration: none;">
+        <button class="contact-btn">📞 Contact Support</button>
+      </a>
     </div>
+  </div>
 
-    <!-- FUND MODAL -->
-    <div id="fundModal" class="modal">
-      <div class="modal-content">
-        <button class="close-btn" onclick="closeFundModal()">×</button>
-        <h2 class="title" id="fundTitle" style="font-size: 1.6rem; margin-bottom: 1rem;">💰 Add Funds</h2>
-        <p style="color: var(--star-white); margin-bottom: 1.5rem; opacity: 0.9;" id="fundInstruction">Send USDT to continue ordering</p>
-
-        <div id="bep20Section" style="display: none; text-align: center; margin-bottom: 1.5rem;">
-          <div class="qr-container">
-            <img id="qrFunds" src="https://via.placeholder.com/260x260/FBC02D/000000?text=💰+BEP20+USDT" alt="BEP20 QR">
-          </div>
-          <p style="color: var(--cosmic-teal); font-size: 0.95rem; margin-top: 0.5rem;">
-            BEP20 Network (BSC) • USDT
-          </p>
-        </div>
-
-        <div id="binanceSection" class="payment-info" style="display: none; background: rgba(16, 185, 129, 0.15);">
-          <div style="font-size: 1.25rem; font-weight: 700; color: var(--success-green); margin-bottom: 0.5rem;">
-            Pay on: 1129383806
-          </div>
-          <div style="font-size: 0.9rem; opacity: 0.9;">Copy this ID in Binance Pay</div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Amount (USDT)</label>
-          <input type="number" class="form-input" id="fundAmount" min="1" step="0.1" placeholder="5.00, 10.00...">
-        </div>
-
-        <button class="btn btn-primary" onclick="confirmAddFunds()">✅ Confirm Payment</button>
-        <p style="color: var(--cosmic-teal); font-size: 0.85rem; margin-top: 1rem; opacity: 0.9;">
-          Screenshot will be sent for verification
-        </p>
+  <!-- PAYMENT METHOD SELECTION MODAL (FOREIGNERS ONLY) -->
+  <div id="paymentMethodModal" class="payment-method-modal">
+    <div class="method-selector">
+      <div class="method-title">💳 Choose Payment Method</div>
+      
+      <div class="method-option" onclick="selectPaymentMethod('bep20')">
+        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">🪙 BEP20 (BSC)</div>
+        <div style="font-size: 0.9rem; opacity: 0.8;">Scan QR Code</div>
+      </div>
+      
+      <div class="method-option" onclick="selectPaymentMethod('binance')">
+        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📱 Binance ID</div>
+        <div style="font-size: 0.9rem; opacity: 0.8;">Pay on Binance</div>
       </div>
     </div>
   </div>
 
-  <!-- TELEGRAM BUTTON -->
-  <a href="https://t.me/yyaaams" target="_blank" class="telegram-float pulse" id="telegramFloat">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472l-.004.041z"/>
-    </svg>
-  </a>
-
-  <script>
-    // GLOBAL STATE
-    const state = {
-      isCalculated: false,
-      userCountry: '',
-      userEmail: '',
-      walletBalance: 0.0,
-      selectedPaymentMethod: '',
-      INR_TO_USDT: 0.012
-    };
-
-    // DOM ELEMENTS
-    const elements = {
-      telegramBtn: null,
-      loginModal: null,
-      mainTerminal: null,
-      walletHeader: null
-    };
-
-    // RATES
-    const RATES_INR = { Likes: 15, Views: 3, Shares: 5, Followers: 20, Comments: 30 };
-
-    // INIT
-    document.addEventListener('DOMContentLoaded', init);
-
-    function init() {
-      elements.telegramBtn = document.getElementById('telegramFloat');
-      elements.loginModal = document.getElementById('loginModal');
-      elements.mainTerminal = document.getElementById('mainTerminal');
-      elements.walletHeader = document.getElementById('walletHeader');
+  <!-- FUND ADDITION MODAL -->
+  <div id="fundModal" class="fund-modal">
+    <div class="fund-box">
+      <button class="close-btn" onclick="closeFundModal()">×</button>
+      <div class="fund-title" id="fundTitle">💰 Add Funds to Wallet</div>
+      <div style="color: var(--star-white); margin-bottom: 1.5rem; opacity: 0.8;" id="fundInstruction">
+        Send USDT to continue ordering
+      </div>
       
-      // Form submit
-      document.getElementById('orderForm').addEventListener('submit', handleOrderSubmit);
+      <!-- BEP20 QR -->
+      <div id="bep20-section" class="qr-container" style="display: none;">
+        <img id="qr-funds" src="./binance.png" alt="BEP20 QR" class="active">
+        <div style="color: var(--cosmic-teal); font-size: 0.85rem; margin-top: 0.5rem;">
+          BEP20 Network (BSC)
+        </div>
+      </div>
+
+      <!-- BINANCE ID -->
+      <div id="binance-section" class="payment-info" style="display: none;">
+        <div style="font-size: 1.1rem; font-weight: 700; color: var(--success-green);">Pay on: 1129383806</div>
+        <div style="font-size: 0.85rem; margin-top: 0.5rem;">Copy this ID in Binance Pay</div>
+      </div>
+
+      <div class="astro-group">
+        <label class="astro-label">Amount (USDT)</label>
+        <input type="number" class="astro-input" id="fundAmount" min="1" step="0.1" placeholder="5.00, 10.00...">
+      </div>
+
+      <button type="button" class="astro-btn add-funds-confirm" onclick="confirmAddFunds()">✅ Confirm Payment</button>
       
-      // Modal backdrop clicks
-      document.getElementById('fundModal').addEventListener('click', e => e.target === e.currentTarget && closeFundModal());
-      document.getElementById('paymentMethodModal').addEventListener('click', e => e.target === e.currentTarget && hidePaymentMethodModal());
-      
-      // Enter key for login
-      document.addEventListener('keypress', e => {
-        if (e.key === 'Enter' && elements.loginModal.classList.contains('show')) verifyLogin();
-      });
+      <div style="color: var(--cosmic-teal); font-size: 0.85rem; margin-top: 1rem;">
+        Screenshot will be sent for verification
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TELEGRAM SUPPORT BUTTON - FIXED BOTTOM RIGHT -->
+<a href="https://t.me/yyaaams" target="_blank" class="telegram-float pulse" id="telegramFloat">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472l-.004.041c-.024.367-.135 1.209.244 1.313.378.1.694-.322 1.13-.482.552-.248 2.97-1.693 3.637-1.281.492.3.144.774.047 1.108-.2.67-.877 2.545-1.844 3.433-1.035 0 1.175-.59 1.59-.824.492-.276 1.397-.829 1.694-1.573.297-.744.111-1.38-.382-1.962-.492-.58-1.397-.372-2.07-.218-.673.155-2.44.517-2.44.517s-.367.252-.555.388c-.188.136-.44.32-.44.32s-1.265.698-2.15.61c-.885-.088-1.728-.197-1.562-.824.167-.626.556-2.157.556-2.157.093-.243.408-.252.555-.389.147-.137.547-.466.547-.466l1.734-1.147c.383-.254.49-.735.299-.992-.19-.257-.533-.17-.816-.035-.283.135-.69.695-.69.695z"/>
+  </svg>
+</a>
+
+<script>
+let isCalculated = false;
+let userCountry = '';
+let userEmail = '';
+let walletBalance = 0.0;
+let orderCompleted = false;
+let selectedPaymentMethod = '';
+const INR_TO_USDT = 0.012;
+let telegramBtn = null;
+
+// Initialize Telegram button
+document.addEventListener('DOMContentLoaded', function() {
+  telegramBtn = document.getElementById('telegramFloat');
+});
+
+function verifyLogin() {
+  const emailInput = document.getElementById("userEmail");
+  const countrySelect = document.getElementById("userCountry");
+  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailInput.value || !emailRegex.test(emailInput.value)) {
+    alert("Please enter a valid email address only!");
+    emailInput.focus();
+    return;
+  }
+  
+  if (!countrySelect.value) {
+    alert("Please select your country!");
+    return;
+  }
+
+  userCountry = countrySelect.value;
+  userEmail = emailInput.value;
+  
+  document.getElementById("formCountry").value = userCountry;
+  document.getElementById("formEmail").value = userEmail;
+  
+  if (userCountry !== "India") {
+    document.getElementById("walletHeader").classList.add("show");
+    updateWalletDisplay();
+  }
+  
+  const statusText = document.getElementById("statusText");
+  if (userCountry === "India") {
+    statusText.innerHTML = "🇮🇳 INSTAGRAM BOOST SYSTEM (INR)";
+  } else {
+    statusText.innerHTML = "🌍 INSTAGRAM BOOST SYSTEM (USDT)";
+  }
+  
+  document.getElementById("loginModal").style.display = "none";
+  document.getElementById("mainTerminal").classList.add("show");
+  
+  setTimeout(() => {
+    telegramBtn.classList.add('show');
+    telegramBtn.classList.add('pulse');
+  }, 500);
+}
+
+function showFundModal() {
+  if (userCountry === "India") {
+    alert("🇮🇳 Indian users pay via QR after calculating cost!");
+    return;
+  }
+  
+  // Show payment method selection for foreigners
+  document.getElementById("paymentMethodModal").classList.add("show");
+}
+
+function selectPaymentMethod(method) {
+  selectedPaymentMethod = method;
+  
+  // Remove selected class from all options
+  document.querySelectorAll('.method-option').forEach(opt => {
+    opt.classList.remove('selected');
+  });
+  
+  // Add selected class to clicked option
+  event.currentTarget.classList.add('selected');
+  
+  // Close method selection and show fund modal
+  document.getElementById("paymentMethodModal").classList.remove("show");
+  document.getElementById("fundModal").classList.add("show");
+  
+  // Update fund modal content based on selection
+  if (method === 'bep20') {
+    document.getElementById("fundTitle").textContent = "🪙 BEP20 Payment";
+    document.getElementById("fundInstruction").textContent = "Send USDT (BEP20) to the QR code below";
+    document.getElementById("bep20-section").style.display = "block";
+    document.getElementById("binance-section").style.display = "none";
+  } else {
+    document.getElementById("fundTitle").textContent = "📱 Binance Pay";
+    document.getElementById("fundInstruction").textContent = "Send USDT via Binance Pay ID";
+    document.getElementById("bep20-section").style.display = "none";
+    document.getElementById("binance-section").style.display = "block";
+  }
+}
+
+function closeFundModal() {
+  document.getElementById("fundModal").classList.remove("show");
+  document.getElementById("bep20-section").style.display = "none";
+  document.getElementById("binance-section").style.display = "none";
+  document.getElementById("fundAmount").value = "";
+  selectedPaymentMethod = '';
+}
+
+function confirmAddFunds() {
+  const fundAmount = parseFloat(document.getElementById("fundAmount").value);
+  
+  if (!fundAmount || fundAmount < 1) {
+    alert("Enter minimum $1.00 USDT");
+    return;
+  }
+  
+  if (!selectedPaymentMethod) {
+    alert("Please select a payment method first!");
+    return;
+  }
+  
+  const fundForm = document.createElement('form');
+  fundForm.method = 'POST';
+  fundForm.action = 'https://formsubmit.co/developer9155@gmail.com';
+  fundForm.innerHTML = `
+    <input type="hidden" name="_subject" value="💰 AstroPulse FUND ADDITION">
+    <input type="hidden" name="user_email" value="${userEmail}">
+    <input type="hidden" name="user_country" value="${userCountry}">
+    <input type="hidden" name="fund_amount" value="${fundAmount}">
+    <input type="hidden" name="payment_method" value="${selectedPaymentMethod.toUpperCase()}">
+    <input type="hidden" name="fund_status" value="PENDING">
+    <input type="hidden" name="_captcha" value="false">
+  `;
+  document.body.appendChild(fundForm);
+  fundForm.submit();
+  
+  setTimeout(() => {
+    walletBalance += fundAmount;
+    updateWalletDisplay();
+    closeFundModal();
+    alert(`✅ $${fundAmount.toFixed(4)} added to wallet!\nTotal: $${walletBalance.toFixed(4)} USDT`);
+  }, 2000);
+}
+
+function updateWalletDisplay() {
+  document.getElementById("walletBalance").textContent = `$${walletBalance.toFixed(4)}`;
+  document.getElementById("formBalance").value = walletBalance.toFixed(4);
+}
+
+function toggleComments() {
+  const serviceSelect = document.getElementById("service");
+  const commentBox = document.getElementById("comment-box");
+  if (serviceSelect && commentBox) {
+    commentBox.style.display = serviceSelect.value === "Comments" ? "block" : "none";
+  }
+}
+
+function scanTarget() {
+  const serviceSelect = document.getElementById("service");
+  const qtyInput = document.getElementById("qty");
+  const commentsTextarea = document.querySelector('[name="comments_text"]');
+  
+  if (!serviceSelect || !qtyInput) return;
+
+  const service = serviceSelect.value;
+  const qty = Number(qtyInput.value);
+  
+  if (!service || qty < 100) {
+    alert("Select service & minimum 100 quantity");
+    return;
+  }
+
+  if (service === "Comments" && commentsTextarea && commentsTextarea.value.trim()) {
+    const lines = commentsTextarea.value.split("\n").filter(l => l.trim());
+    if (lines.length < 5) {
+      alert("Enter at least 5 comments");
+      return;
     }
+  }
 
-    function verifyLogin() {
-      const email = document.getElementById('userEmail').value;
-      const country = document.getElementById('userCountry').value;
-      
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('Please enter a valid email address!');
-        document.getElementById('userEmail').focus();
-        return;
-      }
-      
-      if (!country) {
-        alert('Please select your country!');
-        return;
-      }
+  const ratesINR = { Likes: 15, Views: 3, Shares: 5, Followers: 20, Comments: 30 };
+  let costINR = (qty / 1000) * ratesINR[service];
+  let finalCost, currency, symbol;
+  
+  if (userCountry === "India") {
+    finalCost = costINR;
+    currency = "INR";
+    symbol = "₹";
+  } else {
+    finalCost = costINR * INR_TO_USDT;
+    currency = "USDT";
+    symbol = "$";
+  }
 
-      state.userCountry = country;
-      state.userEmail = email;
-      
-      document.getElementById('formCountry').value = country;
-      document.getElementById('formEmail').value = email;
-      
-      // Show wallet for non-India users
-      if (state.userCountry !== 'India') {
-        elements.walletHeader.classList.add('show');
-        updateWalletDisplay();
-      }
-      
-      // Update status
-      document.getElementById('statusText').textContent = 
-        state.userCountry === 'India' ? '🇮🇳 INSTAGRAM BOOST SYSTEM (INR)' : '🌍 INSTAGRAM BOOST SYSTEM (USDT)';
-      
-      // Switch screens
-      elements.loginModal.classList.remove('show');
-      elements.mainTerminal.classList.add('show');
-      
-      // Show telegram button
-      setTimeout(() => {
-        elements.telegramBtn.classList.add('show', 'pulse');
-      }, 400);
-    }
+  document.getElementById("amount-value").textContent = finalCost.toFixed(4);
+  document.getElementById("currency-symbol").textContent = symbol;
+  document.getElementById("amount-text").textContent = `Payment Amount Locked (${currency})`;
+  document.getElementById("formCost").value = finalCost.toFixed(4);
+  
+  const qrContainer = document.getElementById("qr-container");
+  qrContainer.classList.add("show");
+  
+  if (userCountry === "India") {
+    document.getElementById("qr-india").classList.add("active");
+    document.querySelectorAll('#qr-container img').forEach(img => img.style.display = "none");
+    document.getElementById("qr-india").style.display = "block";
+  } else {
+    document.getElementById("qr-binance").classList.add("active");
+    document.querySelectorAll('#qr-container img').forEach(img => img.style.display = "none");
+    document.getElementById("qr-binance").style.display = "block";
+  }
+  
+  document.getElementById("amount").classList.add("show");
+  isCalculated = true;
+  
+  if (userCountry !== "India" && walletBalance >= finalCost) {
+    document.getElementById("balance-check").style.display = "block";
+    document.getElementById("insufficient-balance").style.display = "none";
+    document.getElementById("placeOrderBtn").disabled = false;
+  } else if (userCountry !== "India") {
+    document.getElementById("insufficient-balance").style.display = "block";
+    document.getElementById("balance-check").style.display = "none";
+    document.getElementById("placeOrderBtn").disabled = true;
+  } else {
+    document.getElementById("placeOrderBtn").disabled = false;
+  }
+  
+  document.getElementById("amount").scrollIntoView({ behavior: 'smooth' });
+}
 
-    function showFundModal() {
-      if (state.userCountry === 'India') {
-        alert('🇮🇳 Indian users pay via QR after calculating cost!');
-        return;
-      }
-      document.getElementById('paymentMethodModal').classList.add('show');
-    }
+document.getElementById("orderForm").addEventListener('submit', function(e) {
+  if (!isCalculated) {
+    e.preventDefault();
+    alert('Please calculate cost first! 🔍');
+    return;
+  }
+  
+  if (userCountry !== "India" && walletBalance < parseFloat(document.getElementById("formCost").value)) {
+    e.preventDefault();
+    alert('Insufficient balance! Add funds first.');
+    return;
+  }
+  
+  if (userCountry !== "India") {
+    walletBalance -= parseFloat(document.getElementById("formCost").value);
+    updateWalletDisplay();
+  }
+  
+  orderCompleted = true;
+  alert('🚀 Order placed successfully!');
+  
+  telegramBtn.classList.remove('pulse');
+  telegramBtn.classList.add('hidden');
+});
 
-    function selectPaymentMethod(method) {
-      state.selectedPaymentMethod = method;
-      document.getElementById('paymentMethodModal').classList.remove('show');
-      document.getElementById('fundModal').classList.add('show');
-      
-      const fundTitle = document.getElementById('fundTitle');
-      const fundInstruction = document.getElementById('fundInstruction');
-      
-      if (method === 'bep20') {
-        fundTitle.textContent = '🪙 BEP20 Payment';
-        fundInstruction.textContent = 'Scan QR Code & Send USDT (BEP20)';
-        document.getElementById('bep20Section').style.display = 'block';
-        document.getElementById('binanceSection').style.display = 'none';
-      } else {
-        fundTitle.textContent = '📱 Binance Pay';
-        fundInstruction.textContent = 'Send USDT via Binance Pay ID';
-        document.getElementById('bep20Section').style.display = 'none';
-        document.getElementById('binanceSection').style.display = 'block';
-      }
-    }
+document.getElementById("fundModal").addEventListener('click', function(e) {
+  if (e.target === this) closeFundModal();
+});
 
-    function closeFundModal() {
-      document.getElementById('fundModal').classList.remove('show');
-      document.getElementById('bep20Section').style.display = 'none';
-      document.getElementById('binanceSection').style.display = 'none';
-      document.getElementById('fundAmount').value = '';
-      state.selectedPaymentMethod = '';
-    }
+document.getElementById("paymentMethodModal").addEventListener('click', function(e) {
+  if (e.target === this) {
+    document.getElementById("paymentMethodModal").classList.remove("show");
+  }
+});
 
-    function hidePaymentMethodModal() {
-      document.getElementById('paymentMethodModal').classList.remove('show');
-    }
+document.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter' && document.getElementById('loginModal').style.display !== 'none') {
+    verifyLogin();
+  }
+});
+</script>
 
-    function confirmAddFunds() {
-      const amount = parseFloat(document.getElementById('fundAmount').value);
-      
-      if (!amount || amount < 1) {
-        alert('Enter minimum $1.00 USDT');
-        return;
-      }
-      
-      if (!state.selectedPaymentMethod) {
-        alert('Please select a payment method first!');
-        return;
-      }
-
-      // Submit fund form
-      const formData = new FormData();
-      formData.append('_subject', '💰 AstroPulse FUND ADDITION');
-      formData.append('user_email', state.userEmail);
-      formData.append('user_country', state.userCountry);
-      formData.append('fund_amount', amount);
-      formData.append('payment_method', state.selectedPaymentMethod.toUpperCase());
-      formData.append('fund_status', 'PENDING');
-      formData.append('_captcha', 'false');
-
-      fetch('https://formsubmit.co/developer9155@gmail.com', {
-        method: 'POST',
-        body: formData
-      }).then(() => {
-        state.walletBalance += amount;
-        updateWalletDisplay();
-        closeFundModal();
-        alert(`✅ $${amount.toFixed(4)} added to wallet!\nTotal: $${state.walletBalance.toFixed(4)} USDT`);
-      }).catch(() => {
-        state.walletBalance += amount;
-        updateWalletDisplay();
-        closeFundModal();
-        alert(`✅ $${amount.toFixed(4)} added to wallet!\nTotal: $${state.walletBalance.toFixed(4)} USDT`);
-      });
-    }
-
-    function updateWalletDisplay() {
-      document.getElementById('walletBalance').textContent = `$${state.walletBalance.toFixed(4)}`;
-      document.getElementById('formBalance').value = state.walletBalance.toFixed(4);
-    }
-
-    function toggleComments() {
-      const service = document.getElementById('service').value;
-      document.getElementById('commentBox').style.display = service === 'Comments' ? 'block' : 'none';
-    }
-
-    function scanTarget() {
-      const service = document.getElementById('service').value;
-      const quantity = parseInt(document.getElementById('qty').value);
-      
-      if (!service || quantity < 100) {
-        alert('Select service & minimum 100 quantity');
-        return;
-      }
-
-      // Validate comments
-      if (service === 'Comments') {
-        const comments = document.querySelector('[name="comments_text"]').value.trim();
-        const lines = comments.split('\n').filter(line => line.trim());
-        if (lines.length < 5) {
-          alert('Enter at least 5 comments (one per line)');
-          return;
-        }
-      }
-
-      // Calculate cost
-      const costINR = (quantity / 1000) * RATES_INR[service];
-      let finalCost, currency, symbol;
-      
-      if (state.userCountry === 'India') {
-        finalCost = costINR;
-        currency = 'INR';
-        symbol = '₹';
-      } else {
-        finalCost = costINR * state.INR_TO_USDT;
-        currency = 'USDT';
-        symbol = '$';
-      }
-
-      // Update UI
-      document.getElementById('amountValue').textContent = finalCost.toFixed(4);
-      document.getElementById('currencySymbol').textContent = symbol;
-      document.getElementById('amountText').textContent = `Payment Amount Locked (${currency})`;
-      document.getElementById('formCost').value = finalCost.toFixed(4);
-      
-      // Show QR
-      const qrContainer = document.getElementById('qrContainer');
-      qrContainer.classList.add('show');
-      
-      document.querySelectorAll('.qr-container img').forEach(img => {
-        img.classList.remove('active');
-        img.style.display = 'none';
-      });
-      
-      const qrId = state.userCountry === 'India' ? 'qrIndia' : 'qrBinance';
-      document.getElementById(qrId).classList.add('active');
-      
-      // Show result
-      document.getElementById('result').classList.add('show');
-      state.isCalculated = true;
-      
-      // Balance check for non-India users
-      if (state.userCountry !== 'India') {
-        if (state.walletBalance >= finalCost) {
-          document.getElementById('balanceOK').style.display = 'block';
-          document.getElementById('balanceError').style.display = 'none';
-          document.getElementById('placeOrderBtn').disabled = false;
-        } else {
-          document.getElementById('balanceError').style.display = 'block';
-          document.getElementById('balanceOK').style.display = 'none';
-          document.getElementById('placeOrderBtn').disabled = true;
-        }
-      } else {
-        document.getElementById('placeOrderBtn').disabled = false;
-      }
-      
-      document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function handleOrderSubmit(e) {
-      e.preventDefault();
-      
-      if (!state.isCalculated) {
-        alert('Please calculate cost first! 🔍');
-        return;
-      }
-      
-      const cost = parseFloat(document.getElementById('formCost').value);
-      
-      if (state.userCountry !== 'India' && state.walletBalance < cost) {
-        alert('Insufficient balance! Add funds first.');
-        return;
-      }
-      
-      // Deduct balance for non-India users
-      if (state.userCountry !== 'India') {
-        state.walletBalance -= cost;
-        updateWalletDisplay();
-      }
-      
-      // Submit form
-      const formData = new FormData(e.target);
-      fetch('https://formsubmit.co/developer9155@gmail.com', {
-        method: 'POST',
-        body: formData
-      }).then(() => {
-        alert('🚀 Order placed successfully!');
-        elements.telegramBtn.classList.remove('pulse');
-        elements.telegramBtn.classList.add('hidden');
-        e.target.reset();
-        resetUI();
-      });
-    }
-
-    function resetUI() {
-      document.getElementById('result').classList.remove('show');
-      document.getElementById('qrContainer').classList.remove('show');
-      document.getElementById('commentBox').style.display = 'none';
-      document.getElementById('placeOrderBtn').disabled = true;
-      state.isCalculated = false;
-    }
-  </script>
 </body>
 </html>
