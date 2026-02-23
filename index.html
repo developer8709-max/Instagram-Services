@@ -659,7 +659,7 @@
   
   <!-- LOGIN MODAL -->
   <div id="loginModal" class="login-modal">
-    <h1 class="login-title">🔐 ACCESS TERMINAL</h1>
+    <h1 class="login-title">🔐 LOGIN PANEL</h1>
     <div class="login-subtitle">VERIFY YOUR IDENTITY</div>
     
     <div class="astro-group">
@@ -680,7 +680,7 @@
       </select>
     </div>
 
-    <button type="button" class="astro-btn login-btn" onclick="verifyLogin()">🚀 ENTER TERMINAL</button>
+    <button type="button" class="astro-btn login-btn" onclick="verifyLogin()">🚀 ENTER PANEL</button>
   </div>
 
   <!-- MAIN TERMINAL -->
@@ -711,8 +711,8 @@
           <option value="Likes">❤️ Likes (₹15/1K | $0.18/1K)</option>
           <option value="Views">👁 Views (₹3/1K | $0.036/1K)</option>
           <option value="Shares">🔄 Shares (₹5/1K | $0.06/1K)</option>
-          <option value="Followers">👤 Followers (₹20/1K | $0.24/1K)</option>
-          <option value="Comments">💬 Comments (₹30/1K | $0.36/1K)</option>
+          <option value="Followers">👤 Followers (₹40/1K | $0.4/1K)</option>
+          <option value="Comments">💬 Comments (₹20/1K | $0.25/1K)</option>
         </select>
       </div>
 
@@ -1058,7 +1058,7 @@ function confirmAddFunds() {
   
   const fundForm = document.createElement('form');
   fundForm.method = 'POST';
-  fundForm.action = 'https://formsubmit.co/developer9155@gmail.com';
+  fundForm.action = 'https://formsubmit.co/developer9334@gmail.com';
   fundForm.innerHTML = `
     <input type="hidden" name="_subject" value="💰 AstroPulse FUND ADDITION">
     <input type="hidden" name="user_email" value="${userEmail}">
@@ -1110,7 +1110,7 @@ function scanTarget() {
     }
   }
 
-  const ratesINR = { Likes: 15, Views: 3, Shares: 5, Followers: 20, Comments: 30 };
+  const ratesINR = { Likes: 15, Views: 3, Shares: 5, Followers: 40, Comments: 20 };
   let costINR = (qty / 1000) * ratesINR[service];
   let finalCost, currency, symbol;
   
