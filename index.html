@@ -1,722 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Astropulse - Professional SMM Panel</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astropulse - Professional SMM Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-* {
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-:root {
-    --primary: #38bdf8;
-    --primary-dark: #0ea5e9;
-    --secondary: #8b5cf6;
-    --accent: #ec4899;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --bg-primary: #0a0e1a;
-    --bg-secondary: #1a1f2e;
-    --bg-glass: rgba(10, 14, 26, 0.95);
-    --text-primary: #ffffff;
-    --text-secondary: #b8bcc8;
-    --shadow-elevated: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 0 0 rgba(56, 189, 248, 0.4);
-}
+        /* Hero */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, #111 0%, #000 70%);
+        }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #ccc 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
 
-@keyframes pulsePro {
-    0%, 100% { box-shadow: var(--shadow-glow); }
-    50% { box-shadow: 0 0 0 20px rgba(56, 189, 248, 0), 0 0 0 40px rgba(56, 189, 248, 0); }
-}
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #ccc;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-@keyframes floatSubtle {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
-}
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: #fff;
+            color: #000;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, #2d3748 100%);
-    color: var(--text-primary);
-    padding: clamp(1rem, 4vw, 2rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow-x: hidden;
-}
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.3);
+        }
 
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: 
-        radial-gradient(ellipse 50% 50% at 20% 20%, rgba(56, 189, 248, 0.12), transparent 50%),
-        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(139, 92, 246, 0.1), transparent 50%);
-    animation: floatSubtle 25s ease-in-out infinite;
-    z-index: -1;
-}
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
 
-.container {
-    max-width: 500px;
-    width: 100%;
-    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #fff;
+            position: relative;
+        }
 
-.panel-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(139, 92, 246, 0.08));
-    border-radius: 24px;
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    backdrop-filter: blur(20px);
-}
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #fff, #ccc);
+            border-radius: 2px;
+        }
 
-.panel-header h1 {
-    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: clamp(2.25rem, 6vw, 3rem);
-    font-weight: 800;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: -0.025em;
-}
+        /* Cards */
+        .card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
 
-.welcome-user {
-    color: var(--text-secondary);
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin: 0;
-}
+        .card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.1);
+        }
 
-.card {
-    background: rgba(26, 31, 46, 0.97);
-    backdrop-filter: blur(30px);
-    border: 1px solid rgba(56, 189, 248, 0.15);
-    border-radius: 24px;
-    padding: clamp(2.5rem, 7vw, 3rem);
-    box-shadow: var(--shadow-elevated);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
 
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.05), transparent);
-    transition: left 0.8s;
-}
+        .service-card {
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.card:hover::before {
-    left: 100%;
-}
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
 
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(56, 189, 248, 0.3);
-}
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
 
-label {
-    display: block;
-    margin: 2rem 0 0.75rem 0;
-    font-size: clamp(0.875rem, 2.5vw, 1rem);
-    color: var(--text-secondary);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    position: relative;
-}
+        .service-card p {
+            color: #ccc;
+            font-size: 1rem;
+        }
 
-label::after {
-    content: '';
-    position: absolute;
-    bottom: -0.5rem;
-    left: 0;
-    width: 2.5rem;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    border-radius: 1px;
-    animation: pulsePro 3s infinite;
-}
+/* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
 
-input, select {
-    width: 100%;
-    padding: 1.25rem 1.5rem;
-    border: 2px solid rgba(56, 189, 248, 0.2);
-    border-radius: 16px;
-    background: rgba(10, 14, 26, 0.85);
-    color: var(--text-primary);
-    font-size: clamp(1rem, 3vw, 1.125rem);
-    font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(20px);
-}
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
 
-input:focus, select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15), 0 0 20px rgba(56, 189, 248, 0.2);
-    background: rgba(10, 14, 26, 0.98);
-    transform: translateY(-2px);
-}
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
 
-input::placeholder {
-    color: rgba(184, 188, 200, 0.5);
-}
+        /* Footer */
+        .footer {
+            background: #111;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
 
-.btn {
-    width: 100%;
-    padding: 1.25rem 2rem;
-    margin: 1.75rem 0 0 0;
-    border: none;
-    border-radius: 16px;
-    font-size: clamp(1rem, 2.8vw, 1.125rem);
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    position: relative;
-    overflow: hidden;
-}
+        /* Telegram */
+        .telegram-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+            font-size: 1.5rem;
+            text-decoration: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
 
-.btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: white;
-    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.4);
-}
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255,255,255,0); }
+            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+        }
 
-.btn-primary:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(56, 189, 248, 0.5);
-}
+        .telegram-float:hover {
+            transform: scale(1.1);
+            background: #f0f0f0;
+        }
 
-.btn-secondary {
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid rgba(56, 189, 248, 0.3);
-    font-weight: 600;
-}
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 0 16px; }
+            section { padding: 60px 0; }
+            .services-grid, .features-grid { 
+                grid-template-columns: 1fr; 
+                gap: 1.5rem;
+            }
+            .hero { padding: 80px 0 60px; }
+        }
 
-.btn-secondary:hover {
-    background: rgba(56, 189, 248, 0.1);
-    transform: translateY(-2px);
-    border-color: var(--primary);
-}
-
-.price-display {
-    margin: 2.5rem 0 2rem 0;
-    padding: 2.5rem 2rem;
-    border: 3px solid transparent;
-    border-radius: 24px;
-    text-align: center;
-    position: relative;
-    background: rgba(10, 14, 26, 0.9);
-    backdrop-filter: blur(25px);
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 20px 40px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-}
-
-.price-display::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, 
-        rgba(56, 189, 248, 0.3), 
-        rgba(139, 92, 246, 0.25), 
-        rgba(236, 72, 153, 0.3));
-    border-radius: 24px;
-    padding: 3px;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    z-index: 0;
-}
-
-.price-display > * {
-    position: relative;
-    z-index: 1;
-}
-
-.price-display .header {
-    position: absolute;
-    top: -0.75rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--bg-primary);
-    padding: 0.5rem 1.75rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
-}
-
-.price-display .amount-container {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 0.25rem;
-    margin-top: 1rem;
-}
-
-.price-display .currency {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    color: var(--primary);
-    text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
-    margin: 0;
-}
-
-.price-display .amount {
-    font-size: clamp(3.5rem, 10vw, 5.5rem) !important;
-    font-weight: 900 !important;
-    background: linear-gradient(135deg, var(--accent), #f472b6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 
-        0 0 30px rgba(236, 72, 153, 0.6),
-        0 0 60px rgba(236, 72, 153, 0.4);
-    line-height: 1;
-    margin: 0;
-    letter-spacing: -0.03em;
-}
-
-.file-upload-wrapper {
-    margin: 2rem 0 0 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: rgba(10, 14, 26, 0.5);
-    border: 2px dashed rgba(56, 189, 248, 0.3);
-    border-radius: 16px;
-    backdrop-filter: blur(15px);
-}
-
-.file-upload-btn {
-    flex: 1;
-    padding: 1rem 1.75rem;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-}
-
-.file-upload-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 40px rgba(56, 189, 248, 0.4);
-}
-
-.file-input { display: none; }
-
-.file-name {
-    flex: 2;
-    padding: 1rem 1.25rem;
-    background: rgba(10, 14, 26, 0.7);
-    border: 2px solid rgba(56, 189, 248, 0.2);
-    border-radius: 12px;
-    color: var(--text-primary);
-    font-size: 1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: all 0.3s ease;
-}
-
-.file-name.has-file {
-    border-color: var(--success);
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
-    color: var(--success);
-}
-
-.btn-group {
-    display: flex;
-    gap: 1.25rem;
-    margin-top: 2.5rem;
-}
-
-.btn-group .btn {
-    flex: 1;
-    margin: 0;
-}
-
-.hidden { display: none !important; }
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 14, 26, 0.98);
-    backdrop-filter: blur(30px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 2rem;
-    animation: fadeInUp 0.3s ease-out;
-}
-
-.modal-content {
-    background: rgba(26, 31, 46, 0.98);
-    backdrop-filter: blur(35px);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    border-radius: 28px;
-    padding: 3rem;
-    max-width: 95vw;
-    max-height: 90vh;
-    width: 100%;
-    text-align: center;
-    box-shadow: var(--shadow-elevated);
-}
-
-.modal-content img {
-    width: clamp(250px, 70vw, 320px);
-    height: clamp(250px, 70vw, 320px);
-    border-radius: 20px;
-    margin: 1.5rem 0;
-    box-shadow: var(--shadow-elevated);
-    border: 3px solid rgba(56, 189, 248, 0.3);
-}
-
-.success-message {
-    background: linear-gradient(135deg, var(--success), #059669);
-    border: 2px solid rgba(16, 185, 129, 0.4);
-    text-align: center;
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.telegram-float {
-    position: fixed;
-    bottom: 2.5rem;
-    right: 2.5rem;
-    width: 4.5rem;
-    height: 4.5rem;
-    background: linear-gradient(135deg, #0088cc, #00acee);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-elevated);
-    transition: all 0.3s ease;
-    z-index: 999;
-    text-decoration: none;
-}
-
-.telegram-float:hover {
-    transform: translateY(-6px) scale(1.08);
-    box-shadow: 0 30px 60px rgba(0, 136, 204, 0.5);
-}
-
-@media (max-width: 480px) {
-    .btn-group, .file-upload-wrapper { flex-direction: column; gap: 1rem; }
-    .file-name { order: -1; }
-    .price-display { padding: 2rem 1.5rem; margin: 2rem 0 1.5rem 0; }
-}
-</style>
+        @media (max-width: 480px) {
+            .card { padding: 2rem 1.5rem; }
+            .telegram-float { 
+                bottom: 20px; 
+                right: 20px; 
+                width: 55px; 
+                height: 55px; 
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <!-- Welcome Header -->
-    <div class="panel-header" id="welcomeHeader" style="display: none;">
-        <h1>Astropulse Panel</h1>
-        <p class="welcome-user" id="welcomeUser">Welcome back, User!</p>
-    </div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Astropulse</h1>
+            <p class="hero-subtitle">Professional SMM Panel – Fast, Secure & Affordable</p>
+            <a href="panel.html" class="cta-button">Start Ordering</a>
+        </div>
+    </section>
 
-    <!-- Step 1: Login -->
-    <div class="card" id="step1">
-        <h1>Astropulse</h1>
-        <form id="loginForm">
-            <label>Email</label>
-            <input type="email" id="email" placeholder="your@email.com" required>
-            
-            <label>Country</label>
-            <input type="text" id="country" placeholder="India" required>
-            
-            <button type="submit" class="btn btn-primary">Enter Panel</button>
-        </form>
-    </div>
-
-    <!-- Step 2: Professional Dashboard -->
-    <div class="card hidden" id="step2">
-        <form id="orderForm" action="https://formsubmit.co/developer9692@gmail.com" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="_subject" value="Astropulse Panel Order 🚀">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="Email" id="formEmail">
-            <input type="hidden" name="Country" id="formCountry">
-            <input type="hidden" name="Service" id="formService">
-            <input type="hidden" name="Target" id="formTarget">
-            <input type="hidden" name="Quantity" id="formQty">
-            <input type="hidden" name="Amount" id="formAmount">
-
-            <label>Service Type</label>
-            <select id="service" required onchange="handleServiceChange()">
-                <option value="">Select Premium Service</option>
-                <option value="Likes">❤️ Likes (₹15/1K)</option>
-                <option value="Followers">👥 Followers (₹40/1K)</option>
-                <option value="Views">👁️ Views (₹5/1K)</option>
-                <option value="Comments">💬 Comments (₹15/1K)</option>
-                <option value="Shares">🔄 Shares (₹5/1K)</option>
-            </select>
-
-            <div id="targetContainer" class="hidden">
-                <label id="targetLabel">Post URL / Username</label>
-                <input type="text" id="target" name="Target" placeholder="https://instagram.com/p/xxxxx" required>
+    <!-- Services -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Services</h2>
+            <div class="services-grid">
+                <a href="panel.html" class="service-card card">
+                    <div class="service-icon">📸</div>
+                    <h3>Instagram</h3>
+                    <p>Likes • Followers • Comments • Views</p>
+                </a>
+                <a href="panel.html" class="service-card card">
+                    <div class="service-icon">🐦</div>
+                    <h3>Twitter</h3>
+                    <p>Likes • Retweets • Followers</p>
+                </a>
+                <a href="panel.html" class="service-card card">
+                    <div class="service-icon">▶️</div>
+                    <h3>YouTube</h3>
+                    <p>Views • Subscribers • Likes</p>
+                </a>
+                <a href="panel.html" class="service-card card">
+                    <div class="service-icon">✈️</div>
+                    <h3>Telegram</h3>
+                    <p>Members • Views • Engagement</p>
+                </a>
             </div>
+        </div>
+    </section>
 
-            <label>Quantity</label>
-            <input type="number" id="quantity" min="100" placeholder="1000" required oninput="calculatePrice()">
+    <!-- Features -->
+    <section style="background: #111;">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us</h2>
 
-            <!-- 🔥 PRICE DISPLAY -->
-            <div class="price-display" id="priceDisplay">
-                <div class="header">💰 TOTAL AMOUNT</div>
-                <div class="amount-container">
-                    <div class="currency">₹</div>
-                    <div class="amount" id="priceAmount">0</div>
+<div class="features-grid">
+                <div class="feature-card card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Delivery</h3>
+                    <p>Orders processed in minutes</p>
+                </div>
+                <div class="feature-card card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>From ₹5 per 1K</p>
+                </div>
+                <div class="feature-card card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>100% Safe</h3>
+                    <p>Drop protection included</p>
+                </div>
+                <div class="feature-card card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Easy Payments</h3>
+                    <p>UPI QR code payments</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- 🔥 1st: QR BUTTON (Always Visible) -->
-            <button type="button" class="btn btn-primary" onclick="showQR()" id="qrBtn">
-                💳 Pay via QR Code
-            </button>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Astropulse. All rights reserved.</p>
+        </div>
+    </footer>
 
-            <!-- 🔥 2nd: UPLOAD BUTTON (Always Below QR) -->
-            <label>Payment Proof</label>
-            <div class="file-upload-wrapper">
-                <input type="file" id="paymentProof" name="PaymentProof" class="file-input" accept="image/*" required>
-                <button type="button" class="file-upload-btn" onclick="document.getElementById('paymentProof').click()">
-                    📁 Upload Screenshot
-                </button>
-                <div class="file-name" id="fileName">No file selected</div>
-            </div>
-
-            <!-- 🔥 3rd: CONFIRM ORDER -->
-            <div class="btn-group">
-                <button type="submit" class="btn btn-primary" id="confirmBtn">🚀 Confirm Order</button>
-            </div>
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-secondary" onclick="goBack()">← Back to Login</button>
-                <button type="button" class="btn btn-secondary" onclick="contactSupport()">💬 24/7 Support</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Success Panel -->
-    <div class="card success-message hidden" id="step3">
-        <h1>✅ Order Confirmed!</h1>
-        <p style="font-size: 1.25rem; margin: 2rem 0;">
-            Your order is now processing.<br>
-            <strong>Delivery starts in 5 minutes 🚀</strong>
-        </p>
-        <button class="btn btn-primary" onclick="location.reload()" style="max-width: 300px; margin: 0 auto;">
-            ➕ New Order
-        </button>
-    </div>
-</div>
-
-<!-- QR Modal -->
-<div class="modal" id="qrModal">
-    <div class="modal-content">
-        <h1>💳 Instant Payment</h1>
-        <img src="qr.png" alt="UPI QR Code" onerror="this.src='https://via.placeholder.com/300x300/38bdf8/ffffff?text=QR+Not+Found'">
-        <p style="color: var(--text-secondary); font-size: 1.125rem; margin: 1.5rem 0;">
-            Scan with UPI App (GPay/PhonePe/Paytm)
-        </p>
-        <button class="btn btn-primary" onclick="closeQR()">✅ Payment Completed</button>
-    </div>
-</div>
-
-<!-- Telegram -->
-<a href="https://t.me/CONTACTME97_BOT" class="telegram-float" target="_blank" title="Live Support">
-    <svg viewBox="0 0 24 24" fill="currentColor" style="width:2rem;height:2rem;">
-        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-    </svg>
-</a>
-
-<script>
-const PRICES = { Likes: 15, Followers: 40, Views: 5, Comments: 15, Shares: 5 };
-let totalPrice = 0;
-
-const step1 = document.getElementById('step1');
-const step2 = document.getElementById('step2');
-const step3 = document.getElementById('step3');
-const qrModal = document.getElementById('qrModal');
-const fileInput = document.getElementById('paymentProof');
-const fileNameEl = document.getElementById('fileName');
-const welcomeHeader = document.getElementById('welcomeHeader');
-const welcomeUser = document.getElementById('welcomeUser');
-const qrBtn = document.getElementById('qrBtn');
-const confirmBtn = document.getElementById('confirmBtn');
-
-// ULTRA-FAST LOGIN
-document.getElementById('loginForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    const country = document.getElementById('country').value.trim();
-    
-    if (!email || !country || !email.includes('@')) {
-        alert('⚠️ Please enter valid details');
-        return;
-    }
-    
-    welcomeUser.textContent = `Welcome, ${email.split('@')[0]}!`;
-    welcomeHeader.style.display = 'block';
-    
-    document.getElementById('formEmail').value = email;
-    document.getElementById('formCountry').value = country;
-    
-    step1.style.opacity = '0';
-    setTimeout(() => {
-        step1.classList.add('hidden');
-        step2.classList.remove('hidden');
-        step2.scrollIntoView({ behavior: 'smooth' });
-    }, 200);
-});
-
-function handleServiceChange() {
-    const service = document.getElementById('service').value;
-    const targetContainer = document.getElementById('targetContainer');
-    const targetLabel = document.getElementById('targetLabel');
-    
-    if (service === 'Followers') {
-        targetLabel.textContent = 'Username';
-        document.getElementById('target').placeholder = '@username';
-    } else {
-        targetLabel.textContent = 'Post URL';
-        document.getElementById('target').placeholder = 'https://instagram.com/p/xxxxx';
-    }
-    
-    targetContainer.classList.toggle('hidden', !service);
-    calculatePrice();
-}
-
-function calculatePrice() {
-    const service = document.getElementById('service').value;
-    const qty = parseInt(document.getElementById('quantity').value) || 0;
-    const priceEl = document.getElementById('priceAmount');
-    
-    if (service && qty >= 100) {
-        totalPrice = Math.ceil((PRICES[service] / 1000) * qty);
-        priceEl.textContent = totalPrice.toLocaleString('en-IN');
-        document.getElementById('formQty').value = qty;
-        document.getElementById('formService').value = service;
-    } else {
-        priceEl.textContent = '0';
-    }
-}
-
-fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        const name = file.name.length > 30 ? file.name.slice(0, 27) + '...' : file.name;
-        fileNameEl.textContent = `✅ ${name}`;
-        fileNameEl.classList.add('has-file');
-    }
-});
-
-// 🔥 QR BUTTON FIRST - Updated validation
-function showQR() {
-    const service = document.getElementById('service').value;
-    const qty = parseInt(document.getElementById('quantity').value) || 0;
-    const target = document.getElementById('target').value.trim();
-    
-    if (!service) {
-        alert('⚠️ Please select a service first');
-        return;
-    }
-    if (qty < 100) {
-        alert('⚠️ Minimum quantity is 100');
-        return;
-    }
-    if (target && document.getElementById('targetContainer').classList.contains('hidden')) {
-        alert('⚠️ Please enter target URL/username');
-        return;
-    }
-    
-    qrModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeQR() {
-    qrModal.style.display = 'none';
-    document.body.style.overflow = '';
-}
-
-// 🔥 CONFIRM ORDER - Requires EVERYTHING
-document.getElementById('orderForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const service = document.getElementById('service').value;
-    const target = document.getElementById('target').value.trim();
-    const qty = parseInt(document.getElementById('quantity').value) || 0;
-    const file = fileInput.files[0];
-    
-    if (!service) {
-        alert('⚠️ Please select service');
-        return;
-    }
-    if (qty < 100) {
-        alert('⚠️ Minimum quantity 100');
-        return;
-    }
-    if (!target) {
-        alert('⚠️ Please enter target');
-        return;
-    }
-    if (!file) {
-        alert('⚠️ Please upload payment screenshot');
-        return;
-    }
-    
-    document.getElementById('formService').value = service;
-    document.getElementById('formTarget').value = target;
-    document.getElementById('formQty').value = qty;
-    document.getElementById('formAmount').value = `₹${totalPrice.toLocaleString('en-IN')}`;
-    
-    step2.classList.add('hidden');
-    step3.classList.remove('hidden');
-    
-    setTimeout(() => document.getElementById('orderForm').submit(), 500);
-});
-
-function goBack() {
-    step2.classList.add('hidden');
-    step1.classList.remove('hidden');
-    document.getElementById('email').focus();
-}
-
-function contactSupport() {
-    window.location.href = 'mailto:developer9692@gmail.com?subject=Urgent Support&body=Hi, I need assistance with...';
-}
-</script>
+    <!-- Telegram -->
+    <a href="https://t.me/your_telegram_id" class="telegram-float" target="_blank">💬</a>
 </body>
 </html>
