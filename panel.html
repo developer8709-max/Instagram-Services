@@ -49,7 +49,6 @@
             z-index: 1;
         }
 
-        /* Header */
         .header {
             padding: 20px 0;
             position: sticky;
@@ -89,7 +88,6 @@
             box-shadow: 0 10px 25px rgba(255,255,255,0.3);
         }
 
-        /* Steps Navigation */
         .steps-nav {
             display: flex;
             justify-content: center;
@@ -127,7 +125,6 @@
             color: #000;
         }
 
-        /* Form Steps */
         .form-step {
             display: none;
             animation: fadeInUp 0.5s ease;
@@ -151,7 +148,6 @@
             margin-bottom: 2rem;
         }
 
-        /* Platform Selection */
         .platform-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -182,7 +178,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Link & Service Selection */
         .form-group {
             margin-bottom: 2rem;
         }
@@ -238,7 +233,6 @@
             background: rgba(255,255,255,0.1);
         }
 
-        /* Quantity & Price */
         .price-display {
             background: rgba(255,255,255,0.1);
             border: 2px solid rgba(255,255,255,0.3);
@@ -258,7 +252,6 @@
             margin: 1rem 0;
         }
 
-        /* QR Code */
         .qr-section {
             text-align: center;
             padding: 3rem;
@@ -272,7 +265,6 @@
             margin: 2rem 0;
         }
 
-        /* File Upload */
         .file-upload {
             position: relative;
             display: inline-block;
@@ -295,7 +287,6 @@
             display: none;
         }
 
-        /* Buttons */
         .btn {
             padding: 1.2rem 3rem;
             border: none;
@@ -330,22 +321,6 @@
             background: rgba(255,255,255,0.3);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container { padding: 0 16px; }
-            .step-card { padding: 2rem 1.5rem; }
-            .platform-grid { grid-template-columns: repeat(2, 1fr); }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .header-content { flex-direction: column; gap: 1rem; }
-        }
-
-        @media (max-width: 480px) {
-            .steps-nav { flex-direction: column; align-items: center; gap: 1rem; }
-            .platform-grid { grid-template-columns: 1fr; }
-            .services-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Telegram Float */
         .telegram-float {
             position: fixed;
             bottom: 30px;
@@ -376,10 +351,23 @@
             transform: translateY(-20px) scale(1.15);
             box-shadow: 0 30px 70px rgba(255,255,255,0.7);
         }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 16px; }
+            .step-card { padding: 2rem 1.5rem; }
+            .platform-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .header-content { flex-direction: column; gap: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .steps-nav { flex-direction: column; align-items: center; gap: 1rem; }
+            .platform-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -389,35 +377,16 @@
         </div>
     </header>
 
-    <!-- Steps Navigation -->
     <div class="container">
         <div class="steps-nav">
-            <div class="step active">
-                <div class="step-icon">1</div>
-                <span>Platform</span>
-            </div>
-            <div class="step">
-                <div class="step-icon">2</div>
-                <span>Link & Service</span>
-            </div>
-            <div class="step">
-                <div class="step-icon">3</div>
-                <span>Quantity</span>
-            </div>
-            <div class="step">
-                <div class="step-icon">4</div>
-                <span>Payment</span>
-            </div>
-            <div class="step">
-                <div class="step-icon">5</div>
-                <span>Confirm</span>
-            </div>
+            <div class="step active"><div class="step-icon">1</div><span>Platform</span></div>
+            <div class="step"><div class="step-icon">2</div><span>Link & Service</span></div>
+            <div class="step"><div class="step-icon">3</div><span>Quantity</span></div>
+            <div class="step"><div class="step-icon">4</div><span>Payment</span></div>
+            <div class="step"><div class="step-icon">5</div><span>Confirm</span></div>
         </div>
-    </div>
 
-    <!-- Form Steps -->
-    <div class="container">
-        <!-- Step 1: Platform Selection -->
+        <!-- Step 1: Platform -->
         <div class="form-step active" id="step1">
             <div class="step-card">
                 <h2 style="font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 2rem;">Select Platform</h2>
@@ -451,13 +420,11 @@
                 <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;" id="step2-title">Service Details</h2>
                 <div class="form-group">
                     <label class="form-label">Post/Account Link</label>
-                    <input type="url" class="form-input" id="linkInput" placeholder="https://instagram.com/p/..." required>
+                    <input type="url" class="form-input" id="linkInput" placeholder="https://instagram.com/p/...">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Select Service</label>
-                    <div class="services-grid" id="servicesGrid">
-                        <!-- Services populated by JS -->
-                    </div>
+                    <div class="services-grid" id="servicesGrid"></div>
                 </div>
                 <div style="display: flex; gap: 1rem; justify-content: space-between; margin-top: 3rem;">
                     <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
@@ -466,13 +433,13 @@
             </div>
         </div>
 
-        <!-- Step 3: Quantity & Price -->
+        <!-- Step 3: Quantity -->
         <div class="form-step" id="step3">
             <div class="step-card">
                 <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">Quantity & Price</h2>
                 <div class="form-group">
                     <label class="form-label">Quantity</label>
-                    <input type="number" class="form-input" id="quantityInput" min="1" placeholder="1000" required>
+                    <input type="number" class="form-input" id="quantityInput" min="1" placeholder="1000">
                 </div>
                 <div class="price-display">
                     <div>Price per 1000: <span id="ratePer1000">₹50</span></div>
@@ -492,13 +459,14 @@
                 <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">Complete Payment</h2>
                 <div class="qr-section">
                     <div class="form-label" style="font-size: 1.3rem;">Scan QR Code (UPI)</div>
-                    <img src="https://raw.githubusercontent.com/developer8709-max/Instagram-Services/main/qr.png" alt="UPI QR Code" class="qr-code" id="qrCode" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjIyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2NjYyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk9uIFBlbmRpbmc8L3RleHQ+PC9zdmc+'">
+                    <img src="https://raw.githubusercontent.com/developer8709-max/Instagram-Sevices/main/qr.png" alt="UPI QR Code" class="qr-code" id="qrCode" 
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjIyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2NjYyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk9uIFBlbmRpbmc8L3RleHQ+PC9zdmc+'">
                     <div style="margin: 2rem 0; font-size: 1.2rem;">
                         Total Amount: <strong id="paymentAmount">₹0</strong>
                     </div>
                     <div class="file-upload">
                         📱 Upload Payment Screenshot
-                        <input type="file" class="file-input" id="screenshotInput" accept="image/*" required>
+                        <input type="file" class="file-input" id="screenshotInput" accept="image/*">
                     </div>
                 </div>
                 <div style="display: flex; gap: 1rem; justify-content: space-between; margin-top: 3rem;">
@@ -520,29 +488,27 @@
         </div>
     </div>
 
-    <!-- Hidden Form for FormSubmit -->
-    <form id="orderForm" action="https://formsubmit.co/developer9692@gmail.com" method="POST" enctype="multipart/form-data" style="display: none;">
+    <!-- FormSubmit.co Form -->
+    <form id="orderForm" action="https://formsubmit.co/YOUR-EMAIL@gmail.com" method="POST" enctype="multipart/form-data" style="display: none;">
         <input type="text" name="platform" id="formPlatform">
         <input type="text" name="link" id="formLink">
         <input type="text" name="service" id="formService">
         <input type="text" name="quantity" id="formQuantity">
         <input type="text" name="amount" id="formAmount">
         <input type="file" name="screenshot" id="formScreenshot">
-        <input type="hidden" name="_next" value="https://yourdomain.com/thankyou.html">
+        <input type="hidden" name="_next" value="https://formsubmit.co/thankyou">
         <input type="hidden" name="_subject" value="New SMM Order - Astropulse">
         <input type="hidden" name="_captcha" value="false">
     </form>
 
-    <!-- Telegram Float -->
-    <a href="https://t.me/CONTACTME97_BOT" class="telegram-float" target="_blank" rel="noopener">💬</a>
+    <a href="https://t.me/your_telegram_id" class="telegram-float" target="_blank" rel="noopener">💬</a>
 
     <script>
         let currentStep = 1;
         let selectedPlatform = '';
         let selectedService = '';
-        let ratePer1000 = 50; // Default rate
+        let ratePer1000 = 50;
 
-        // Platform services mapping
         const services = {
             instagram: ['Likes', 'Followers', 'Comments', 'Views', 'Stories'],
             twitter: ['Likes', 'Retweets', 'Followers', 'Views'],
@@ -550,39 +516,52 @@
             telegram: ['Members', 'Views']
         };
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            updateSteps();
+            initPlatformHandlers();
+            document.getElementById('quantityInput').addEventListener('input', updatePrice);
         });
 
-        function updateSteps() {
-            document.querySelectorAll('.form-step').forEach((step, index) => {
-                step.classList.toggle('active', index + 1 === currentStep);
-            });
-            
-            document.querySelectorAll('.step').forEach((stepEl, index) => {
-                stepEl.classList.toggle('active', index + 1 <= currentStep);
+        function initPlatformHandlers() {
+            document.querySelectorAll('.platform-option').forEach(platform => {
+                platform.addEventListener('click', function() {
+                    document.querySelectorAll('.platform-option').forEach(el => el.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
             });
         }
-function nextStep() {
-            if (!validateCurrentStep()) return;
 
+        
+        function nextStep() {
             if (currentStep === 1) {
                 const selected = document.querySelector('.platform-option.selected');
                 if (!selected) {
-                    alert('Please select a platform');
+                    alert('Please select a platform!');
                     return;
                 }
                 selectedPlatform = selected.dataset.platform;
             } else if (currentStep === 2) {
+                const linkInput = document.getElementById('linkInput');
+                if (!linkInput.value.trim()) {
+                    alert('Please enter post/account link');
+                    return;
+                }
                 if (!selectedService) {
-                    alert('Please select a service');
+                    alert('Please select a service!');
                     return;
                 }
             } else if (currentStep === 3) {
+                const quantityInput = document.getElementById('quantityInput');
+                if (!quantityInput.value || parseInt(quantityInput.value) <= 0) {
+                    alert('Please enter valid quantity');
+                    return;
+                }
                 updatePrice();
             } else if (currentStep === 4) {
-                // Submit form
+                const screenshotInput = document.getElementById('screenshotInput');
+                if (!screenshotInput.files.length) {
+                    alert('Please upload payment screenshot');
+                    return;
+                }
                 submitOrder();
                 return;
             }
@@ -598,48 +577,30 @@ function nextStep() {
             updateSteps();
         }
 
-        function validateCurrentStep() {
-            const linkInput = document.getElementById('linkInput');
-            const quantityInput = document.getElementById('quantityInput');
-            
-            if (currentStep === 2 && linkInput && !linkInput.value) {
-                alert('Please enter post/account link');
-                return false;
-            }
-            if (currentStep === 3 && (!quantityInput.value || quantityInput.value <= 0)) {
-                alert('Please enter valid quantity');
-                return false;
-            }
-            if (currentStep === 4) {
-                const screenshot = document.getElementById('screenshotInput');
-                if (!screenshot.files.length) {
-                    alert('Please upload payment screenshot');
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        function initStep2() {
-            const title = document.getElementById('step2-title');
-            title.textContent = `${selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1)} Services`;
-            
-            const servicesGrid = document.getElementById('servicesGrid');
-            servicesGrid.innerHTML = '';
-            
-            services[selectedPlatform].forEach(service => {
-                const div = document.createElement('div');
-                div.className = 'service-option';
-                div.onclick = () => selectService(service, div);
-                div.innerHTML = `<div style="font-size: 1.2rem; margin-bottom: 0.5rem;">${service}</div>`;
-                servicesGrid.appendChild(div);
+        function updateSteps() {
+            document.querySelectorAll('.form-step').forEach((step, index) => {
+                step.classList.toggle('active', index + 1 === currentStep);
+            });
+            document.querySelectorAll('.step').forEach((stepEl, index) => {
+                stepEl.classList.toggle('active', index + 1 <= currentStep);
             });
         }
 
-        function selectService(service, element) {
-            document.querySelectorAll('.service-option').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedService = service;
+        function initStep2() {
+            document.getElementById('step2-title').textContent = selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1) + ' Services';
+            const servicesGrid = document.getElementById('servicesGrid');
+            servicesGrid.innerHTML = '';
+            services[selectedPlatform].forEach(service => {
+                const div = document.createElement('div');
+                div.className = 'service-option';
+                div.innerHTML = `<div style="font-size: 1.2rem; margin-bottom: 0.5rem;">${service}</div>`;
+                div.addEventListener('click', function() {
+                    document.querySelectorAll('.service-option').forEach(el => el.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedService = service;
+                });
+                servicesGrid.appendChild(div);
+            });
         }
 
         function initStep3() {
@@ -655,62 +616,27 @@ function nextStep() {
             document.getElementById('paymentAmount').textContent = `₹${total.toFixed(2)}`;
         }
 
-        function initStep4() {
-            const totalAmount = document.getElementById('finalAmount').textContent.replace('₹', '');
-            document.getElementById('formAmount').value = totalAmount;
-        }
-
         function submitOrder() {
-    // Populate form fields
-    document.getElementById('formPlatform').value = selectedPlatform;
-    document.getElementById('formLink').value = document.getElementById('linkInput').value;
-    document.getElementById('formService').value = selectedService;
-    document.getElementById('formQuantity').value = document.getElementById('quantityInput').value;
-    document.getElementById('formAmount').value = document.getElementById('finalAmount').textContent.replace('₹', '');
-    
-    // CLONE screenshot file to form
-    const screenshotInput = document.getElementById('screenshotInput');
-    const formScreenshot = document.getElementById('formScreenshot');
-    if (screenshotInput.files.length > 0) {
-        const dt = new DataTransfer();
-        dt.items.add(screenshotInput.files[0]);
-        formScreenshot.files = dt.files;
-    }
-    
-    // Show success FIRST (before redirect)
-    currentStep = 5;
-    updateSteps();
-    
-    // Submit 2 seconds later
-    setTimeout(() => {
-        document.getElementById('orderForm').submit();
-    }, 1000);
-        }
-            // Show success step
+            document.getElementById('formPlatform').value = selectedPlatform;
+            document.getElementById('formLink').value = document.getElementById('linkInput').value;
+            document.getElementById('formService').value = selectedService;
+            document.getElementById('formQuantity').value = document.getElementById('quantityInput').value;
+            document.getElementById('formAmount').value = document.getElementById('finalAmount').textContent.replace('₹', '');
+
+            const screenshotInput = document.getElementById('screenshotInput');
+            const formScreenshot = document.getElementById('formScreenshot');
+            if (screenshotInput.files.length > 0) {
+                const dt = new DataTransfer();
+                dt.items.add(screenshotInput.files[0]);
+                formScreenshot.files = dt.files;
+            }
+
             currentStep = 5;
             updateSteps();
-            
-            // Submit form (will send to your email via FormSubmit.co)
-            // Note: Actual form submission happens on page reload or via JS
-            document.getElementById('orderForm').submit();
+            setTimeout(() => {
+                document.getElementById('orderForm').submit();
+            }, 1000);
         }
-
-        // Event Listeners
-        document.querySelectorAll('.platform-option').forEach(option => {
-            option.onclick = function() {
-                document.querySelectorAll('.platform-option').forEach(el => el.classList.remove('selected'));
-                this.classList.add('selected');
-            };
-        });
-
-        document.getElementById('quantityInput').addEventListener('input', updatePrice);
-
-        // Update payment amount on step 4
-        document.addEventListener('click', function(e) {
-            if (e.target.matches('.btn-primary') && currentStep === 4) {
-                initStep4();
-            }
-        });
     </script>
 </body>
 </html>
