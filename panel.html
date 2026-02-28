@@ -661,19 +661,31 @@ function nextStep() {
         }
 
         function submitOrder() {
-            // Populate form fields
-            document.getElementById('formPlatform').value = selectedPlatform;
-            document.getElementById('formLink').value = document.getElementById('linkInput').value;
-            document.getElementById('formService').value = selectedService;
-            document.getElementById('formQuantity').value = document.getElementById('quantityInput').value;
-            
-            // Handle screenshot
-            const screenshotInput = document.getElementById('screenshotInput');
-            const formScreenshot = document.getElementById('formScreenshot');
-            if (screenshotInput.files.length > 0) {
-                formScreenshot.files = screenshotInput.files;
-            }
-            
+    // Populate form fields
+    document.getElementById('formPlatform').value = selectedPlatform;
+    document.getElementById('formLink').value = document.getElementById('linkInput').value;
+    document.getElementById('formService').value = selectedService;
+    document.getElementById('formQuantity').value = document.getElementById('quantityInput').value;
+    document.getElementById('formAmount').value = document.getElementById('finalAmount').textContent.replace('₹', '');
+    
+    // CLONE screenshot file to form
+    const screenshotInput = document.getElementById('screenshotInput');
+    const formScreenshot = document.getElementById('formScreenshot');
+    if (screenshotInput.files.length > 0) {
+        const dt = new DataTransfer();
+        dt.items.add(screenshotInput.files[0]);
+        formScreenshot.files = dt.files;
+    }
+    
+    // Show success FIRST (before redirect)
+    currentStep = 5;
+    updateSteps();
+    
+    // Submit 2 seconds later
+    setTimeout(() => {
+        document.getElementById('orderForm').submit();
+    }, 1000);
+        }
             // Show success step
             currentStep = 5;
             updateSteps();
