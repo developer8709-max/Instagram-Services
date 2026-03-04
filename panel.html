@@ -569,6 +569,7 @@
             formData.append('quantity', orderData.quantity);
             formData.append('amount', orderData.amount);
             formData.append('order_id', orderData.orderId);
+            formData.append('screenshot', orderData.screenshot);
             
             const screenshotInput = document.getElementById('screenshotInput');
             if (screenshotInput.files.length > 0) {
@@ -647,7 +648,7 @@
                 const quantity = parseInt(quantityInput.value);
                 
                 if (!quantityInput.value || quantity <= 0) {
-                    alert('Please enter a valid quantity (minimum 1)!');
+                    alert('Please enter a valid quantity (minimum 100)!');
                     return;
                 }
             } else if (currentStep === 4) {
