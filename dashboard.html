@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram‑Services – Order Dashboard</title>
+    <title>Astropulse – Order Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -17,141 +18,322 @@
             color: #fff;
             line-height: 1.6;
             padding: 40px 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: floatBg 20s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        @keyframes floatBg {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
         h1 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #ccc);
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #f0f0f0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        /* AUTHENTIC TELEGRAM FLOATING BUTTON */
+        .telegram-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 10000;
+            width: 68px;
+            height: 68px;
+            background: linear-gradient(145deg, #0088cc 0%, #229ED9 50%, #00aaff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 
+                0 8px 25px rgba(0, 136, 204, 0.4),
+                0 4px 12px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: telegramPulse 2s infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        .telegram-float:hover {
+            animation-play-state: paused;
+            transform: scale(1.15) translateY(-8px);
+            box-shadow: 
+                0 18px 40px rgba(0, 136, 204, 0.5),
+                0 10px 25px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        .telegram-float:active {
+            transform: scale(0.95);
+            transition: transform 0.1s;
+        }
+
+        .telegram-icon {
+            font-size: 28px;
+            color: white;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .telegram-float:hover .telegram-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        @keyframes telegramPulse {
+            0% {
+                box-shadow: 
+                    0 8px 25px rgba(0, 136, 204, 0.4),
+                    0 4px 12px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                box-shadow: 
+                    0 12px 35px rgba(0, 136, 204, 0.6),
+                    0 4px 12px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                    0 0 0 12px rgba(0, 136, 204, 0.15);
+                transform: translateY(-3px) scale(1.02);
+            }
+            100% {
+                box-shadow: 
+                    0 8px 25px rgba(0, 136, 204, 0.4),
+                    0 4px 12px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Subtle floating animation */
+        @keyframes telegramFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .telegram-float {
+                bottom: 20px;
+                right: 20px;
+                width: 62px;
+                height: 62px;
+            }
+            .telegram-icon {
+                font-size: 26px;
+            }
         }
 
         p.center {
             text-align: center;
             color: #ccc;
+            font-size: 1.1rem;
             margin-bottom: 2rem;
         }
 
         .form-box {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
-            padding: 30px;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 24px;
+            padding: 40px;
             margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #ddd;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #fff;
+            font-size: 1.1rem;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 14px 16px;
-            background: rgba(255,255,255,0.08);
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
+            border-radius: 16px;
             color: #fff;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
         }
 
         input[type="text"]:focus {
             outline: none;
             border-color: #fff;
-            background: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: #888;
         }
 
         button {
             width: 100%;
-            padding: 14px 20px;
-            background: #fff;
+            padding: 16px 24px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
             color: #000;
-            font-weight: 600;
+            font-weight: 700;
             border: none;
-            border-radius: 10px;
+            border-radius: 16px;
             cursor: pointer;
-            margin-top: 10px;
-            font-size: 1.05rem;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
         }
 
         button:hover {
-            background: #e0e0e0;
-            transform: translateY(-1px);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.3);
         }
 
         .result {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 30px;
             margin-top: 20px;
             max-height: 400px;
             overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
         .result h3 {
-            margin-bottom: 1rem;
-            color: #ccc;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
         }
 
         .result-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .label {
-            flex: 1 0 120px;
+            flex: 1;
             color: #bbb;
+            font-weight: 500;
         }
 
         .value {
             flex: 2;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .status-processed {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 10px;
         }
 
         .error {
             color: #ff4444;
-            font-size: 0.95rem;
-            margin-top: 8px;
+            font-size: 1rem;
+            margin-top: 10px;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,68,68,0.1);
+            border: 1px solid rgba(255,68,68,0.3);
+            border-radius: 12px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 16px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
 
         footer {
             text-align: center;
             color: #666;
             font-size: 0.9rem;
-            margin-top: 40px;
+            margin-top: 60px;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        footer a {
-            color: #00b5ff;
-            text-decoration: none;
+        @media (max-width: 768px) {
+            body { padding: 20px 16px; }
+            .form-box, .result { padding: 24px; }
+            .result-row { flex-direction: column; gap: 8px; }
+            h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Instagram‑Services Order Dashboard</h1>
-        <p class="center">
-            Enter your <strong>Order ID</strong> (as shown after completing your order)
-            to check status, link, and quantity.
-        </p>
+        <div class="header">
+            <h1>Astropulse Order Dashboard</h1>
+            <p class="center">
+                Enter your <strong>Order ID</strong> to check order details and status
+            </p>
+        </div>
 
         <div class="form-box">
             <label for="orderId">Order ID</label>
-            <input type="text" id="orderId" placeholder="e.g. INSTA_12345" />
-            <button onclick="checkOrder()">Check Order</button>
+            <input type="text" id="orderId" placeholder="e.g. INSTA_F123 or FACE_L456" />
+            <button onclick="checkOrder()">Check Order Status</button>
+            <a href="index.html" class="back-btn">← Back to Orders</a>
         </div>
 
         <div id="resultBox" class="result" style="display: none;">
@@ -160,86 +342,90 @@
         </div>
 
         <footer>
-            Project hosted on GitHub:
-            <a href="https://github.com/developer8709-max/Instagram-Services" target="_blank">
-                @developer8709‑max / Instagram‑Services
-            </a>
+            Made with ❤️ for social media growth | <a href="https://t.me/aastropulsesupport_bot" target="_blank">Live Support</a>
         </footer>
     </div>
 
+    <!-- AUTHENTIC TELEGRAM FLOATING BUTTON -->
+    <a href="https://t.me/aastropulsesupport_bot" class="telegram-float" target="_blank" rel="noopener" title="Live Support">
+        <i class="fab fa-telegram-plane telegram-icon"></i>
+    </a>
+
     <script>
-        // EXAMPLE local order data (in real panel, this would come from server/API)
-        const sampleOrders = {
-            "INSTA_12345": {
-                productId: "Instagram Likes – 1K",
-                link: "https://instagram.com/post/12345",
-                started: "1000",
-                delivered: "982",
-                status: "Completed",
-                userId: "USR_789",
-                createdAt: "2026-03-01 14:30:00"
-            },
-            "INSTA_67890": {
-                productId: "Instagram Followers – 500",
-                link: "https://instagram.com/user/example",
-                started: "500",
-                delivered: "498",
-                status: "Active",
-                userId: "USR_789",
-                createdAt: "2026-03-02 09:15:00"
-            }
-            // add more orders here as your panel generates them
+        // Order ID decoder based on your exact specifications
+        const orderDecoder = {
+            INSTA_F: 'Instagram Followers',
+            INSTA_L: 'Instagram Likes', 
+            INSTA_C: 'Instagram Comments',
+            INSTA_V: 'Instagram Views',
+            INSTA_S: 'Instagram Shares',
+            FACE_F: 'Facebook Followers',
+            FACE_L: 'Facebook Likes',
+            FACE_V: 'Facebook Views',
+            TWITT_F: 'Twitter Followers',
+            TWITT_L: 'Twitter Likes',
+            TWITT_R: 'Twitter Retweets',
+            TWITT_V: 'Twitter Views',
+            TELE_M: 'Telegram Members',
+            TELE_V: 'Telegram Views'
         };
+
+        function parseOrderId(orderId) {
+            const prefix = orderId.substring(0, 7); // e.g. "INSTA_F" or "TWITT_R"
+            return orderDecoder[prefix] || 'Unknown Service';
+        }
 
         function checkOrder() {
             const idInput = document.getElementById("orderId");
             const resultBox = document.getElementById("resultBox");
             const resultContent = document.getElementById("resultContent");
-            const orderId = idInput.value.trim();
+            const orderId = idInput.value.trim().toUpperCase();
 
             if (!orderId) {
                 showError("Please enter an Order ID.");
                 return;
             }
 
-            resultBox.style.display = "block";
-            resultContent.innerHTML = "";
-
-            if (!sampleOrders[orderId]) {
-                showError("Order ID not found. Please check and try again.");
+            // Validate order ID format
+            const orderIdRegex = /^(INSTA|FACE|TWITT|TELE)_[FLCRVSM][0-9]{3}$/;
+            if (!orderIdRegex.test(orderId)) {
+                showError("Invalid Order ID format. Example: INSTA_F123, FACE_L456");
                 return;
             }
 
-            const order = sampleOrders[orderId];
+            resultBox.style.display = "block";
+            resultContent.innerHTML = "";
+
+            // Show order details
+            const serviceName = parseOrderId(orderId);
+            const currentTime = new Date().toLocaleString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
             resultContent.innerHTML = `
                 <div class="result-row">
                     <div class="label">Order ID:</div>
                     <div class="value">${orderId}</div>
                 </div>
                 <div class="result-row">
-                    <div class="label">Service:</div>
-                    <div class="value">${order.productId}</div>
+                    <div class="label">Order Name:</div>
+                    <div class="value">${serviceName}</div>
                 </div>
                 <div class="result-row">
-                    <div class="label">Instagram Link:</div>
-                    <div class="value"><a href="${order.link}" style="color:#00b5ff;" target="_blank">${order.link}</a></div>
-                </div>
-                <div class="result-row">
-                    <div class="label">Started / Delivered:</div>
-                    <div class="value">${order.started} / ${order.delivered}</div>
+                    <div class="label">Current Time:</div>
+                    <div class="value">${currentTime} IST</div>
                 </div>
                 <div class="result-row">
                     <div class="label">Status:</div>
-                    <div class="value">${order.status}</div>
+                    <div class="value">✅ Order Processed</div>
                 </div>
-                <div class="result-row">
-                    <div class="label">User ID:</div>
-                    <div class="value">${order.userId}</div>
-                </div>
-                <div class="result-row">
-                    <div class="label">Created At:</div>
-                    <div class="value">${order.createdAt}</div>
-                </div>
+                <div class="status-processed">Thanks for using Our Service!</div>
             `;
         }
 
@@ -249,6 +435,13 @@
             resultBox.style.display = "block";
             resultContent.innerHTML = `<p class="error">${message}</p>`;
         }
+
+        // Allow Enter key to trigger check
+        document.getElementById('orderId').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkOrder();
+            }
+        });
     </script>
 </body>
 </html>
