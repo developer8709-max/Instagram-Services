@@ -1,1 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram‑Services – Order Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", system-ui, sans-serif;
+        }
 
+        body {
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        p.center {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .form-box {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #ddd;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.05rem;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #fff;
+            background: rgba(255,255,255,0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px 20px;
+            background: #fff;
+            color: #000;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 1.05rem;
+        }
+
+        button:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .result {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .result h3 {
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .result-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .label {
+            flex: 1 0 120px;
+            color: #bbb;
+        }
+
+        .value {
+            flex: 2;
+        }
+
+        .error {
+            color: #ff4444;
+            font-size: 0.95rem;
+            margin-top: 8px;
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #00b5ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Instagram‑Services Order Dashboard</h1>
+        <p class="center">
+            Enter your <strong>Order ID</strong> (as shown after completing your order)
+            to check status, link, and quantity.
+        </p>
+
+        <div class="form-box">
+            <label for="orderId">Order ID</label>
+            <input type="text" id="orderId" placeholder="e.g. INSTA_12345" />
+            <button onclick="checkOrder()">Check Order</button>
+        </div>
+
+        <div id="resultBox" class="result" style="display: none;">
+            <h3>Order Details</h3>
+            <div id="resultContent"></div>
+        </div>
+
+        <footer>
+            Project hosted on GitHub:
+            <a href="https://github.com/developer8709-max/Instagram-Services" target="_blank">
+                @developer8709‑max / Instagram‑Services
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // EXAMPLE local order data (in real panel, this would come from server/API)
+        const sampleOrders = {
+            "INSTA_12345": {
+                productId: "Instagram Likes – 1K",
+                link: "https://instagram.com/post/12345",
+                started: "1000",
+                delivered: "982",
+                status: "Completed",
+                userId: "USR_789",
+                createdAt: "2026-03-01 14:30:00"
+            },
+            "INSTA_67890": {
+                productId: "Instagram Followers – 500",
+                link: "https://instagram.com/user/example",
+                started: "500",
+                delivered: "498",
+                status: "Active",
+                userId: "USR_789",
+                createdAt: "2026-03-02 09:15:00"
+            }
+            // add more orders here as your panel generates them
+        };
+
+        function checkOrder() {
+            const idInput = document.getElementById("orderId");
+            const resultBox = document.getElementById("resultBox");
+            const resultContent = document.getElementById("resultContent");
+            const orderId = idInput.value.trim();
+
+            if (!orderId) {
+                showError("Please enter an Order ID.");
+                return;
+            }
+
+            resultBox.style.display = "block";
+            resultContent.innerHTML = "";
+
+            if (!sampleOrders[orderId]) {
+                showError("Order ID not found. Please check and try again.");
+                return;
+            }
+
+            const order = sampleOrders[orderId];
+            resultContent.innerHTML = `
+                <div class="result-row">
+                    <div class="label">Order ID:</div>
+                    <div class="value">${orderId}</div>
+                </div>
+                <div class="result-row">
+                    <div class="label">Service:</div>
+                    <div class="value">${order.productId}</div>
+                </div>
+                <div class="result-row">
+                    <div class="label">Instagram Link:</div>
+                    <div class="value"><a href="${order.link}" style="color:#00b5ff;" target="_blank">${order.link}</a></div>
+                </div>
+                <div class="result-row">
+                    <div class="label">Started / Delivered:</div>
+                    <div class="value">${order.started} / ${order.delivered}</div>
+                </div>
+                <div class="result-row">
+                    <div class="label">Status:</div>
+                    <div class="value">${order.status}</div>
+                </div>
+                <div class="result-row">
+                    <div class="label">User ID:</div>
+                    <div class="value">${order.userId}</div>
+                </div>
+                <div class="result-row">
+                    <div class="label">Created At:</div>
+                    <div class="value">${order.createdAt}</div>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            const resultBox = document.getElementById("resultBox");
+            const resultContent = document.getElementById("resultContent");
+            resultBox.style.display = "block";
+            resultContent.innerHTML = `<p class="error">${message}</p>`;
+        }
+    </script>
+</body>
+</html>
