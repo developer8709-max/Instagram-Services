@@ -240,35 +240,41 @@
             <a href="panel.html" class="cta-button">Start Ordering</a>
         </div>
     </section>
-
-    <!-- Services -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">Services</h2>
-            <div class="services-grid">
-                <a href="panel.html" class="service-card card">
-                    <div class="service-icon">📸</div>
-                    <h3>Instagram</h3>
-                    <p>Likes • Followers • Views</p>
-                </a>
-                <a href="panel.html" class="service-card card">
-                    <div class="service-icon">🐦</div>
-                    <h3>Twitter</h3>
-                    <p>Likes • Retweets • Followers</p>
-                </a>
-                <a href="panel.html" class="service-card card">
-                    <div class="service-icon">📘</div>
-                    <h3>Facebook</h3>
-                    <p>Views • Followers • Likes</p>
-                </a>
-                <a href="panel.html" class="service-card card">
-                    <div class="service-icon">✈️</div>
-                    <h3>Telegram</h3>
-                    <p>Members • Views • Engagement</p>
-                </a>
-            </div>
+    
+<!-- Services - BLACK HOMEPAGE STYLE WITH panel.html LINKS -->
+<div class="form-step active" id="step1">
+    <div class="step-card">
+        <h2 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; text-align: center; margin-bottom: 4rem; color: #fff; position: relative;">
+            Select Platform
+            <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: linear-gradient(90deg, #fff, #ccc); border-radius: 2px;"></div>
+        </h2>
+        <div class="platform-grid">
+            <a href="panel.html" class="platform-option" data-platform="instagram">
+                <div class="platform-icon"><i class="fab fa-instagram"></i></div>
+                <h3>Instagram</h3>
+                <p>Likes • Followers • Views</p>
+            </a>
+            <a href="panel.html" class="platform-option" data-platform="facebook">
+                <div class="platform-icon"><i class="fab fa-facebook-f"></i></div>
+                <h3>Facebook</h3>
+                <p>Views • Followers • Likes</p>
+            </a>
+            <a href="panel.html" class="platform-option" data-platform="twitter">
+                <div class="platform-icon"><i class="fab fa-twitter"></i></div>
+                <h3>Twitter</h3>
+                <p>Likes • Retweets • Followers</p>
+            </a>
+            <a href="panel.html" class="platform-option" data-platform="telegram">
+                <div class="platform-icon"><i class="fab fa-telegram-plane"></i></div>
+                <h3>Telegram</h3>
+                <p>Members • Views • Engagement</p>
+            </a>
         </div>
-    </section>
+        <div style="text-align: center; margin-top: 3rem;">
+            <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+        </div>
+    </div>
+</div>
 
     <!-- Features -->
     <section style="background: #111;">
