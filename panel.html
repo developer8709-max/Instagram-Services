@@ -266,38 +266,8 @@
             margin: 2rem 0;
         }
 
-        .file-upload {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            padding: 1.5rem 3rem;
-            background: linear-gradient(45deg, #fff, #f0f0f0);
-            color: #000;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin: 1rem 0;
-        }
-
-        .file-upload:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255,255,255,0.4);
-        }
-
-        .file-upload.has-file {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: #fff;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .file-name {
-            margin-top: 0.5rem;
-            color: #ccc;
-            font-size: 0.9rem;
-            word-break: break-all;
+        .transaction-input-group {
+            margin: 2rem 0;
         }
 
         .btn {
@@ -481,16 +451,14 @@
                 <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">Complete Payment</h2>
                 <div class="qr-section">
                     <div class="form-label" style="font-size: 1.3rem;">Scan QR Code (UPI)</div>
-                    <!-- ✅ YOUR GITHUB QR CODE FROM Instagram-Services REPO -->
                     <img src="https://raw.githubusercontent.com/developer8709-max/Instagram-Services/main/qr.png" alt="UPI QR Code" class="qr-code">
                     <div style="margin: 2rem 0; font-size: 1.2rem;">
                         Total Amount: <strong id="paymentAmount">₹0</strong>
                     </div>
-                    <label for="screenshotInput" class="file-upload" id="uploadLabel">
-                        📱 Upload Payment Screenshot
-                    </label>
-                    <input type="file" class="file-input" id="screenshotInput" accept="image/*">
-                    <div class="file-name" id="fileNameDisplay"></div>
+                    <div class="transaction-input-group">
+                        <label class="form-label">Enter Transaction ID</label>
+                        <input type="text" class="form-input" id="transactionIdInput" placeholder="Enter transaction ID from UPI app">
+                    </div>
                 </div>
                 <div style="display: flex; gap: 1rem; justify-content: space-between; margin-top: 3rem;">
                     <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
@@ -505,7 +473,7 @@
                 <div style="font-size: 5rem; margin-bottom: 2rem; color: #4CAF50;">✅</div>
                 <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Order Confirmed!</h2>
                 <div class="success-message">
-                    <strong>Order ID: #ASTRO-2026-001</strong><br>
+                    <strong id="orderIdDisplay">Order ID: #ASTRO-2026-001</strong><br>
                     Your order has been received and payment verified. Processing will start within 5 minutes.
                 </div>
                 <p style="color: #ccc; font-size: 1.3rem; margin-bottom: 3rem;">Check your email for order details and live tracking.</p>
@@ -560,6 +528,31 @@
             telegram: ['Members', 'Views']
         };
 
+        const orderIdPrefixes = {
+            instagram: {
+                'Likes': 'INSTA_L',
+                'Followers': 'INSTA_F', 
+                'Comments': 'INSTA_C',
+                'Views': 'INSTA_V',
+                'Shares': 'INSTA_S'
+            },
+            facebook: {
+                'Views': 'FACE_V',
+                'Likes': 'FACE_L',
+                'Followers': 'FACE_F'
+            },
+            twitter: {
+                'Views': 'TWITT_V',
+                'Likes': 'TWITT_L',
+                'Retweets': 'TWITT_R',
+                'Followers': 'TWITT_F'
+            },
+            telegram: {
+                'Members': 'TELE_M',
+                'Views': 'TELE_V'
+            }
+        };
+
         function submitOrderForm() {
             const formData = new FormData();
             
@@ -569,13 +562,8 @@
             formData.append('quantity', orderData.quantity);
             formData.append('amount', orderData.amount);
             formData.append('order_id', orderData.orderId);
-            formData.append('screenshot', orderData.screenshot);
+            formData.append('transaction_id', document.getElementById('transactionIdInput').value);
             
-            const screenshotInput = document.getElementById('screenshotInput');
-            if (screenshotInput.files.length > 0) {
-                formData.append('screenshot', screenshotInput.files[0]);
-            }
-
             fetch('https://formsubmit.co/ajax/developer9692@gmail.com', {
                 method: 'POST',
                 body: formData
@@ -593,7 +581,6 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             initPlatformHandlers();
-            initFileUpload();
             document.getElementById('quantityInput').addEventListener('input', updatePrice);
         });
 
@@ -604,20 +591,6 @@
                     this.classList.add('selected');
                     selectedPlatform = this.dataset.platform;
                 });
-            });
-        }
-
-        function initFileUpload() {
-            const screenshotInput = document.getElementById('screenshotInput');
-            const uploadLabel = document.getElementById('uploadLabel');
-            const fileNameDisplay = document.getElementById('fileNameDisplay');
-
-            screenshotInput.addEventListener('change', function() {
-                if (this.files.length > 0) {
-                    uploadLabel.classList.add('has-file');
-                    uploadLabel.innerHTML = '✅ Screenshot Uploaded';
-                    fileNameDisplay.textContent = `Selected: ${this.files[0].name}`;
-                }
             });
         }
         
@@ -652,9 +625,9 @@
                     return;
                 }
             } else if (currentStep === 4) {
-                const screenshotInput = document.getElementById('screenshotInput');
-                if (!screenshotInput.files.length) {
-                    alert('Please upload your payment screenshot!');
+                const transactionId = document.getElementById('transactionIdInput').value.trim();
+                if (!transactionId) {
+                    alert('Please enter the transaction ID!');
                     return;
                 }
                 saveOrderData();
@@ -725,13 +698,15 @@
         }
 
         function saveOrderData() {
+            const randomNum = Math.floor(Math.random() * 900) + 100;
+            const prefix = orderIdPrefixes[selectedPlatform][selectedService] || 'ASTRO';
             orderData = {
                 platform: selectedPlatform,
                 link: document.getElementById('linkInput').value,
                 service: selectedService,
                 quantity: document.getElementById('quantityInput').value,
                 amount: document.getElementById('finalAmount').textContent.replace('₹', ''),
-                orderId: 'ASTRO-' + Date.now().toString().slice(-6),
+                orderId: prefix + randomNum,
                 timestamp: new Date().toISOString()
             };
         }
@@ -739,7 +714,7 @@
         function showSuccess() {
             currentStep = 5;
             updateSteps();
-            document.querySelector('.success-message strong').textContent = `Order ID: #${orderData.orderId}`;
+            document.getElementById('orderIdDisplay').innerHTML = `<strong>Order ID: #${orderData.orderId}</strong>`;
         }
     </script>
 </body>
