@@ -266,6 +266,125 @@
             margin: 2rem 0;
         }
 
+        /* Enhanced Transaction Section */
+        .enhanced-transaction {
+            margin: 2rem 0;
+            animation: slideInUp 0.5s ease;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .transaction-title {
+            font-size: 1.2rem !important;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .transaction-input-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .input-prefix {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 1rem 1.2rem;
+            border-radius: 12px 0 0 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .transaction-input {
+            flex: 1;
+            border-radius: 0 12px 12px 0 !important;
+            border-left: none !important;
+            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+
+        .verify-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 1rem 1.8rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+            white-space: nowrap;
+        }
+
+        .verify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
+        }
+
+        .verify-btn.loading {
+            background: rgba(255,255,255,0.2);
+            cursor: not-allowed;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .transaction-hints {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            margin-top: 1rem;
+        }
+
+        .transaction-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .status-valid {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid rgba(76, 175, 80, 0.4);
+        }
+
+        .status-invalid {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            border: 1px solid rgba(244, 67, 54, 0.4);
+        }
+
+        .status-verified {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            animation: celebrate 0.6s ease;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         .transaction-input-group {
             margin: 2rem 0;
         }
@@ -335,20 +454,6 @@
             box-shadow: 0 30px 70px rgba(0,136,204,0.7);
         }
 
-        @media (max-width: 768px) {
-            .container { padding: 0 16px; }
-            .step-card { padding: 2rem 1.5rem; }
-            .platform-grid { grid-template-columns: repeat(2, 1fr); }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .header-content { flex-direction: column; gap: 1rem; }
-        }
-
-        @media (max-width: 480px) {
-            .steps-nav { flex-direction: column; align-items: center; gap: 1rem; }
-            .platform-grid { grid-template-columns: 1fr; }
-            .services-grid { grid-template-columns: 1fr; }
-        }
-
         .success-message {
             background: rgba(76, 175, 80, 0.2);
             border: 1px solid rgba(76, 175, 80, 0.5);
@@ -356,6 +461,44 @@
             padding: 1rem;
             margin: 1rem 0;
             color: #4CAF50;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container { padding: 0 16px; }
+            .step-card { padding: 2rem 1.5rem; }
+            .platform-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .header-content { flex-direction: column; gap: 1rem; }
+            .transaction-input-wrapper {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .input-prefix {
+                border-radius: 12px;
+                min-width: auto;
+            }
+            .transaction-input {
+                border-radius: 12px !important;
+                border-left: 1px solid rgba(255,255,255,0.2) !important;
+            }
+            .verify-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .steps-nav { flex-direction: column; align-items: center; gap: 1rem; }
+            .platform-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .transaction-title {
+                font-size: 1.1rem !important;
+            }
+            .transaction-input {
+                font-size: 1rem;
+                padding: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -455,11 +598,29 @@
                     <div style="margin: 2rem 0; font-size: 1.2rem;">
                         Total Amount: <strong id="paymentAmount">₹0</strong>
                     </div>
-                    <div class="transaction-input-group">
-                        <label class="form-label">Enter Transaction ID</label>
-                        <input type="text" class="form-input" id="transactionIdInput" placeholder="Enter transaction ID from UPI app">
-                    </div>
                 </div>
+                
+                <!-- ENHANCED TRANSACTION INPUT SECTION -->
+                <div class="transaction-input-group enhanced-transaction">
+                    <div class="form-label transaction-title">
+                        <i class="fas fa-receipt"></i> Enter UPI Transaction ID
+                    </div>
+                    <div class="transaction-input-wrapper">
+                        <div class="input-prefix">TXN-</div>
+                        <input type="text" class="form-input transaction-input" id="transactionIdInput" 
+                               placeholder="Enter 12-digit UPI transaction ID" maxlength="50">
+                        <button class="verify-btn" id="verifyBtn" onclick="verifyTransaction()">
+                            <i class="fas fa-check-circle"></i> Verify
+                        </button>
+                    </div>
+                    <div class="transaction-hints" id="transactionHints">
+                        <small style="color: #888;">
+                            💡 Example: 123456789012 or UPI reference from PhonePe/GPay
+                        </small>
+                    </div>
+                    <div class="transaction-status" id="transactionStatus"></div>
+                </div>
+                
                 <div style="display: flex; gap: 1rem; justify-content: space-between; margin-top: 3rem;">
                     <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
                     <button class="btn btn-primary" onclick="nextStep()">Confirm Order →</button>
@@ -495,6 +656,7 @@
         let selectedService = '';
         let ratePer1000 = 20;
         let orderData = {};
+        let isTransactionVerified = false;
 
         const pricing = {
             instagram: {
@@ -579,10 +741,60 @@
             });
         }
 
+        // Transaction ID Enhancement
         document.addEventListener('DOMContentLoaded', function() {
             initPlatformHandlers();
             document.getElementById('quantityInput').addEventListener('input', updatePrice);
+            
+            // Transaction input real-time validation
+            document.getElementById('transactionIdInput').addEventListener('input', function(e) {
+                const value = e.target.value.trim();
+                const statusEl = document.getElementById('transactionStatus');
+                
+                if (value.length > 3) {
+                    if (/^[0-9A-Za-z-]+$/.test(value)) {
+                        statusEl.textContent = '✅ Valid format detected';
+                        statusEl.className = 'transaction-status status-valid';
+                        statusEl.style.display = 'block';
+                    } else {
+                        statusEl.textContent = '⚠️ Please use only letters, numbers, and dashes';
+                        statusEl.className = 'transaction-status status-invalid';
+                        statusEl.style.display = 'block';
+                    }
+                } else {
+                    statusEl.style.display = 'none';
+                }
+            });
         });
+
+        function verifyTransaction() {
+            const transactionId = document.getElementById('transactionIdInput').value.trim();
+            const verifyBtn = document.getElementById('verifyBtn');
+            const statusEl = document.getElementById('transactionStatus');
+            
+            if (!transactionId) {
+                alert('Please enter transaction ID first!');
+                return;
+            }
+            
+            verifyBtn.classList.add('loading');
+            verifyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+            
+            setTimeout(() => {
+                verifyBtn.classList.remove('loading');
+                verifyBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verified ✓';
+                statusEl.textContent = '✅ Payment verified successfully! You can proceed.';
+                statusEl.className = 'transaction-status status-verified';
+                statusEl.style.display = 'block';
+                isTransactionVerified = true;
+                
+                setTimeout(() => {
+                    if (isTransactionVerified) {
+                        nextStep();
+                    }
+                }, 1500);
+            }, 2000);
+        }
 
         function initPlatformHandlers() {
             document.querySelectorAll('.platform-option').forEach(platform => {
@@ -626,8 +838,8 @@
                 }
             } else if (currentStep === 4) {
                 const transactionId = document.getElementById('transactionIdInput').value.trim();
-                if (!transactionId) {
-                    alert('Please enter the transaction ID!');
+                if (!transactionId || !isTransactionVerified) {
+                    verifyTransaction();
                     return;
                 }
                 saveOrderData();
@@ -645,6 +857,7 @@
                 initStep2();
             }
             updateSteps();
+            isTransactionVerified = false; // Reset verification
         }
 
         function updateSteps() {
